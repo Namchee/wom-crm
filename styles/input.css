@@ -1,0 +1,146 @@
+.input-group {
+    display: block;
+    position: relative;
+    margin-bottom: 40px;
+    cursor: text;
+}
+
+.input-group * {
+    font-family: 'Roboto';
+    box-sizing: border-box;
+}
+
+.input-group > .input-field {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    width: 60%;
+    border: none;
+    border-bottom: 1px solid #363636;
+}
+
+.input-group.input-error > .input-field {
+    border-bottom: 1px solid red;
+}
+
+.input-group > .input-field:focus {
+    outline: none;
+}
+
+.input-group > .input-label {
+    color: #363636;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.25s ease-in-out all;
+}
+
+.input-group > .input-field:focus ~ .input-label, 
+.input-label.not-empty {
+    top: -20px;
+    font-size: 14px;
+    color: #363636;
+}
+
+.input-group > .input-bar {
+    position: relative;
+    display: block;
+    width: 60%;
+}
+
+.input-group > .input-bar::before, 
+.input-group > .input-bar::after {
+    content: "";
+    height: 2px;
+    width: 0px;
+    position: absolute;
+    bottom: 1px;
+    background: #363636;
+    transition: 0.25s ease-in-out all;
+}
+
+.input-group > .input-bar::before {
+    left: 50%;
+}
+
+.input-group > .input-bar::after {
+    right: 50%;
+}
+
+.input-group > .input-field:focus ~ .input-bar::before, 
+.input-group > .input-field:focus ~ .input-bar::after {
+    width: 50%;
+}
+
+.input-group > .input-highlight {
+    position: absolute;
+    height: 100%;
+    width: 60%;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+.input-group > .input-field:focus ~ .input-highlight {
+    animation: inputHighlight 0.15s ease-in-out;
+}
+
+.input-group > .input-message {
+    color: #363636;
+    font-size: 12px;
+    display: block;
+    word-wrap: break-word;
+    width: 55%;
+    text-align: justify;
+    line-height: 17.5px;
+    position: relative;
+    top: 7px;
+}
+
+.input-group.input-error > .input-field:focus ~ .input-highlight {
+    animation: inputErrorHighlight 0.15s ease-in-out;
+}
+
+.input-group.input-error > .input-label, 
+.input-group.input-error > .input-field:focus ~ .input-label,
+.input-group.input-error > .input-message  {
+    color: red;
+}
+
+.input-group.input-error > .input-bar::before, 
+.input-group.input-error > .input-bar::after {
+    background: red;
+}
+
+.password-reveal {
+    position: absolute;
+    top: 7.5px;
+    left: calc(60% - 30px);
+    cursor: pointer;
+    pointer-events: visible;
+    background: white;
+}
+
+@keyframes inputHighlight {
+    0% {
+        background: #363636;
+    }
+    100% {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputErrorHighlight {
+    0% {
+        background: red;
+        opacity: 0.1;
+    }
+    100% {
+        width: 0;
+        background: transparent;
+    }
+}

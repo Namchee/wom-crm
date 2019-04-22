@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dropdown Component</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="styles/button.css">
+    <link rel="stylesheet" href="styles/dropdown.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="js/dropdown.js" defer></script>
+</head>
+<body>
+    <div class="dropdown" data-value="">
+        <button class="button button-light dropdown-trigger">
+            <label class="dropdown-toggler" for="dropdown-input">&nbsp;</label>
+            <span class="dropdown-value">Choose your option...</span>
+        </button>
+        <span class="dropdown-icon">
+            <i class="material-icons">expand_more</i>
+        </span>
+        <input type="checkbox" class="dropdown-input" id="dropdown-input" /> 
+        <ul class="dropdown-content">
+            <li data-value="jinx">Jinx</li>
+            <li data-value="pro">Pro</li>
+        </ul>
+    </label>
+</body>
+</html>
