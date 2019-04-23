@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .modal,
 .modal-overlay {
     width: 100%;
@@ -14,9 +18,13 @@
     pointer-events: none;
 }
 
+#modal-close {
+    display: none;
+    position: absolute;
+}
+
 .modal-overlay {
     position: absolute;
-    z-index: 10;
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1);
@@ -27,20 +35,74 @@
     pointer-events: auto;
 }
 
-.modal-content {
-    width: 60%;
-    min-width: 300px;
-    max-width: 600px;
-    background: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
-    padding: 10px;
+.modal-close-button {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
     opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.modal.active .modal-content {
+.modal.active .modal-close-button {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.modal-items {
+    background: #ffffff;
+    z-index: 20;
+    opacity: 0;
+    max-height: 60vh;
+    max-width: 60vw;
+    overflow: auto;
+    border-radius: 5px;
+    font-family: 'Roboto';
+}
+
+.modal-items > * {
+    padding: 25px;
+}
+
+.modal-items .modal-header,
+.modal-items .modal-footer {
+    background: #ebebeb;
+}
+
+.modal-items .modal-header,
+.modal-items .modal-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.modal-items .modal-header {
+    height: 15%;
+    justify-content: flex-start;
+}
+
+.modal-items .modal-footer {
+    height: 10%;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.modal-items .modal-header * {
+    margin: 0;
+}
+
+.modal-items .modal-content {
+    max-height: 75%;
+    min-height: 75%;
+    overflow: auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal.active .modal-items {
     animation: anim-open 0.35s ease-in-out forwards;
     pointer-events: auto;
 }

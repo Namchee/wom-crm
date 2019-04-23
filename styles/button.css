@@ -13,6 +13,7 @@
     font-size: 16px;
     min-width: 100px;
     min-height: 30px;
+    text-decoration: none;
 }
 
 .button-dark {
@@ -26,8 +27,8 @@
 }
 
 .button-primary {
-    background: hsl(217, 71%, 53%);
-    color: white;
+    background: hsl(217, 71%, 53%) !important;
+    color: white !important;
 }
 
 .button-info {

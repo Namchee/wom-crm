@@ -17,6 +17,7 @@ html, body {
     width: 100%;
     height: 10vh;
     z-index: 10;
+    transition: top 0.2s;
 }
 
 #navbar-toggle {
@@ -27,7 +28,7 @@ html, body {
 .navbar-toggle-label {
     position: relative;
     margin: 0 10px;
-    transition: left 0.35s ease-out;
+    transition: left 0.2s ease-out;
 }
 
 .burger {
@@ -95,8 +96,7 @@ html, body {
     background: white;
     overflow-x: hidden;
     overflow-y: auto;
-    transition: left 0.2s ease-out;
-    box-shadow: 0 0 5px#363636;
+    transition: left 0.25s ease-out;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -112,47 +112,56 @@ html, body {
     content: '';
 }
 
-.sidenav ul {
-    align-self: flex-start;
+.sidenav .sidenav-item {
     color: #363636;
     list-style-type: none;
     font-family: 'Open Sans';
-    margin: 0;
+    width: 100%;
 }
 
-.sidenav ul a {
-    margin: 10px;
-    border-bottom: 1px solid #363636;
+.sidenav ul.sidenav-item {
+    margin: 0;
+    padding-left: 0;
+}
+
+.sidenav .sidenav-item a {
     text-decoration: none;
     color: #363636;
-}
-
-.sidenav .media {
-    align-self: flex-end;
-    color: initial;
+    padding: 12px;
+    font-size: 18px;
     display: flex;
-    justify-content: flex-start;
-    width: 90%;
-    margin: auto;
+    align-items: center;
+    transition: padding-left 0.2s;
+}
+
+.sidenav .sidenav-item a li {
+    display: flex;
+    align-items: center;
+}
+
+.sidenav .sidenav-item a:hover,
+.sidenav .sidenav-item a.active {
+    padding-left: 35px;
+}
+
+.sidenav .sidenav-item a li i {
+    margin-right: 10px;
+}
+
+.sidenav .sidenav-item a.active {
+    color: white;
+    background: hsl(217, 71%, 53%);
+}
+
+.sidenav .sidenav-item.sidenav-top {
+    align-self: flex-start;
+}
+
+.sidenav .sidenav-item.sidenav-bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
     margin-bottom: 10px;
-    background: rgba(0, 0, 0, 0.025);
-    font-family: 'Roboto';
-}
-
-.sidenav .media i {
-    font-size: 48px;
-}
-
-.sidenav .media div {
-    flex: 1;
-}
-
-.sidenav .media div * {
-    margin: 5px;
-}
-
-.sidenav .media div *:first-child {
-    margin-top: 0;
 }
 
 .content {
@@ -166,6 +175,7 @@ html, body {
 
 #navbar-toggle:checked ~ .sidenav {
     left: 0;
+    box-shadow: 5px 0 5px -3px #363636;
 }
 
 #navbar-toggle:checked ~ .sidenav::before {
@@ -183,7 +193,6 @@ html, body {
         opacity: 1;
     }
 }
-
 
 /* some color styles */
 

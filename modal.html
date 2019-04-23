@@ -6,13 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Modal Component</title>
     <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/font.css">
+    <link rel="stylesheet" href="styles/button.css">
+    <link rel="stylesheet" href="styles/icon.css">
     <script src="js/modal.js" defer></script>
+    <script src="js/button.js" defer></script>
 </head>
 <body>
     <button class="modal-trigger" data-target="modal">Trigger</button>
     <div id="modal" class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">Tai kuda</div>
+        <input type="checkbox" id="modal-close" />
+        <label for="modal-close" class="modal-overlay"></label>
+        <label for="modal-close" class="modal-close-button">
+            <i class="material-icons">
+                cancel
+            </i>
+        </label>
+        <div class="modal-items">
+            <div class="modal-header">
+                <h1>aaaa</h1>
+            </div>
+            <div class="modal-content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo perferendis perspiciatis accusamus amet tenetur. Quas sed amet voluptas deleniti nam aliquid illum cumque nisi. Quidem atque consequatur consequuntur temporibus accusamus. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam aspernatur a accusamus odit. Sunt labore fugiat magnam rem praesentium in, placeat mollitia, exercitationem voluptates hic sint accusamus nihil reiciendis distinctio?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="button button-dark" ripple>Aaaa</button>
+                <button class="button button-primary">bnbbb</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

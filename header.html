@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Header Component</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/icon.css" />
+    <link rel="stylesheet" href="styles/font.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/button.css" />
+    <script src="js/button.js" defer></script>
     <script src="js/header.js" defer></script>
 </head>
+
 <body>
     <nav class="navbar navbar-primary">
         <input type="checkbox" id="navbar-toggle" />
@@ -21,45 +25,48 @@
             </div>
         </label>
         <header class="navbar-content">
+            <div class="navbar-item navbar-brand">
+                Hello, Wumbo!
+            </div>
             <div class="navbar-item navbar-item-right" id="date"></div>
         </header>
         <nav class="sidenav">
-            <ul>
-                <a href="">
-                    <li>qalat</li>
+            <ul class="sidenav-item sidenav-top">
+                <a class="active" href="">
+                    <li>
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </li>
                 </a>
                 <a href="">
-                    <li>qalat</li>
+                    <li>
+                        <i class="material-icons">person_add</i>
+                        <span>Add Client</span>
+                    </li>
                 </a>
                 <a href="">
-                    <li>qalat</li>
+                    <li>
+                        <i class="material-icons">poll</i>
+                        <span>View Report</span>
+                    </li>
                 </a>
                 <a href="">
-                    <li>qalat</li>
+                    <li>
+                        <i class="material-icons">public</i>
+                        <span>Region Search</span>
+                    </li>
                 </a>
                 <a href="">
-                    <li>qalat</li>
-                </a>
-                <a href="">
-                    <li>qalat</li>
-                </a>
-                <a href="">
-                    <li>qalat</li>
-                </a>
-                <a href="">
-                    <li>qalat</li>
-                </a>
-                <a href="">
-                    <li>qalat</li>
-                </a>
+                        <li>
+                            <i class="material-icons">settings</i>
+                            <span>Profile Settings</span>
+                        </li>
+                    </a>
             </ul>
-            <div class="media">
-                <i class="material-icons">person</i>
-                <div>
-                    <h2>Signed In As</h2>
-                    <p>Namchee</p>
-                    <p>Adm33n</p>
-                </div>
+            <div class="sidenav-item sidenav-bottom">
+                <button class="button button-primary">
+                    Logout
+                </button>
             </div>
         </nav>
     </nav>
@@ -67,4 +74,5 @@
         ganteng
     </section>
 </body>
+
 </html>
