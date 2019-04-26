@@ -1,5 +1,9 @@
 body {
-    background:hsla(204, 86%, 53%, 0.247);
+    background: #9dd6e6;
+    background-image: -webkit-radial-gradient(top, circle cover, #a6e5f7, #395e6e 82.5%);
+    background-image: -moz-radial-gradient(top, circle cover, #a6e5f7, #395e6e 82.5%);
+    background-image: -o-radial-gradient(top, circle cover, #a6e5f7, #395e6e 82.5%);
+    background-image: radial-gradient(top, circle cover, #a6e5f7, #395e6e 82.5%);
 }
 
 .container {
@@ -16,6 +20,7 @@ body {
 .logo {
     display: block;
     margin-bottom: 10px;
+    margin-top: -20px;
 }
 
 .login-box {
@@ -23,7 +28,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 2.5em;
-    width: 40%;
+    width: 35%;
 }
 
 .login {
