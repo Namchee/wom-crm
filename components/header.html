@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Header Component</title>
-    <link rel="stylesheet" href="styles/icon.css" />
-    <link rel="stylesheet" href="styles/font.css" />
-    <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/button.css" />
+    <link rel="stylesheet" href="styles/master.css">
     <script src="js/button.js" defer></script>
     <script src="js/header.js" defer></script>
 </head>
@@ -31,14 +28,29 @@
             <div class="navbar-item navbar-item-right" id="date"></div>
         </header>
         <nav class="sidenav">
-            <ul class="sidenav-item sidenav-top">
-                <a class="active" href="">
+            <div class="sidenav-item sidenav-top current-user">
+                <div class="media">
+                    <div class="media-image">
+                        <img src="./resources/user.png" alt="'s image'" title="" />
+                    </div>
+                    <div class="media-content">
+                        <div class="media-header">
+                            Wumbo
+                        </div>
+                        <p>
+                            Customer Service
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidenav-item">
+                <a href="">
                     <li>
                         <i class="material-icons">home</i>
                         <span>Home</span>
                     </li>
                 </a>
-                <a href="">
+                <a class="active" href="">
                     <li>
                         <i class="material-icons">person_add</i>
                         <span>Add Client</span>
@@ -57,18 +69,19 @@
                     </li>
                 </a>
                 <a href="">
-                        <li>
-                            <i class="material-icons">settings</i>
-                            <span>Profile Settings</span>
-                        </li>
-                    </a>
+                    <li>
+                        <i class="material-icons">settings</i>
+                        <span>Profile Settings</span>
+                    </li>
+                </a>
             </ul>
             <div class="sidenav-item sidenav-bottom">
-                <button class="button button-primary">
+                <button class="button button-primary" ripple>
                     Logout
                 </button>
             </div>
         </nav>
+        <label class="sidenav-mask" for="navbar-toggle"></label>
     </nav>
     <section class="content">
         ganteng

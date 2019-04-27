@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
+function toggleInputs() {
   let inputs = document.querySelectorAll('.input-group > .input-field');
 
   for (let input of inputs) {
     input.addEventListener('blur', () => {
       if (input.value.length) {
-        input.parentElement.querySelector('.input-label').classList.add('not-empty');
+        input.parentElement.classList.add('not-empty');
       } else {
-        input.parentElement.querySelector('.input-label').classList.remove('not-empty');
+        input.parentElement.classList.remove('not-empty');
       }
     });
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       input.focus();
     });
   }
-});
+}
 
 function inputRequired(elem) {
   let parent = elem.parentElement;
@@ -67,4 +67,5 @@ function passwordReveal(elem) {
   });
 
   elem.parentElement.appendChild(revealer);
+  elem.parentElement.classList.add('icon-right');
 }

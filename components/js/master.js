@@ -206,11 +206,11 @@ function selectDropdown (elem, choice, rest) {
 }
 
 function autoInit() {
-	let buttons = document.querySelector('.button');
-	let inputs = document.querySelector('.input-group');
-	let dropdowns = document.querySelector('.dropdown');
-  let navbars = document.querySelector('.navbar');
-	let modals = document.querySelector('.modal');
+	let buttons = document.querySelectorAll('.button');
+	let inputs = document.querySelectorAll('.input-group');
+	let dropdowns = document.querySelectorAll('.dropdown');
+	let navbars = document.querySelectorAll('.navbar');
+	let modals = document.querySelectorAll('.modal');
 
 	if (buttons) {
 		toggleButtons();
@@ -232,7 +232,3 @@ function autoInit() {
 		toggleModals();
 	}
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  autoInit();
-})

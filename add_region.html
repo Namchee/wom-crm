@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tambah Region - Wom-CRM</title>
+    <script src="./js/slimselect.js" defer></script>
+    <link href="./styles/slimselect.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/master.css">
+    <script src="./js/master.js"></script>
+    <link rel="stylesheet" href="styles/add_region.css">
+    <script src="./js/add_region.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="heading">
+            Tambah Region
+        </h1>
+        <form action="">
+            <div class="input-group">
+                <input type="text" name="namaKota" class="input-field" autocomplete="off" required />
+                <span class="input-highlight"></span>
+                <span class="input-bar"></span>
+                <label class="input-label">Nama Region</label>
+            </div>
+            <select name="city" id="cities" class="cities" multiple>
+                <!-- php -->
+                <option value="aaa">bbb</option>
+                <option value="bbb">ccc</option>
+            </select>
+            <button class="button button-primary icon-left submit" type="submit" ripple>
+                <i class="material-icons">location_city</i>
+                <span>Tambah Region</span>
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function toggleModals() {
   let modalButtons = document.querySelectorAll('button.modal-trigger');
 
   for (let modalButton of modalButtons) {
@@ -21,4 +21,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
+}

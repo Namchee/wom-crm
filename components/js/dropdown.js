@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function toggleDropdowns() {
   let dropdowns = document.querySelectorAll('.dropdown');
 
   for (let dropdown of dropdowns) {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       choice.addEventListener('click', () => selectDropdown(dropdown, choice, content.children));
     }
   }
-});
+};
 
 function dropdownState (e, elem) {
   let label = elem.querySelector('.dropdown-toggler');

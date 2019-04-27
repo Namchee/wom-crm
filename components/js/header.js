@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function toggleNavbars() {
   let navbar = document.querySelector('.navbar');
   let date = document.querySelector('#date');
   date.textContent = new Date().toLocaleString();
@@ -19,4 +19,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     prevScrollPos = currentScrollPos;
   }
-});
+}

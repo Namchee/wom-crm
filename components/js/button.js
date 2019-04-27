@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function toggleButtons() {
   let buttons = document.querySelectorAll('[ripple]');
   for (let button of buttons) {
     rippleContainer = document.createElement('div');
@@ -8,12 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     button.rippleContainer = rippleContainer;
     button.appendChild(rippleContainer);
   }
-});
+}
 
 function addRipple(e) {
   let pos, ripple, rippler, size, style, x, y;
   ripple = this;
-  console.log(ripple);
   rippler = document.createElement('span');
   size = ripple.offsetWidth;
   pos = ripple.getBoundingClientRect();
@@ -28,18 +27,4 @@ function cleanUp() {
   while (this.rippleContainer.firstChild) {
     this.rippleContainer.removeChild(this.rippleContainer.firstChild);
   }  
-}
-
-function debounce(func, delay) {
-  let inDebounce;
-  inDebounce = undefined;
-  return function () {
-    let args, context;
-    context = this;
-    args = arguments;
-    clearTimeout(inDebounce);
-    return inDebounce = setTimeout(function () {
-      return func.apply(context, args);
-    }, delay);
-  };
 }

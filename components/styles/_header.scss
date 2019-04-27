@@ -1,14 +1,3 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-}
-
-* {
-    box-sizing: border-box;
-}
-
 .navbar {
     display: flex;
     align-items: center;
@@ -33,34 +22,34 @@ html, body {
 
 .burger {
     display: inline-block;
+
+    & .line {
+        width: 30px;
+        height: 4px;
+        background: #9e9e9e;
+        display: block;
+        transition: transform 0.3s ease-in-out, opacity 0.3s;
+        border-radius: 1px;
+
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
-.burger .line {
-    width: 30px;
-    height: 4px;
-    background: #9e9e9e;
-    display: block;
-    transition: transform 0.3s ease-in-out, opacity 0.3s;
-    border-radius: 1px;
-}
-
-.burger .line:not(:last-child) {
-    margin-bottom: 5px;
-}
-
-.burger:hover {
-    cursor: pointer;
-}
-
-#navbar-toggle:checked + .navbar-toggle-label .burger .line:nth-child(1) {
+#navbar-toggle:checked+.navbar-toggle-label .burger .line:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
 
-#navbar-toggle:checked + .navbar-toggle-label .burger .line:nth-child(2) {
+#navbar-toggle:checked+.navbar-toggle-label .burger .line:nth-child(2) {
     opacity: 0;
 }
 
-#navbar-toggle:checked + .navbar-toggle-label .burger .line:nth-child(3) {
+#navbar-toggle:checked+.navbar-toggle-label .burger .line:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg);
 }
 
@@ -103,13 +92,15 @@ html, body {
     align-items: center;
 }
 
-.sidenav::before {
+.sidenav-mask {
     position: fixed;
     top: 10vh;
     width: 0;
     height: 0;
     background: rgba(0, 0, 0, 0.5);
     content: '';
+    opacity: 0;
+    transition: opacity 0.1s;
 }
 
 .sidenav .sidenav-item {
@@ -155,6 +146,7 @@ html, body {
 
 .sidenav .sidenav-item.sidenav-top {
     align-self: flex-start;
+    box-shadow: 0 4px 2px -2px gray;
 }
 
 .sidenav .sidenav-item.sidenav-bottom {
@@ -173,25 +165,18 @@ html, body {
     overflow: auto;
 }
 
-#navbar-toggle:checked ~ .sidenav {
+#navbar-toggle:checked~.sidenav {
+    z-index: 2;
     left: 0;
     box-shadow: 5px 0 5px -3px #363636;
 }
 
-#navbar-toggle:checked ~ .sidenav::before {
-    left: 25vw;
+#navbar-toggle:checked~.sidenav-mask {
+    z-index: 1;
+    left: 0vw;
     width: 100vw;
     height: 90vh;
-    animation: backdrop 0.2s;
-}
-
-@keyframes backdrop {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+    opacity: 1;
 }
 
 /* some color styles */

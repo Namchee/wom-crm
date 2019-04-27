@@ -1,0 +1,28 @@
+.media {
+    display: flex;
+    align-items: flex-start;
+    padding: 1em;
+    max-width: 25vw;
+}
+
+.media>.media-image {
+    width: 50px;
+    margin: 0 1rem 0 0;
+}
+
+.media>.media-image>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.media>.media-content {
+    flex: 1;
+}
+
+.media .media-header {
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    font-size: 24px;
+}
