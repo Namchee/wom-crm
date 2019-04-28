@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add New Client - Wombat Inc. CRM</title>
+    <link rel="stylesheet" href="styles/slimselect.css">
+    <script src="js/slimselect.js"></script>
+    <link rel="stylesheet" href="styles/datepicker.css">
+    <script src="js/datepicker.js" defer></script>
+    <link rel="stylesheet" href="styles/master.css">
+    <script src="js/master.js" defer></script>
+    <link rel="stylesheet" href="styles/add_client.css">
+    <script src="js/add_client.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-primary">
+        <input type="checkbox" id="navbar-toggle" />
+        <label for="navbar-toggle" class="navbar-toggle-label">
+            <div class="burger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </label>
+        <header class="navbar-content">
+            <div class="navbar-item navbar-item-right" id="date"></div>
+        </header>
+        <nav class="sidenav">
+            <div class="sidenav-item sidenav-top current-user">
+                <div class="media">
+                    <div class="media-image">
+                        <img src="./resources/user.png" alt="'s image'" title="'s'" width="64" height="64" />
+                    </div>
+                    <div class="media-content">
+                        <div class="media-header">
+                            Wumbo
+                        </div>
+                        <p>
+                            Customer Service
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidenav-item">
+                <a href="">
+                    <li>
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </li>
+                </a>
+                <a class="active" href="">
+                    <li>
+                        <i class="material-icons">person_add</i>
+                        <span>Add Client</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">poll</i>
+                        <span>View Report</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">public</i>
+                        <span>Region Search</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">settings</i>
+                        <span>Profile Settings</span>
+                    </li>
+                </a>
+            </ul>
+            <div class="sidenav-item sidenav-bottom">
+                <button class="button button-primary" ripple>
+                    Logout
+                </button>
+            </div>
+        </nav>
+        <label class="sidenav-mask" for="navbar-toggle"></label>
+    </nav>
+    <section class="content">
+        <div class="container">
+            <h1 class="heading">
+                Tambah Klien
+            </h1>
+            <form action="" method="POST">
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="text" name="namaKlien" class="input-field" autocomplete="off" required />
+                            <span class="input-bar"></span>
+                            <span class="input-highlight"></span>
+                            <label class="input-label">Nama Klien</label>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="dropdown gender" data-value="">
+                            <button class="button button-light dropdown-trigger" type="button">
+                                <label class="dropdown-toggler" for="gender">&nbsp;</label>
+                                <span class="dropdown-value">Jenis Kelamin</span>
+                            </button>
+                            <span class="dropdown-icon">
+                                <i class="material-icons">expand_more</i>
+                            </span>
+                            <input type="checkbox" class="dropdown-input" id="gender" />
+                            <ul class="dropdown-content">
+                                <li data-value="1">Pria</li>
+                                <li data-value="2">Wanita</li>
+                                <li data-value="3">Khusus</li>
+                            </ul>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="text" name="alamat" class="input-field" autocomplete="off" required />
+                            <span class="input-bar"></span>
+                            <span class="input-highlight"></span>
+                            <label class="input-label">Alamat</label>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="columns">
+                    <div class="columns">
+                        <div class="input-group">
+                            <input type="text" name="date-of-birth" class="input-field date-of-birth" autocomplete="off"
+                                required />
+                            <span class="input-bar"></span>
+                            <span class="input-highlight"></span>
+                            <label class="input-label">Tanggal Lahir</label>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="dropdown marriage" data-value="">
+                            <button class="button button-light dropdown-trigger" type="button">
+                                <label class="dropdown-toggler" for="marriage-status">&nbsp;</label>
+                                <span class="dropdown-value">Status Kawin</span>
+                            </button>
+                            <span class="dropdown-icon">
+                                <i class="material-icons">expand_more</i>
+                            </span>
+                            <input type="checkbox" class="dropdown-input" id="marriage-status" />
+                            <ul class="dropdown-content">
+                                <li data-value="1">Belum Menikah</li>
+                                <li data-value="2">Sudah Menikah</li>
+                                <li data-value="3">Janda / Duda</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <select name="city" id="city" class="city">
+                            <!-- php -->
+                            <option data-placeholder="true"></option>
+                            <option value="aaa">bbb</option>
+                            <option value="bbb">ccc</option>
+                        </select>
+                    </div>
+                    <div class="column">
+                        &nbsp;
+                    </div>
+                </div>
+                <hr />
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="text" name="nilai" class="input-field" autocomplete="off" required />
+                            <span class="input-bar"></span>
+                            <span class="input-highlight"></span>
+                            <label class="input-label">Nilai Investasi</label>
+                        </div>
+                    </div>
+                    <div class="column">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <button class="button button-primary icon-left" type="submit" ripple>
+                            <i class="material-icons">person_add</i>
+                            <span>Tambah Klien</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,7 +1,6 @@
 .input-group {
     display: block;
     position: relative;
-    margin-bottom: 40px;
     cursor: text;
     font-size: 18px;
 
@@ -23,6 +22,15 @@
 
     &.input-error>.input-field {
         border-bottom: 1px solid red;
+    }
+
+    &.icon-right .right-icon {
+        position: absolute;
+        top: 7.5px;
+        left: calc(100% - 30px);
+        cursor: pointer;
+        pointer-events: visible;
+        background: transparent;
     }
 }
 
@@ -120,15 +128,6 @@
 .input-group.input-error>.input-bar::before,
 .input-group.input-error>.input-bar::after {
     background: red;
-}
-
-.password-reveal {
-    position: absolute;
-    top: 7.5px;
-    left: calc(100% - 30px);
-    cursor: pointer;
-    pointer-events: visible;
-    background: transparent;
 }
 
 @keyframes inputHighlight {

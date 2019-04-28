@@ -2,7 +2,11 @@
     padding: 10px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+}
+
+.column {
+    padding: 0.5rem;
+    flex: 1 1 0;
 }
 
 .columns.columns-fullwidth {

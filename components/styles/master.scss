@@ -59,6 +59,12 @@ html, body {
     box-sizing: border-box;
 }
 
+.error-icon {
+	color: red;
+	cursor: none !important;
+	pointer-events: none !important;
+}
+
 @import 'font.scss';
 @import 'box.scss';
 @import 'button.scss';
@@ -66,4 +72,5 @@ html, body {
 @import 'header.scss';
 @import 'input.scss';
 @import 'modal.scss';
-@import 'media.scss'
+@import 'media.scss';
+@import 'hr.scss';

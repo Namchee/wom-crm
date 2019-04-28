@@ -1,5 +1,5 @@
 .container {
-    width: 35%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -16,19 +16,7 @@
     margin-right: auto;
 }
 
-.cities {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    font-family: 'Roboto';
-    font-size: 18px;
-}
-
-.submit {
-    margin: 0;
-}
-
-.ss-value-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+.gender,
+.marriage {
+    float: right;
 }

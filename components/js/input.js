@@ -36,16 +36,25 @@ function inputRequired(elem) {
     parent.classList.remove('input-error');
 
     let message = parent.querySelector('.input-message');
-    if (message)
+    let errorIcon = parent.querySelector('.error');
+    if (message || errorIcon) {
       parent.removeChild(message);
+      parent.removeChild(errorIcon);
+    }
   } else {
-    parent.classList.add('input-error');
-
     if (parent.querySelector('.input-message') === null) {
+      parent.classList.add('input-error');
+      parent.classList.add('icon-right');
+  
+      let icon = document.createElement('i');
+      icon.classList.add('material-icons');
+      icon.classList.add('error');
+      icon.textContent = 'error';
       let message = document.createElement('span');
       message.classList.add('input-message');
       message.textContent = 'Please fill out this field';
       parent.appendChild(message);
+      parent.appendChild(icon);
     }
   }
 }

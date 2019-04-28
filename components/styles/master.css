@@ -59,6 +59,12 @@ html, body {
   box-sizing: border-box;
 }
 
+.error-icon {
+  color: red;
+  cursor: none !important;
+  pointer-events: none !important;
+}
+
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
@@ -109,7 +115,11 @@ html, body {
   padding: 10px;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-evenly;
+}
+
+.column {
+  padding: 0.5rem;
+  flex: 1 1 0;
 }
 
 .columns.columns-fullwidth {
@@ -288,6 +298,7 @@ html, body {
 }
 
 .dropdown-content {
+  z-index: 10000;
   position: absolute;
   top: 100%;
   border: 1px solid #ccc;
@@ -343,7 +354,7 @@ html, body {
 
 .navbar-toggle-label {
   position: relative;
-  margin: 0 10px;
+  margin: 0 2vw;
   transition: left 0.2s ease-out;
 }
 
@@ -485,7 +496,9 @@ html, body {
   font-family: "Roboto";
   top: 10vh;
   padding: 20px;
+  padding-top: 10vh;
   width: 100%;
+  min-height: 90%;
   overflow: auto;
 }
 
@@ -527,10 +540,15 @@ html, body {
     display: none;
   }
 }
+@media screen and (max-width: 767px) {
+  .sidenav {
+    left: -100vw;
+    width: 100vw;
+  }
+}
 .input-group {
   display: block;
   position: relative;
-  margin-bottom: 40px;
   cursor: text;
   font-size: 18px;
 }
@@ -549,6 +567,14 @@ html, body {
 }
 .input-group.input-error > .input-field {
   border-bottom: 1px solid red;
+}
+.input-group.icon-right .right-icon {
+  position: absolute;
+  top: 7.5px;
+  left: calc(100% - 30px);
+  cursor: pointer;
+  pointer-events: visible;
+  background: transparent;
 }
 
 .input-group.icon-right .input-field {
@@ -645,15 +671,6 @@ html, body {
 .input-group.input-error > .input-bar::before,
 .input-group.input-error > .input-bar::after {
   background: red;
-}
-
-.password-reveal {
-  position: absolute;
-  top: 7.5px;
-  left: calc(100% - 30px);
-  cursor: pointer;
-  pointer-events: visible;
-  background: transparent;
 }
 
 @keyframes inputHighlight {
@@ -822,19 +839,16 @@ html, body {
 }
 .media {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 1em;
   max-width: 25vw;
 }
 
 .media > .media-image {
-  width: 50px;
   margin: 0 1rem 0 0;
 }
 
 .media > .media-image > img {
-  width: 100%;
-  height: 100%;
   border-radius: 50%;
   border: 1px solid black;
 }
@@ -847,6 +861,13 @@ html, body {
   font-weight: 600;
   margin: 0 0 0.5rem 0;
   font-size: 24px;
+}
+
+hr {
+  margin: 1.5em 0 1.5em 0;
+  border: 0;
+  height: 1.5px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 /*# sourceMappingURL=master.css.map */

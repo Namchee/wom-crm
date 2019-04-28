@@ -15,28 +15,110 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="heading">
-            Tambah Kota
-        </h1>
-        <form action="">
-            <div class="input-group">
-                <input type="text" name="namaKota" class="input-field" autocomplete="off" required />
-                <span class="input-highlight"></span>
-                <span class="input-bar"></span>
-                <label class="input-label">Nama Kota</label>
+    <nav class="navbar navbar-primary">
+        <input type="checkbox" id="navbar-toggle" />
+        <label for="navbar-toggle" class="navbar-toggle-label">
+            <div class="burger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
             </div>
-            <select name="region" id="regions" class="regions" multiple>
-                <!-- php -->
-                <option value="aaa">bbb</option>
-                <option value="bbb">ccc</option>
-            </select>
-            <button class="button button-primary icon-left submit" type="submit" ripple>
-                <i class="material-icons">location_city</i>
-                <span>Tambah Kota</span>
-            </button>
-        </form>
-    </div>
+        </label>
+        <header class="navbar-content">
+            <div class="navbar-item navbar-item-right" id="date"></div>
+        </header>
+        <nav class="sidenav">
+            <div class="sidenav-item sidenav-top current-user">
+                <div class="media">
+                    <div class="media-image">
+                        <img src="./resources/user.png" alt="'s image'" title="" width="64" height="64" />
+                    </div>
+                    <div class="media-content">
+                        <div class="media-header">
+                            Wumbo
+                        </div>
+                        <p>
+                            Customer Service
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidenav-item">
+                <a href="">
+                    <li>
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </li>
+                </a>
+                <a class="active" href="">
+                    <li>
+                        <i class="material-icons">person_add</i>
+                        <span>Add Client</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">poll</i>
+                        <span>View Report</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">public</i>
+                        <span>Region Search</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">settings</i>
+                        <span>Profile Settings</span>
+                    </li>
+                </a>
+            </ul>
+            <div class="sidenav-item sidenav-bottom">
+                <button class="button button-primary" ripple>
+                    Logout
+                </button>
+            </div>
+        </nav>
+        <label class="sidenav-mask" for="navbar-toggle"></label>
+    </nav>
+    <section class="content">
+        <div class="container">
+            <h1 class="heading">
+                Tambah Kota
+            </h1>
+            <form action="">
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="text" name="namaKota" class="input-field" autocomplete="off" required />
+                            <span class="input-highlight"></span>
+                            <span class="input-bar"></span>
+                            <label class="input-label">Nama Kota</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <select name="region" id="regions" class="regions" multiple>
+                            <!-- php -->
+                            <option value="aaa">bbb</option>
+                            <option value="bbb">ccc</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <button class="button button-primary icon-left submit" type="submit" ripple>
+                            <i class="material-icons">location_city</i>
+                            <span>Tambah Kota</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
 </body>
 
 </html>

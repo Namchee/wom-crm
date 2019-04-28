@@ -1,15 +1,15 @@
 function debounce(func, delay) {
-	let inDebounce;
-	inDebounce = undefined;
-	return function () {
-		let args, context;
-		context = this;
-		args = arguments;
-		clearTimeout(inDebounce);
-		return inDebounce = setTimeout(function () {
-			return func.apply(context, args);
-		}, delay);
-	};
+  let inDebounce;
+  inDebounce = undefined;
+  return function () {
+    let args, context;
+    context = this;
+    args = arguments;
+    clearTimeout(inDebounce);
+    return inDebounce = setTimeout(function () {
+      return func.apply(context, args);
+    }, delay);
+  };
 }
 
 function toggleInputs() {
@@ -50,15 +50,29 @@ function inputRequired(elem) {
     parent.classList.remove('input-error');
 
     let message = parent.querySelector('.input-message');
-    if (message)
+    let errorIcon = parent.querySelector('.error-icon');
+    if (message || errorIcon) {
       parent.removeChild(message);
+      parent.removeChild(errorIcon);
+    }
   } else {
-    parent.classList.add('input-error');
-
     if (parent.querySelector('.input-message') === null) {
+      parent.classList.add('input-error');
+      if (parent.querySelector('i') === null) {
+        parent.classList.add('icon-right');
+
+        let icon = document.createElement('i');
+        icon.classList.add('material-icons');
+        icon.classList.add('right-icon');
+        icon.classList.add('error-icon');
+        icon.textContent = 'error';
+        parent.appendChild(icon);
+      }
+
       let message = document.createElement('span');
       message.classList.add('input-message');
       message.textContent = 'Please fill out this field';
+
       parent.appendChild(message);
     }
   }
@@ -68,6 +82,7 @@ function passwordReveal(elem) {
   let revealer = document.createElement('i');
   revealer.classList.add('material-icons');
   revealer.classList.add('password-reveal');
+  revealer.classList.add('right-icon');
   revealer.textContent = 'visibility';
 
   revealer.addEventListener('click', () => {
@@ -137,7 +152,7 @@ function addRipple(e) {
 function cleanUp() {
   while (this.rippleContainer.firstChild) {
     this.rippleContainer.removeChild(this.rippleContainer.firstChild);
-  }  
+  }
 }
 
 function toggleNavbars() {
@@ -177,11 +192,11 @@ function toggleDropdowns() {
   }
 };
 
-function dropdownState (e, elem) {
+function dropdownState(e, elem) {
   let label = elem.querySelector('.dropdown-toggler');
   let toggler = elem.querySelector('.dropdown-input');
   let symbol = elem.querySelector('.dropdown-icon');
-  
+
   if (!toggler.checked && (e.target === label || e.target === toggler)) {
     toggler.checked = true;
     symbol.classList.add('active');
@@ -191,7 +206,7 @@ function dropdownState (e, elem) {
   }
 }
 
-function selectDropdown (elem, choice, rest) {
+function selectDropdown(elem, choice, rest) {
   for (let choice of rest) {
     choice.classList.remove('selected');
   }
@@ -206,31 +221,31 @@ function selectDropdown (elem, choice, rest) {
 }
 
 function autoInit() {
-	let buttons = document.querySelector('.button');
-	let inputs = document.querySelector('.input-group');
-	let dropdowns = document.querySelector('.dropdown');
+  let buttons = document.querySelector('.button');
+  let inputs = document.querySelector('.input-group');
+  let dropdowns = document.querySelector('.dropdown');
   let navbars = document.querySelector('.navbar');
-	let modals = document.querySelector('.modal');
+  let modals = document.querySelector('.modal');
 
-	if (buttons) {
-		toggleButtons();
-	}
+  if (buttons) {
+    toggleButtons();
+  }
 
-	if (inputs) {
-		toggleInputs();
-	}
+  if (inputs) {
+    toggleInputs();
+  }
 
-	if (dropdowns) {
-		toggleDropdowns();
-	}
+  if (dropdowns) {
+    toggleDropdowns();
+  }
 
-	if (navbars) {
-		toggleNavbars();
-	}
+  if (navbars) {
+    toggleNavbars();
+  }
 
-	if (modals) {
-		toggleModals();
-	}
+  if (modals) {
+    toggleModals();
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

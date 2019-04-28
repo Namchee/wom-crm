@@ -16,7 +16,7 @@
 
 .navbar-toggle-label {
     position: relative;
-    margin: 0 10px;
+    margin: 0 2vw;
     transition: left 0.2s ease-out;
 }
 
@@ -161,7 +161,9 @@
     font-family: 'Roboto';
     top: 10vh;
     padding: 20px;
+    padding-top: 10vh;
     width: 100%;
+    min-height: 90%;
     overflow: auto;
 }
 
@@ -202,5 +204,12 @@
 @media screen and (max-width: 639px) {
     .navbar-item:not(.navbar-brand) {
         display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .sidenav {
+        left: -100vw;
+        width: 100vw;
     }
 }
