@@ -202,6 +202,11 @@ html, body {
   color: white;
 }
 
+.button-special {
+  background: #6200ee;
+  color: white;
+}
+
 .button-round {
   border-radius: 15px;
 }
@@ -413,7 +418,7 @@ html, body {
 
 .sidenav {
   position: fixed;
-  top: 0vh;
+  top: 0;
   left: -25vw;
   height: 100vh;
   width: 25vw;
@@ -429,7 +434,7 @@ html, body {
 
 .sidenav-mask {
   position: fixed;
-  top: 0vh;
+  top: 0;
   width: 0;
   height: 0;
   background: rgba(0, 0, 0, 0.5);
@@ -576,6 +581,27 @@ html, body {
   pointer-events: visible;
   background: transparent;
 }
+.input-group.icon-left .left-icon {
+  transition: color 0.2s ease;
+  color: #acacac;
+  position: absolute;
+  top: 7.5px;
+  left: 0;
+  cursor: pointer;
+  pointer-events: visible;
+  background: transparent;
+}
+.input-group.icon-left .input-label {
+  left: 32px;
+}
+.input-group.icon-left > .input-field:focus ~ .input-label, .input-group.icon-left.not-empty > .input-label {
+  left: 0;
+  top: -20px;
+  font-size: 14px;
+}
+.input-group.icon-left > .input-field:focus ~ .left-icon {
+  color: #363636;
+}
 
 .input-group.icon-right .input-field {
   padding-right: 32px;
@@ -656,6 +682,7 @@ html, body {
   line-height: 17.5px;
   position: relative;
   top: 7px;
+  margin-bottom: 15px;
 }
 
 .input-group.input-error > .input-field:focus ~ .input-highlight {
@@ -731,12 +758,30 @@ html, body {
 }
 
 .modal {
-  z-index: 100000;
+  z-index: 1000;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
+}
+
+.modal-trigger,
+.row-data {
+  cursor: pointer;
+}
+
+.row-data {
+  transition: background 0.2s;
+}
+
+.row-data:hover {
+  background: #f3f3f3;
+}
+
+.row-selected {
+  background: #3273dc !important;
+  color: white !important;
 }
 
 #modal-close {
@@ -745,33 +790,30 @@ html, body {
 }
 
 .modal-overlay {
-  display: none;
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-  pointer-events: none;
 }
 
 .modal.active .modal-overlay {
   opacity: 1;
   pointer-events: auto;
-  display: block;
 }
 
 .modal-close-button {
-  color: white;
-  position: fixed;
+  display: block;
+  position: absolute;
   pointer-events: none;
-  top: 2.5vh;
-  right: 2.5vh;
+  top: 5vh;
+  right: 5vh;
+  color: white;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1);
 }
-
-.modal-close-button>i {
-  font-size: 32px;
+.modal-close-button i {
+  font-size: 36px;
 }
 
 .modal.active .modal-close-button {
@@ -782,11 +824,11 @@ html, body {
 .modal-items {
   background: #ffffff;
   opacity: 0;
-  max-height: 60vh;
   max-width: 60vw;
   overflow: auto;
   border-radius: 5px;
   font-family: "Roboto";
+  max-height: 90vh;
 }
 
 .modal-items > * {
@@ -830,8 +872,13 @@ html, body {
 }
 
 .modal.active .modal-items {
-  animation: anim-open 0.35s ease-in-out forwards;
+  animation: anim-open 0.2s ease-in-out forwards;
   pointer-events: auto;
+}
+
+.modal.remove .modal-items {
+  animation: anim-close 0.2s ease-in-out forwards;
+  pointer-events: none;
 }
 
 @keyframes anim-open {
@@ -842,6 +889,18 @@ html, body {
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes anim-close {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
   }
 }
 .media {
@@ -874,20 +933,167 @@ hr {
   margin: 1.5em 0 1.5em 0;
   border: 0;
   height: 1.5px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
-.flatpickr-calendar {
-  font-family: 'Roboto', sans-serif;
+.checkbox {
+  display: inline-block;
+  padding: 10px 20px;
+  transform: translateZ(0);
 }
-
-tr.modal-trigger {
+.checkbox label {
   cursor: pointer;
-  transition: background 0.15s;
+  padding-left: 0;
+}
+.checkbox input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  margin: 0;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  left: 0;
+  pointer-events: none;
+}
+.checkbox .checkbox-material {
+  vertical-align: middle;
+  position: relative;
+  top: 3px;
+}
+.checkbox .checkbox-material:before {
+  position: absolute;
+  left: 8px;
+  top: 2px;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 4px;
+  width: 4px;
+  border-radius: 100%;
+  z-index: 1;
+  opacity: 0;
+  margin: 0;
+}
+.checkbox .checkbox-material .check {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 1;
+}
+.checkbox .checkbox-material .check:before {
+  position: absolute;
+  content: "";
+  transform: rotate(45deg);
+  display: block;
+  margin-top: -4px;
+  margin-left: 6px;
+  width: 0;
+  height: 0;
+  box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0 inset;
+  animation: checkbox-off 0.3s forwards ease-out;
+}
+.checkbox input[type=checkbox]:focus + .checkbox-material .check:after {
+  opacity: 0.2;
+}
+.checkbox input[type=checkbox]:checked + .checkbox-material .check:before {
+  box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0px 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
+  animation: checkbox-on 0.3s forwards ease-out;
+}
+.checkbox input[type=checkbox]:not(:checked) + .checkbox-material:before {
+  animation: rippleOff 700ms forwards ease-out;
+}
+.checkbox input[type=checkbox]:checked + .checkbox-material:before {
+  animation: rippleOn 700ms forwards ease-out;
+}
+.checkbox input[type=checkbox]:not(:checked) + .checkbox-material .check:after {
+  animation: rippleOff 700ms forwards ease-out;
+}
+.checkbox input[type=checkbox]:checked + .checkbox-material .check:after {
+  animation: rippleOn 700ms forwards ease-out;
+}
+.checkbox input[type=checkbox][disabled]:not(:checked) ~ .checkbox-material .check:before,
+.checkbox input[type=checkbox][disabled] + .circle {
+  opacity: 0.5;
+}
+.checkbox input[type=checkbox][disabled] + .checkbox-material .check:after {
+  background-color: rgba(0, 0, 0, 0.84);
+  transform: rotate(-45deg);
 }
 
-tr.modal-trigger:hover {
-  background: rgb(230, 230, 230);
+.coloured .checkbox-material .check {
+  color: #2FAEF8;
+}
+.coloured .checkbox-material:before {
+  background-color: #2FAEF8;
+}
+.coloured input[type=checkbox]:checked + .checkbox-material .check {
+  color: #2FAEF8;
+}
+
+@keyframes checkbox-on {
+  0% {
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0px 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px;
+  }
+  50% {
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0px 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px 2px 0 11px;
+  }
+  100% {
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0px 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
+  }
+}
+@keyframes checkbox-off {
+  0% {
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0px 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px, 0 0 0 0 inset;
+  }
+  25% {
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0px 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px, 0 0 0 0 inset;
+  }
+  50% {
+    transform: rotate(45deg);
+    margin-top: -4px;
+    margin-left: 6px;
+    width: 0px;
+    height: 0px;
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0px 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px, 0 0 0 0 inset;
+  }
+  51% {
+    transform: rotate(0deg);
+    margin-top: -2px;
+    margin-left: -2px;
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0px 0px 0 10px inset;
+  }
+  100% {
+    transform: rotate(0deg);
+    margin-top: -2px;
+    margin-left: -2px;
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0px 0px 0 0px inset;
+  }
+}
+@keyframes rippleOn {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(13, 13);
+  }
+}
+@keyframes rippleOff {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(13, 13);
+  }
 }
 
 /*# sourceMappingURL=master.css.map */

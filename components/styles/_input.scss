@@ -32,6 +32,34 @@
         pointer-events: visible;
         background: transparent;
     }
+
+    &.icon-left {
+        & .left-icon {
+            transition: color 0.2s ease;
+            color: #acacac;
+            position: absolute;
+            top: 7.5px;
+            left: 0;
+            cursor: pointer;
+            pointer-events: visible;
+            background: transparent;
+        }
+
+        .input-label {
+            left: 32px;
+        }
+
+        &>.input-field:focus~.input-label,
+        &.not-empty>.input-label {
+            left: 0;
+            top: -20px;
+            font-size: 14px;
+        }
+
+        &>.input-field:focus~.left-icon {
+            color: #363636;
+        }
+    }
 }
 
 .input-group.icon-right .input-field {
@@ -113,6 +141,7 @@
     line-height: 17.5px;
     position: relative;
     top: 7px;
+    margin-bottom: 15px;
 }
 
 .input-group.input-error>.input-field:focus~.input-highlight {
@@ -163,12 +192,12 @@
         border-radius: 15px;
         border: 1px solid gray;
         outline: none;
-        
+
         &:focus {
             box-shadow: 0 0 5px hsla(217, 71%, 53%, 0.75);
             color: #363636;
 
-            & + .material-icons {
+            &+.material-icons {
                 color: #363636;
             }
         }

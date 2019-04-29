@@ -7,11 +7,30 @@
 }
 
 .modal {
+    z-index: 1000;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
+}
+
+.modal-trigger,
+.row-data {
+    cursor: pointer;
+}
+
+.row-data {
+    transition: background 0.2s;
+}
+
+.row-data:hover {
+    background: rgb(243, 243, 243);
+}
+
+.row-selected {
+    background: hsl(217, 71%, 53%) !important;
+    color: white !important;
 }
 
 #modal-close {
@@ -35,11 +54,16 @@
     display: block;
     position: absolute;
     pointer-events: none;
-    top: 5px;
-    right: 5px;
+    top: 5vh;
+    right: 5vh;
+    color: white;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+
+    & i {
+        font-size: 36px;
+    }
 }
 
 .modal.active .modal-close-button {
@@ -49,16 +73,15 @@
 
 .modal-items {
     background: #ffffff;
-    z-index: 20;
     opacity: 0;
-    max-height: 60vh;
     max-width: 60vw;
     overflow: auto;
     border-radius: 5px;
     font-family: 'Roboto';
+    max-height: 90vh;
 }
 
-.modal-items > * {
+.modal-items>* {
     padding: 25px;
 }
 
@@ -99,17 +122,37 @@
 }
 
 .modal.active .modal-items {
-    animation: anim-open 0.35s ease-in-out forwards;
+    animation: anim-open 0.2s ease-in-out forwards;
     pointer-events: auto;
 }
 
+.modal.remove .modal-items {
+    animation: anim-close 0.2s ease-in-out forwards;
+    pointer-events: none;
+}
+
 @keyframes anim-open {
-	0% { 
-		opacity: 0; 
-		transform: translate3d(0, 50px, 0); 
-	}
-	100% { 
-		opacity: 1; 
-		transform: translate3d(0, 0, 0); 
-	}
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes anim-close {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50px, 0);
+        transform: translate3d(0, 50px, 0);
+    }
 }

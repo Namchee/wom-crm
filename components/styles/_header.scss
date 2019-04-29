@@ -77,10 +77,10 @@
 }
 
 .sidenav {
-    position: absolute;
-    top: 10vh;
+    position: fixed;
+    top: 0;
     left: -25vw;
-    height: 90vh;
+    height: 100vh;
     width: 25vw;
     background: white;
     overflow-x: hidden;
@@ -94,7 +94,7 @@
 
 .sidenav-mask {
     position: fixed;
-    top: 10vh;
+    top: 0;
     width: 0;
     height: 0;
     background: rgba(0, 0, 0, 0.5);
@@ -177,7 +177,7 @@
     z-index: 1;
     left: 0vw;
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     opacity: 1;
 }
 

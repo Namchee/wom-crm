@@ -37,6 +37,10 @@
     justify-content: space-between;
 }
 
+.media-modal > .media-image {
+    position: relative;
+}
+
 .media-modal > .media-content {
     height: 100%;
     display: flex;
@@ -45,4 +49,22 @@
 
 .media-modal > .media-content > .heading {
     margin-bottom: 0;
+}
+
+.image-uploader {
+    display: none;
+}
+
+.image-uploader-button {
+    border-radius: 50%;
+    min-width: unset;
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    padding: 7.5px;
+}
+
+.gender,
+.marriage {
+    float: right;
 }

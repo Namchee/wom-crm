@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Region - Wombat Inc. CRM</title>
+    <link rel="stylesheet" href="styles/slimselect.css">
+    <script src="js/slimselect.js" defer></script>
+    <link rel="stylesheet" href="styles/datepicker.css">
+    <script src="js/datepicker.js" defer></script>
+    <script src="js/moment.js" defer></script>
+    <link rel="stylesheet" href="styles/datatables.css">
+    <script src="js/datatables.js" defer></script>
+    <link rel="stylesheet" href="styles/master.css">
+    <script src="js/master.js" defer></script>
+    <link rel="stylesheet" href="styles/edit_client.css">
+    <script src="js/edit_client.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-primary">
+        <input type="checkbox" id="navbar-toggle" />
+        <label for="navbar-toggle" class="navbar-toggle-label">
+            <div class="burger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </label>
+        <header class="navbar-content">
+            <div class="navbar-item navbar-item-right" id="date"></div>
+        </header>
+        <nav class="sidenav">
+            <div class="sidenav-item sidenav-top current-user">
+                <div class="media">
+                    <div class="media-image">
+                        <img src="./resources/user.png" alt="'s image'" title="" width="64" height="64" />
+                    </div>
+                    <div class="media-content">
+                        <div class="media-header">
+                            Wumbo
+                        </div>
+                        <p>
+                            Customer Service
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidenav-item">
+                <a href="">
+                    <li>
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </li>
+                </a>
+                <a class="active" href="">
+                    <li>
+                        <i class="material-icons">person_add</i>
+                        <span>Add Client</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">poll</i>
+                        <span>View Report</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">public</i>
+                        <span>Region Search</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">settings</i>
+                        <span>Profile Settings</span>
+                    </li>
+                </a>
+            </ul>
+            <div class="sidenav-item sidenav-bottom">
+                <button class="button button-primary" ripple>
+                    Logout
+                </button>
+            </div>
+        </nav>
+        <label class="sidenav-mask" for="navbar-toggle"></label>
+    </nav>
+    <section class="content">
+        <div class="container">
+            <h1 class="heading">
+                Edit Klien
+            </h1>
+            <table id="client">
+                <thead>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>Umur</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Status Kawin</th>
+                    <th>Nilai Investasi</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Sun</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Dar</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Der</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Dor</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Desh</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div id="modal-info" class="modal">
+        <input type="checkbox" id="modal-close" />
+        <label for="modal-close" class="modal-overlay"></label>
+        <label for="modal-close" class="modal-close-button">
+            <i class="material-icons">
+                cancel
+            </i>
+        </label>
+        <div class="modal-items client-info">
+            <div class="modal-content">
+                <div class="columns">
+                    <div class="column">
+                        <div class="media media-modal">
+                            <figure class="media-image">
+                                <img src="./resources/user.png" alt="'s picture" title="" width="128" height="128" />
+                                <input type="file" class="image-uploader" id="image-uploader" accept="image/*" />
+                                <label for="image-uploader" class="button button-primary image-uploader-button">
+                                    <i class="material-icons">camera_alt</i>
+                                </label>
+                            </figure>
+                            <div class="media-content">
+                                <h1 class="heading client-heading">
+                                    Sun's Profile
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form action="" method="POST">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group">
+                                <input type="text" name="namaKlien" class="input-field" autocomplete="off" required />
+                                <span class="input-bar"></span>
+                                <span class="input-highlight"></span>
+                                <label class="input-label">Nama Klien</label>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="dropdown gender" data-value="">
+                                <button class="button button-light dropdown-trigger" type="button">
+                                    <label class="dropdown-toggler" for="gender">&nbsp;</label>
+                                    <span class="dropdown-value">Jenis Kelamin</span>
+                                </button>
+                                <span class="dropdown-icon">
+                                    <i class="material-icons">expand_more</i>
+                                </span>
+                                <input type="checkbox" class="dropdown-input" id="gender" />
+                                <ul class="dropdown-content">
+                                    <li data-value="0">Pria</li>
+                                    <li data-value="1">Wanita</li>
+                                </ul>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group">
+                                <input type="text" name="alamat" class="input-field" autocomplete="off" required />
+                                <span class="input-bar"></span>
+                                <span class="input-highlight"></span>
+                                <label class="input-label">Alamat</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group">
+                                <input type="text" name="date-of-birth" class="input-field date-of-birth"
+                                    autocomplete="off" required />
+                                <span class="input-bar"></span>
+                                <span class="input-highlight"></span>
+                                <label class="input-label">Tanggal Lahir</label>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="dropdown marriage" data-value="">
+                                <button class="button button-light dropdown-trigger" type="button">
+                                    <label class="dropdown-toggler" for="marriage-status">&nbsp;</label>
+                                    <span class="dropdown-value">Status Kawin</span>
+                                </button>
+                                <span class="dropdown-icon">
+                                    <i class="material-icons">expand_more</i>
+                                </span>
+                                <input type="checkbox" class="dropdown-input" id="marriage-status" />
+                                <ul class="dropdown-content">
+                                    <li data-value="0">Single</li>
+                                    <li data-value="1">Married</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <select name="city" id="city" class="city">
+                                <!-- php -->
+                                <option data-placeholder="true"></option>
+                                <option value="aaa">bbb</option>
+                                <option value="bbb">ccc</option>
+                            </select>
+                        </div>
+                        <div class="column">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group icon-left">
+                                <input type="number" step="5000" name="nilai" class="input-field" autocomplete="off"
+                                    required />
+                                <span class="input-bar"></span>
+                                <span class="input-highlight"></span>
+                                <label class="input-label">Nilai Investasi</label>
+                                <i class="material-icons left-icon">attach_money</i>
+                            </div>
+                        </div>
+                        <div class="column">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <button class="button button-primary icon-left" type="submit" ripple>
+                                <i class="material-icons">update</i>
+                                <span>Ubah Informasi</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

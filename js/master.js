@@ -58,7 +58,7 @@ function inputRequired(elem) {
   } else {
     if (parent.querySelector('.input-message') === null) {
       parent.classList.add('input-error');
-      if (parent.querySelector('i') === null) {
+      if (parent.querySelector('i.icon-right') === null) {
         parent.classList.add('icon-right');
 
         let icon = document.createElement('i');
@@ -100,7 +100,7 @@ function passwordReveal(elem) {
 }
 
 function toggleModals() {
-  let modalButtons = document.querySelectorAll('.modal-trigger');
+  let modalButtons = document.querySelectorAll('button.modal-trigger');
 
   for (let modalButton of modalButtons) {
     modalButton.addEventListener('click', () => {

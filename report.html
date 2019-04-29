@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Search Region - Wombat Inc. CRM</title>
-    <script src="js/moment.js" defer></script>
+    <title>Generate Report - Wombat Inc. CRM</title>
     <link rel="stylesheet" href="styles/datatables.css">
     <script src="js/datatables.js" defer></script>
+    <script src="js/moment.js" defer></script>
     <link rel="stylesheet" href="styles/master.css">
     <script src="js/master.js" defer></script>
-    <link rel="stylesheet" href="styles/search_region.css">
-    <script src="js/search_region.js" defer></script>
+    <link rel="stylesheet" href="styles/report.css">
+    <script src="js/report.js" defer></script>
 </head>
 
 <body>
@@ -87,30 +87,8 @@
     <section class="content">
         <div class="container">
             <h1 class="heading">
-                Cari Region
+                Buat Laporan
             </h1>
-            <div class="columns region-selector">
-                <div class="column region-selector-label">
-                    <p>Pilih Region</p>
-                </div>
-                <div class="column">
-                    <div class="dropdown" data-value="">
-                        <button class="button button-light dropdown-trigger" type="button">
-                            <label class="dropdown-toggler" for="region">&nbsp;</label>
-                            <span class="dropdown-value">Region</span>
-                        </button>
-                        <span class="dropdown-icon">
-                            <i class="material-icons">expand_more</i>
-                        </span>
-                        <input type="checkbox" class="dropdown-input" id="region" />
-                        <ul class="dropdown-content">
-                            <!-- PHP -->
-                            <li data-value="0">Single</li>
-                            <li data-value="1">Married</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <table id="client">
                 <thead>
                     <th>No</th>
@@ -122,7 +100,7 @@
                     <th>Nilai Investasi</th>
                 </thead>
                 <tbody>
-                    <tr class="modal-trigger">
+                    <tr class="row-data">
                         <td>1</td>
                         <td>Sun</td>
                         <td>Jalan Surga</td>
@@ -131,7 +109,7 @@
                         <td>Belum Menikah</td>
                         <td>9999</td>
                     </tr>
-                    <tr class="modal-trigger">
+                    <tr class="row-data">
                         <td>2</td>
                         <td>Dar</td>
                         <td>Jalan Surga</td>
@@ -140,7 +118,7 @@
                         <td>Belum Menikah</td>
                         <td>9999</td>
                     </tr>
-                    <tr class="modal-trigger">
+                    <tr class="row-data">
                         <td>3</td>
                         <td>Der</td>
                         <td>Jalan Surga</td>
@@ -149,7 +127,7 @@
                         <td>Belum Menikah</td>
                         <td>9999</td>
                     </tr>
-                    <tr class="modal-trigger">
+                    <tr class="row-data">
                         <td>3</td>
                         <td>Dor</td>
                         <td>Jalan Surga</td>
@@ -158,7 +136,7 @@
                         <td>Belum Menikah</td>
                         <td>9999</td>
                     </tr>
-                    <tr class="modal-trigger">
+                    <tr class="row-data">
                         <td>3</td>
                         <td>Desh</td>
                         <td>Jalan Surga</td>
@@ -169,83 +147,58 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </section>
-    <div id="modal" class="modal">
-        <input type="checkbox" id="modal-close" />
-        <label for="modal-close" class="modal-overlay"></label>
-        <label for="modal-close" class="modal-close-button">
-            <i class="material-icons">
-                cancel
-            </i>
-        </label>
-        <div class="modal-items client-info">
-            <div class="modal-content">
-                <div class="columns">
-                    <div class="column">
-                        <div class="media media-modal">
-                            <figure class="media-image">
-                                <img src="./resources/user.png" alt="'s picture" title="" width="128" height="128" />
-                            </figure>
-                            <div class="media-content">
-                                <h1 class="heading">
-                                    Sun's Profile
-                                </h1>
-                            </div>
-                        </div>
+
+            <div class="columns">
+                <div class="column category">
+                    Pilih Kategori
+                </div>
+                <div class="column">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="age" />
+                            <span class="checkbox-material">
+                                <span class="check"></span>
+                            </span>
+                            Umur
+                        </label>
                     </div>
                 </div>
-                <div class="columns">
-                    <div class="column">
-                        Nama Lengkap
-                    </div>
-                    <div class="column client-name">
-                        Sun
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column">
-                        Alamat
-                    </div>
-                    <div class="column client-address">
-                        Jalan Ganteng no. 6969
+                <div class="column">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="gender" />
+                            <span class="checkbox-material">
+                                <span class="check"></span>
+                            </span>
+                            Jenis Kelamin
+                        </label>
                     </div>
                 </div>
-                <div class="columns">
-                    <div class="column">
-                        Umur
-                    </div>
-                    <div class="column client-age">
-                        9999
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column">
-                        Jenis Kelamin
-                    </div>
-                    <div class="column client-gender">
-                        Pria
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column">
-                        Status Kawin
-                    </div>
-                    <div class="column client-marriage">
-                        Belum Menikah
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column">
-                        Nilai Investasi
-                    </div>
-                    <div class="column client-invest">
-                        999.999.999,00
+                <div class="column">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="invest" />
+                            <span class="checkbox-material">
+                                <span class="check"></span>
+                            </span>
+                            Nilai Investasi
+                        </label>
                     </div>
                 </div>
             </div>
+
+            <div class="columns">
+                <div class="column">
+                    <button class="button button-primary icon-left" id="report" ripple>
+                        <i class="material-icons left-icon">assessment</i>
+                        <span>Buat Laporan</span>
+                    </button>
+                </div>
+                <div class="column"></div>
+                <div class="column"></div>
+            </div>
         </div>
-    </div>
+    </section>
 </body>
 
 </html>
