@@ -8,9 +8,18 @@
 			return $result;
 		}
 		
-		public function setClient($namaClients,$nilai,$status,$alamat){
-			$query = "SELECT * FROM client WHERE namaClient = $namaClients";
+		private function getIdClient($namaClients){
+			$query = "SELECT idC FROM client WHERE namaClient = $namaClients";
 			$result = $db->executeSelectQuery($query);
+			return $result[0];
+		}
+		
+		public function setGambar($gambar,$nama){
+			$query = "UPDATE client SET gambar=$gambar WHERE namaClient=$nama";
+			$db->executeNonSelectQuery($query);
+		}
+		
+		public function setClient($namaClients,$nilai,$status,$alamat){
 			$nilaiBaru = $nilai;
 			$statusBaru = $status;
 			$alamatBaru = $alamat;
