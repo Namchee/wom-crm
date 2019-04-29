@@ -100,11 +100,11 @@ function passwordReveal(elem) {
 }
 
 function toggleModals() {
-  let modalButtons = document.querySelectorAll('button.modal-trigger');
+  let modalButtons = document.querySelectorAll('.modal-trigger');
 
   for (let modalButton of modalButtons) {
     modalButton.addEventListener('click', () => {
-      let modal = document.querySelector(`#${modalButton.dataset.target}`);
+      let modal = document.querySelector(`#modal`);
 
       modal.classList.remove('remove');
       modal.classList.add('active');
@@ -158,10 +158,10 @@ function cleanUp() {
 function toggleNavbars() {
   let navbar = document.querySelector('.navbar');
   let date = document.querySelector('#date');
-  date.textContent = new Date().toLocaleString();
+  date.textContent = moment().format('LLLL');
 
   setInterval(() => {
-    date.textContent = new Date().toLocaleString();
+    date.textContent = moment().format('LLLL');
   }, 500);
 
   let prevScrollPos = window.pageYOffset;

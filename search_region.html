@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Region - Wombat Inc. CRM</title>
+    <script src="js/moment.js" defer></script>
+    <link rel="stylesheet" href="styles/datatables.css">
+    <script src="js/datatables.js" defer></script>
+    <link rel="stylesheet" href="styles/master.css">
+    <script src="js/master.js" defer></script>
+    <link rel="stylesheet" href="styles/search_region.css">
+    <script src="js/search_region.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-primary">
+        <input type="checkbox" id="navbar-toggle" />
+        <label for="navbar-toggle" class="navbar-toggle-label">
+            <div class="burger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </label>
+        <header class="navbar-content">
+            <div class="navbar-item navbar-item-right" id="date"></div>
+        </header>
+        <nav class="sidenav">
+            <div class="sidenav-item sidenav-top current-user">
+                <div class="media">
+                    <div class="media-image">
+                        <img src="./resources/user.png" alt="'s image'" title="" width="64" height="64" />
+                    </div>
+                    <div class="media-content">
+                        <div class="media-header">
+                            Wumbo
+                        </div>
+                        <p>
+                            Customer Service
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidenav-item">
+                <a href="">
+                    <li>
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </li>
+                </a>
+                <a class="active" href="">
+                    <li>
+                        <i class="material-icons">person_add</i>
+                        <span>Add Client</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">poll</i>
+                        <span>View Report</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">public</i>
+                        <span>Region Search</span>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <i class="material-icons">settings</i>
+                        <span>Profile Settings</span>
+                    </li>
+                </a>
+            </ul>
+            <div class="sidenav-item sidenav-bottom">
+                <button class="button button-primary" ripple>
+                    Logout
+                </button>
+            </div>
+        </nav>
+        <label class="sidenav-mask" for="navbar-toggle"></label>
+    </nav>
+    <section class="content">
+        <div class="container">
+            <h1 class="heading">
+                Cari Region
+            </h1>
+            <table id="client">
+                <thead>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>Umur</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Status Kawin</th>
+                    <th>Nilai Investasi</th>
+                </thead>
+                <tbody>
+                    <tr class="modal-trigger">
+                        <td>1</td>
+                        <td>Sun</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr class="modal-trigger">
+                        <td>2</td>
+                        <td>Dar</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr class="modal-trigger">
+                        <td>3</td>
+                        <td>Der</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr class="modal-trigger">
+                        <td>3</td>
+                        <td>Dor</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr class="modal-trigger">
+                        <td>3</td>
+                        <td>Desh</td>
+                        <td>Jalan Surga</td>
+                        <td>99</td>
+                        <td>Pria</td>
+                        <td>Belum Menikah</td>
+                        <td>9999</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div id="modal" class="modal">
+        <input type="checkbox" id="modal-close" />
+        <label for="modal-close" class="modal-overlay"></label>
+        <label for="modal-close" class="modal-close-button">
+            <i class="material-icons">
+                cancel
+            </i>
+        </label>
+        <div class="modal-items client-info">
+            <div class="modal-content">
+                <h1 class="heading client-heading">
+                    Sun's Profile
+                </h1>
+                <div class="columns">
+                    <div class="column">
+                        Nama Lengkap
+                    </div>
+                    <div class="column client-name">
+                        Sun
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        Alamat
+                    </div>
+                    <div class="column client-address">
+                        Jalan Ganteng no. 6969
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        Umur
+                    </div>
+                    <div class="column client-age">
+                        9999
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        Jenis Kelamin
+                    </div>
+                    <div class="column client-gender">
+                        Pria
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        Status Kawin
+                    </div>
+                    <div class="column client-marriage">
+                        Belum Menikah
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        Nilai Investasi
+                    </div>
+                    <div class="column client-invest">
+                        12312987054r987032
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button button-success">Ok</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

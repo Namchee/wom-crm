@@ -1,5 +1,5 @@
 function toggleModals() {
-  let modalButtons = document.querySelectorAll('button.modal-trigger');
+  let modalButtons = document.querySelectorAll('.modal-trigger');
 
   for (let modalButton of modalButtons) {
     modalButton.addEventListener('click', () => {

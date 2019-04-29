@@ -731,6 +731,7 @@ html, body {
 }
 
 .modal {
+  z-index: 100000;
   position: fixed;
   display: flex;
   align-items: center;
@@ -744,26 +745,33 @@ html, body {
 }
 
 .modal-overlay {
+  display: none;
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
 }
 
 .modal.active .modal-overlay {
   opacity: 1;
   pointer-events: auto;
+  display: block;
 }
 
 .modal-close-button {
-  display: block;
-  position: absolute;
+  color: white;
+  position: fixed;
   pointer-events: none;
-  top: 5px;
-  right: 5px;
+  top: 2.5vh;
+  right: 2.5vh;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.modal-close-button>i {
+  font-size: 32px;
 }
 
 .modal.active .modal-close-button {
@@ -773,7 +781,6 @@ html, body {
 
 .modal-items {
   background: #ffffff;
-  z-index: 20;
   opacity: 0;
   max-height: 60vh;
   max-width: 60vw;
@@ -872,6 +879,15 @@ hr {
 
 .flatpickr-calendar {
   font-family: 'Roboto', sans-serif;
+}
+
+tr.modal-trigger {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+tr.modal-trigger:hover {
+  background: rgb(230, 230, 230);
 }
 
 /*# sourceMappingURL=master.css.map */

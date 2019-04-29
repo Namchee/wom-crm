@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login - Wom-CRM</title>
     <link rel="stylesheet" href="styles/master.css">
-    <link rel="stylesheet" href="styles/login.css">
     <script src="js/master.js" defer></script>
+    <link rel="stylesheet" href="styles/login.css">
+    <script src="js/login.js" defer></script>
 </head>
 
 <body>
@@ -16,21 +17,33 @@
         <img src="./resources/wombat.png" class="logo" alt="Wombat Inc." title="Wombat Inc." width="128" height="128" />
         <div class="box login-box">
             <form action="" method="POST">
-                <div class="input-group">
-                    <input type="text" class="input-field" required />
-                    <span class="input-highlight"></span>
-                    <span class="input-bar"></span>
-                    <label class="input-label">Username</label>
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="text" class="input-field" required />
+                            <span class="input-highlight"></span>
+                            <span class="input-bar"></span>
+                            <label class="input-label">Username</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <input type="password" class="input-field" required password-reveal />
-                    <span class="input-highlight"></span>
-                    <span class="input-bar"></span>
-                    <label class="input-label">Password</label>
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="password" class="input-field" required password-reveal />
+                            <span class="input-highlight"></span>
+                            <span class="input-bar"></span>
+                            <label class="input-label">Password</label>
+                        </div>
+                    </div>
                 </div>
-                <button class="button button-primary login" type="submit" ripple>
-                    Login
-                </button>
+                <div class="columns">
+                    <div class="column">
+                        <button class="button button-primary login" type="submit" ripple>
+                            Login
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
