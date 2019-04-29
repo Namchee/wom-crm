@@ -123,9 +123,9 @@
             $queries = "SELECT idU FROM users WHERE idU=$idCSBaru";
             $res = $db->executeSelectQuery($queries);
             if($result != NULL && $res != NULL){
-                $quer = "UPDATE idU SET idU = $idCSBaru FROM client WHERE idU=$idCSGanti";
+                $quer = "UPDATE users SET idU = $idCSBaru FROM client WHERE idU=$idCSGanti";
                 $db->executeNonSelectQuery($quer);
-                $queri = "UPDATE active SET active = 0 FROM users WHERE idU=$idCSGanti";
+                $queri = "UPDATE users SET active = 0 FROM users WHERE idU=$idCSGanti";
                 $db->executeNonSelectQuery($queri);
                 $myObj->pesan = "Berhasil diubah";
                 $myObj->status = true;
