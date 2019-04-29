@@ -4,7 +4,7 @@
 
         private function cekKota($namakot){
             $query = "SELECT idK FROM kota wHERE namaKota = $namakot";
-            $res = $executeSelectQuery($query);
+            $res = $db->executeSelectQuery($query);
             if($res){
                 return true;
             }
@@ -14,13 +14,13 @@
         }
         private function getIdKota($namakot){
             $query = "SELECT idK FROM kota wHERE namaKota = $namakot";
-            $res = $executeSelectQuery($query);
+            $res = $db->executeSelectQuery($query);
             return $res[0];
         }
 
         private function cekRegion($namareg){
             $query = "SELECT idR FROM region wHERE namaRegion = $namareg";
-            $res = $executeSelectQuery($query);
+            $res = $db->executeSelectQuery($query);
             if($res){
                 return true;
             }
@@ -31,7 +31,7 @@
 
         private function getIdReg($namareg){
             $query = "SELECT idR FROM region wHERE namaRegion = $namareg";
-            $res = $executeSelectQuery($query);
+            $res = $db->executeSelectQuery($query);
             return $res[0];
         }
 
