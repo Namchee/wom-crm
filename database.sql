@@ -9,12 +9,11 @@ CREATE TABLE Users(
 	PRIMARY KEY (idU)
 );
 CREATE TABLE Client(
-	idC int AUTO_INCREMENT NOT NULL,
+	idC int AUTO_INCREMENT PRIMARY,
 	namaClient varchar(30) NOT NULL,
 	statusKawin int NOT NULL,
 	tanggalLahir date NOT NULL,
-	nilaiInvestasi money NOT NULL,
-	umur int NOT NULL,
+	nilaiInvestasi decimal(15,2) NOT NULL,
 	alamat int NULL,
 	gambar MEDIUMTEXT,
 	idU int NOT NULL,
@@ -44,7 +43,7 @@ CREATE TABLE Kontak(
 	CONSTRAINT FK_Kontak FOREIGN KEY (idU) REFERENCES Users(idU)
 );
 CREATE VIEW viewUmurClient as
-SELECT *, TIMESTAMPDIFF(YEAR, Client.tanggalLahir, CURDATE()) as umur
+SELECT *, YEAR(DATEDIFF(Client.tanggalLahir, CURDATE())) as umur
 FROM Client
 
 CREATE INDEX idxUser ON users(nama)
