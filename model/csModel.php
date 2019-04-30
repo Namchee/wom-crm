@@ -89,5 +89,23 @@
 				$db->executeSelectQuery($que);
 			}
 		}
+		
+		public function getClientCS{
+			$masuk = json_decode(file_get_contents('php://input'));
+			$idClient = $masuk->idC;
+			if(cekIdClient($idClient)){
+				$query = "SELECT users.idU,users.nama FROM users INNER JOIN client on users.idU=client.idU
+				WHERE client.idC=$idClient";
+				$res=$db->executeSelectQuery($query);
+				$myObj->idCS = $res[0];
+				$myObj->nama = $res[1];
+				$myObj->status = true;
+				echo json_encode($myObj);
+			}else{
+				$myObj->pesan = "Client tidak ada";
+				$myObj->status = false;
+				echo json_encode($myObj);
+			}
+		}
 	}
 ?>
