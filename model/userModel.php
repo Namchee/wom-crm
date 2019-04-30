@@ -25,9 +25,27 @@
 		}
 		
 		private function getUser($nama){
-			$query = "SELECT * FROM users WHERE username = '$nama'";
+			$query = "SELECT idU,nama,status FROM users WHERE username = '$nama'";
             		$res = $db->executeSelectQuery($query);
             		return $res;
+		}
+		
+		private function cekActive($user){
+			$query = "SELECT active FROM users WHERE username = '$user'";
+            		$res = $db->executeSelectQuery($query);
+            		return $res[0];
+		}
+		
+		public function getUsers(){
+			$query = "SELECT idU,nama,tanggalGabung,username,active,password FROM users";
+			$res=$db->executeSelectQuery($query);
+			return $res;
+		}
+		
+		public function getCS(){
+			$query = "SELECT idU,nama,tanggalGabung,username,active,password FROM users WHERE status=0";
+			$res=$db->executeSelectQuery($query);
+			return $res;
 		}
 		
 		public function login(){
@@ -36,14 +54,22 @@
 			$pass = $masuk->password;
 			if(cekUsers($userName)){
 				if(cekPass($username,$pass)){
-					$arrUserData = getUser($userName);
-					session_start();
-					$_SESSION["nama"]=$arrUserData[0];
-					$_SESSION["status"]=$arrUserData[6];
-					$myObj->data=$userName;
-					$myObj->pesan="Berhasil Log In";
-					$myObj->status=true;
-					echo json_encode($myObj);
+					if(cekActive($username)){
+						$arrUserData = getUser($userName);
+						session_start();
+						$_SESSION["id"]=$arrUserData[0];
+						$_SESSION["nama"]=$arrUserData[1];
+						$_SESSION["status"]=$arrUserData[2];
+						$myObj->data=$userName;
+						$myObj->pesan="Berhasil Log In";
+						$myObj->status=true;
+						echo json_encode($myObj);
+					}else{
+						$myObj->data=$userName;
+						$myObj->pesan="User tidak aktif";
+						$myObj->status=false;
+						echo json_encode($myObj);
+					}
 				}else{
 					$myObj->data=$userName;
 					$myObj->pesan="Password salah";
