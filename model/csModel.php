@@ -28,6 +28,25 @@
 				echo json_encode($myObj);
 			}
 		}
+		
+		public function deleteClient(){
+			$masuk = json_decode(file_get_contents('php://input'));
+			$idC = $masuk->idClient;
+			if(cekIdClient($idC)){
+				$query = "DELETE FROM client WHERE idC=$idC";
+				$db->executeNonSelectQuery($query);
+				$myObj->data=$idC;
+				$myObj->pesan="Data berhasil dihapus";
+				$myObj->status=true;
+				echo json_encode($myObj);
+			}else{
+				$myObj->data=$idC;
+				$myObj->pesan="Data tidak ditemukan";
+				$myObj->status=false;
+				echo json_encode($myObj);
+			}
+		}
+			
 		public function editClient(){
 			$masuk = json_decode(file_get_contents('php://input'));
 		}
@@ -42,6 +61,16 @@
 		
 		private function cekClient($nama){
 			$query = "SELECT idC FROM client WHERE namaClient='$nama'";
+			$res=$db->executeSelectQuery($query);
+			if($res){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		private function cekIdClient($idC){
+			$query = "SELECT namaClient FROM client WHERE idC=$idC";
 			$res=$db->executeSelectQuery($query);
 			if($res){
 				return true;
