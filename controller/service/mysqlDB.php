@@ -60,5 +60,5 @@ class MySQLDB{
 	}
 }
 
-$db = new MySQLDB("localhost","root","","testting");
+$db = new MySQLDB("localhost","root","","crm");
 ?>
