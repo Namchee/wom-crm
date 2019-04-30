@@ -4,56 +4,57 @@
 	class userModel{
 		
 		private function cekUsers($nama){
-			$query = "SELECT username FROM users wHERE username = $nama";
-            $res = $db->executeSelectQuery($query);
-            if($res){
-                return true;
-            }
-            else{
-                return false;
-            }
+			$query = "SELECT username FROM users WHERE username = '$nama'";
+            		$res = $db->executeSelectQuery($query);
+            		if($res){
+                		return true;
+            		}
+            		else{
+                		return false;
+            		}
 		}
 		
-		private function cekPass($pass){
-			$query = "SELECT password FROM users wHERE password = $pass";
-            $res = $db->executeSelectQuery($query);
-            if($res){
-                return true;
-            }
-            else{
-                return false;
-            }
+		private function cekPass($user,$pass){
+            		$query = "SELECT password FROM users WHERE username='$user'";
+			$res = $db->executeSelectQuery($query);
+			if(password_verify($pass,$res[0])){
+				return true;
+			}else{
+				return false;
+			}
 		}
 		
 		private function getUser($nama){
-			$query = "SELECT * FROM users WHERE username = $nama";
-            $res = $db->executeSelectQuery($query);
-            return $res;
+			$query = "SELECT * FROM users WHERE username = '$nama'";
+            		$res = $db->executeSelectQuery($query);
+            		return $res;
 		}
 		
 		public function login(){
 			$masuk = json_decode(file_get_contents('php://input'));
 			$userName = $masuk->user;
 			$pass = $masuk->password;
-			if(cekUsers($userName)&&cekPass($pass)){
-				$arrUserData = getUser($userName);
-				session_start();
-				$_SESSION["nama"]=$arrUserData[0];
-				$_SESSION["tanggalGabung"]=$arrUserData[1];
-				$_SESSION["username"]=$arrUserData[2];
-				$_SESSION["password"]=$arrUserData[3];
-				$_SESSION["idU"]=$arrUserData[4];
-				$_SESSION["active"]=$arrUserData[5];
-				$_SESSION["status"]=$arrUserData[6];
-				$myObj->data=$userName;
-				$myObj->pesan="Berhasil Log In";
-				$myObj->status=true;
-				json_encode($myObj);
+			if(cekUsers($userName)){
+				if(cekPass($username,$pass)){
+					$arrUserData = getUser($userName);
+					session_start();
+					$_SESSION["nama"]=$arrUserData[0];
+					$_SESSION["status"]=$arrUserData[6];
+					$myObj->data=$userName;
+					$myObj->pesan="Berhasil Log In";
+					$myObj->status=true;
+					echo json_encode($myObj);
+				}else{
+					$myObj->data=$userName;
+					$myObj->pesan="Password salah";
+					$myObj->status=false;
+					echo json_encode($myObj);
+				}
 			}else{
 				$myObj->data=null;
 				$myObj->pesan="Tidak Berhasil Log In";
 				$myObj->status=false;
-				json_encode($myObj);
+				echo json_encode($myObj);
 			}
 		}
 		
