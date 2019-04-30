@@ -277,7 +277,7 @@
             $masuk = json_decode(file_get_contents('php://input'));
             $region = $masuk->idR;
             if(cekRegId($region)){
-                $query = "SELECT kota.idK FROM region INNER JOIN terdapatdi ON region.idR=terdapatdi.idR
+                $query = "SELECT kota.idK as 'ID Kota',kota.namaKota as 'Nama Kota' FROM region INNER JOIN terdapatdi ON region.idR=terdapatdi.idR
                 INNER JOIN kota ON terdapatdi.idK=kota.idK WHERE region.idR='$region'";
                 $res=$db->executeSelectQuery($query);
                 echo json_encode($res);
