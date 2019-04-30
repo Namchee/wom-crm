@@ -35,7 +35,7 @@
         public function addKota(){
             $masuk = json_decode(file_get_contents('php://input'));
             $arrReg = $masuk->namareg;
-            $arrReg = $db->escapeString($arrReg);
+            $arrReg = escapeArray($arrReg);
             $namakota = $masuk->namaKota;
             $namakota = $db->escapeString($namakota);
             if(cekKota($namakota)){
@@ -72,7 +72,7 @@
         public function addRegion(){
             $masuk = json_decode(file_get_contents('php://input'));
             $arrKot = $masuk->namakot;
-            $arrKot = $db->escapeString($arrKot);
+            $arrKot = escapeArray($arrKot);
             escapeArray($arrKot);
             $namareg = $masuk->namaRegion;
             $namareg = $db->escapeString($namareg);
@@ -202,6 +202,7 @@
         public function changeCityReg(){
             $masuk = json_decode(file_get_contents('php://input'));
             $arrKota = $masuk->idK;
+            $arrKota = escapeArray($arrKota);
             $region = $masuk->idR;
             $query = "DELETE FROM terdapatdi WHERE idR=$region";
             $db->executeNonSelectQuery($query);
