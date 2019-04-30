@@ -36,7 +36,6 @@
             $masuk = json_decode(file_get_contents('php://input'));
             $arrReg = $masuk->namareg;
             $arrReg = $db->escapeString($arrReg);
-            $arrLength = count($arrReg);
             $namakota = $masuk->namaKota;
             $namakota = $db->escapeString($namakota);
             if(cekKota($namakota)){
@@ -46,23 +45,25 @@
                 echo json_encode($myObj);
             }
             else{
-                $queries = "INSERT INTO kota VALUES (NULL, '$namakota')";
-                $db->executeNonSelectQuery($queries);
-                $myObj->data = $namakota;
-                $myObj->pesan = "Berhasil Ditambah";
-                $myObj->status = true;
-                $idkot = getIdKota($namakota);
-                for ($i=0; $i < $arrLength; $i++) { 
-                        if(cekRegion($arrReg[$i])){
-                            $idReg = getIdReg($arrReg[$i]);
-                            $quer = "INSERT INTO terdapatdi VALUES ($idkot,$idReg)";
-                            $db->executeNonSelectQuery($quer);
-                        }
-                        else{
-                            $myObj->pesan = "Id tidak ada";
-                        }
+                if(cekArrReg($arrReg)){
+                    $queries = "INSERT INTO region VALUES (NULL, '$namareg')";
+                    $db->executeNonSelectQuery($queries);
+                    $myObj->data = $namakota;
+                    $myObj->pesan = "Berhasil Ditambah";
+                    $myObj->status = true;
+                    $idkot = getIdKota($namakota);
+                    foreach($arrReg as $value){
+                        $idReg = getIdReg($value);
+                        $que = "INSERT INTO terdapatdi VALUES ($idkot, $idReg)";
+                        $db->executeNonSelectQuery($queries);
+                    }
+                    echo json_encode($myObj);
+                }else{
+                    $myObj->data = $namakota;
+                    $myObj->pesan = "Tidak bisa ditambah";
+                    $myObj->status = false;
+                    echo json_encode($myObj);
                 }
-                echo json_encode($myObj);
             }
         }
         
