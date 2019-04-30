@@ -108,30 +108,30 @@
             $myObj->pesan = "Customer Service berhasil ditambah";
             echo json_encode($myObj);
         }
+        
         public function changeCSCLient(){
             $masuk = json_decode(file_get_contents('php://input'));
-            $query = "SELECT idU FROM users";
-            $idCSGanti = $masuk->idULama;
-            $idCSBaru = $masuk->idUBaru;
-            $query .= " WHERE idU = $idCSGanti";
-            $result = $db->executeSelectQuery($query);
-            $queries = "SELECT idU FROM users WHERE idU=$idCSBaru";
-            $res = $db->executeSelectQuery($queries);
-            if($result != NULL && $res != NULL){
-                $quer = "UPDATE users SET idU = $idCSBaru WHERE idU=$idCSGanti";
-                $db->executeNonSelectQuery($quer);
-                $queri = "UPDATE users SET active = 0 WHERE idU=$idCSGanti";
-                $db->executeNonSelectQuery($queri);
-                $myObj->pesan = "Berhasil diubah";
+            $idClient = $masuk->idClient;
+            $idCS = $masuk->idCS;
+            $query = "SELECT idC FROM client WHERE idC=$idClient";
+            $res = $db->executeSelectQuery($query);
+            $que = "SELECT idU FROM users WHERE idU = $idCS";
+            $result = $db->executeSelectQuery($que);
+            if($res[0]!=null&&$result[0]!=null){
+                $ques = "UPDATE client SET idU=$idCS WHERE idC=$idClient";
+                $db->executeNonSelectQuery($ques);
+                $myObj->data = $idClient;
+                $myObj->pesan = "Client berhasil di ubah";
                 $myObj->status = true;
                 echo json_encode($myObj);
-            }
-            else{
-                $myObj->pesan = "Gagal diubah";
+            }else{
+                $myObj->data = $idClient;
+                $myObj->pesan = "Client gagal di ubah";
                 $myObj->status = false;
                 echo json_encode($myObj);
             }
         }
+        
         public function changeCSInfo(){
             $masuk = json_decode(file_get_contents('php://input'));
             $query = "SELECT idU FROM users";
@@ -154,6 +154,7 @@
                 echo json_encode($myObj);
             }
         }
+        
         public function changeCityReg(){
             $masuk = json_decode(file_get_contents('php://input'));
             $arrKota = $masuk->idK;
