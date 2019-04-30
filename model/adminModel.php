@@ -35,6 +35,7 @@
         public function addKota(){
             $masuk = json_decode(file_get_contents('php://input'));
             $arrReg = $masuk->namareg;
+            $arrReg = $db->escapeString($arrReg);
             $arrLength = count($arrReg);
             $namakota = $masuk->namaKota;
             $namakota = $db->escapeString($namakota);
@@ -65,9 +66,13 @@
             }
         }
         
+        
+        
         public function addRegion(){
             $masuk = json_decode(file_get_contents('php://input'));
             $arrKot = $masuk->namakot;
+            $arrKot = $db->escapeString($arrKot);
+            escapeArray($arrKot);
             $arrLength = count($arrKot);
             $namareg = $masuk->namaRegion;
             $namareg = $db->escapeString($namareg);
@@ -117,8 +122,11 @@
         public function addCS(){
             $masuk = json_decode(file_get_contents('php://input'));
             $username = $masuk->username;
+            $username = $db->escapeString($username);
             $password = $masuk->password;
+            $password = $db->escapeString($password);
             $arrEmail = $masuk->email;
+            escapeArray($arrEmail);
             if(cekCS($username)){
                 $myObj->username = $masuk->username;
                 $myObj->pesan = "Customer Service gagal ditambah";
@@ -169,8 +177,11 @@
             $result = $db->executeSelectQuery($query);
             if($result != NULL){
                 $username = $masuk->username;
+                $username = $db->escapeString($username);
                 $password = $masuk->password;
+                $password = $db->escapeString($password);
                 $nama = $masuk->nama;
+                $nama = $db->escapeString($nama);
                 $quri = "UPDATE users SET username = '$username', password='$password', nama='$nama'";
                 $db->executeNonSelectQuery($quri);
                 $myObj->idU = $masuk->idU;
@@ -201,6 +212,7 @@
         public function deleteRegion(){
             $masuk = json_decode(file_get_contents('php://input'));
             $reg = $masuk->namaRegion;
+            $reg = $db->escapeString($reg);
             if(cekRegion($reg)){
                 $idReg = getIdReg($reg);
                 $query = "DELETE FROM region WHERE namaRegion='$reg'";
@@ -222,6 +234,7 @@
         public function deleteKota(){
             $masuk = json_decode(file_get_contents('php://input'));
             $kota = $masuk->namaKota;
+            $kota = $db->escapeString($kota);
             if(cekKota($kota)){
                 $idKot = getIdKota($kota);
                 $query = "DELETE FROM kota WHERE namaKota='$kota'";
@@ -243,6 +256,7 @@
         public function aktifkanCS(){
             $masuk = json_decode(file_get_contents('php://input'));
             $user = $masuk->username;
+            $user = $db->escapeString($user);
             if(cekCS($user)){
                 if(userModel::cekActive($user)){
                     $myObj->data = '$user';
@@ -285,6 +299,13 @@
                 $myObj->pesan = "Region tidak ada";
                 $myObj->status = false;
                 echo json_encode($myObj);
+            }
+        }
+        
+        public function escapeArray($array){
+            $length = count($arrKot);
+            for($i =0;$i<length;$i++){
+                $array[$1] = $db->escapeString($array[$i]);
             }
         }
         
