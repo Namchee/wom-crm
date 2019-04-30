@@ -308,5 +308,29 @@
             }
         }
         
+        private function cekArrKota($array){
+            $masuk = escapeArray($array);
+            $status=false;
+            foreach($masuk as $value){
+                if(cekKota($value)){
+                    $status=true;
+                }else{
+                    $status=false;
+                }
+            }
+            return $status;
+        }
+        private function cekArrReg($array){
+            $masuk = escapeArray($array);
+            $status=false;
+            foreach($masuk as $value){
+                if(cekRegion($value)){
+                    $status=true;
+                }else{
+                    $status=false;
+                }
+            }
+            return $status;
+        }
     }
 ?>
