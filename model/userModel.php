@@ -30,7 +30,7 @@
             		return $res;
 		}
 		
-		private function cekActive($user){
+		public function cekActive($user){
 			$query = "SELECT active FROM users WHERE username = '$user'";
             		$res = $db->executeSelectQuery($query);
             		return $res[0];
