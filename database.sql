@@ -16,7 +16,7 @@ CREATE TABLE Client(
 	nilaiInvestasi money NOT NULL,
 	umur int NOT NULL,
 	alamat int NULL,
-	gambar TEXT(),
+	gambar MEDIUMTEXT,
 	idU int NOT NULL,
 	PRIMARY KEY (idC),
 	CONSTRAINT FK_usercs FOREIGN KEY (idU) REFERENCES Users(idU),
