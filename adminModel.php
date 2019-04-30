@@ -2,8 +2,8 @@
     require_once "mysqlDB.php";
     class adminModel{
 
-        private function cekKota($namakot){
-            $query = "SELECT idK FROM kota wHERE namaKota = $namakot";
+        public function cekKota($namakot){
+            $query = "SELECT idK FROM kota wHERE namaKota = '$namakot'";
             $res = $db->executeSelectQuery($query);
             if($res){
                 return true;
@@ -13,13 +13,13 @@
             }
         }
         private function getIdKota($namakot){
-            $query = "SELECT idK FROM kota wHERE namaKota = $namakot";
+            $query = "SELECT idK FROM kota wHERE namaKota = '$namakot'";
             $res = $db->executeSelectQuery($query);
             return $res[0];
         }
 
-        private function cekRegion($namareg){
-            $query = "SELECT idR FROM region wHERE namaRegion = $namareg";
+        public function cekRegion($namareg){
+            $query = "SELECT idR FROM region wHERE namaRegion = '$namareg'";
             $res = $db->executeSelectQuery($query);
             if($res){
                 return true;
@@ -30,7 +30,7 @@
         }
 
         private function getIdReg($namareg){
-            $query = "SELECT idR FROM region wHERE namaRegion = $namareg";
+            $query = "SELECT idR FROM region wHERE namaRegion = '$namareg'";
             $res = $db->executeSelectQuery($query);
             return $res[0];
         }
@@ -120,12 +120,12 @@
             $idCSBaru = $masuk->idUBaru;
             $query .= " WHERE idU = $idCSGanti";
             $result = $db->executeSelectQuery($query);
-            $queries = "SELECT idU FROM users WHERE idU=$idCSBaru";
+            $queries = "SELECT idU FROM users WHERE idU='$idCSBaru'";
             $res = $db->executeSelectQuery($queries);
             if($result != NULL && $res != NULL){
-                $quer = "UPDATE users SET idU = $idCSBaru WHERE idU=$idCSGanti";
+                $quer = "UPDATE users SET idU = $idCSBaru WHERE idU='$idCSGanti'";
                 $db->executeNonSelectQuery($quer);
-                $queri = "UPDATE users SET active = 0 WHERE idU=$idCSGanti";
+                $queri = "UPDATE users SET active = 0 WHERE idU='$idCSGanti'";
                 $db->executeNonSelectQuery($queri);
                 $myObj->pesan = "Berhasil diubah";
                 $myObj->status = true;
@@ -149,7 +149,7 @@
                 $username = $masuk->username;
                 $password = $masuk->password;
                 $nama = $masuk->nama;
-                $quri = "UPDATE users SET username = $username, password=$password, nama=$nama";
+                $quri = "UPDATE users SET username = '$username', password='$password', nama='$nama'";
                 $db->executeNonSelectQuery($quri);
                 $myObj->idU = $masuk->idU;
                 $myObj->pesan = "Customer Service berhasil diubah";
@@ -166,12 +166,12 @@
             $masuk = json_decode(file_get_contents('php://input'));
             $idK = $masuk->idK;
             $idR = $masuk->idR;
-            $quer = "SELECT idK FROM terdapatdi WHERE idK = $idK";
+            $quer = "SELECT idK FROM terdapatdi WHERE idK = '$id'K";
             $res = $db->executeSelectQuery($quer);
-            $quers = "SELECT idR FROM region WHERE idR = $idR";
+            $quers = "SELECT idR FROM region WHERE idR = '$idR'";
             $resu = $db->executeSelectQuery($quers);
             if($res != NULL && $resu!=NULL){
-                $queri = "UPDATE terdapatdi SET idR = $idR";
+                $queri = "UPDATE terdapatdi SET idR = '$idR'";
                 $db->executeNonSelectQuery($queri);
                 $myObj->idK = $masuk->idK;
                 $myObj->pesan ="Daftar Kota berhasil diubah";
