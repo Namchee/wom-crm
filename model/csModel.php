@@ -1,18 +1,17 @@
 <?php
 	require_once "mysqlDB.php";
-	require_once "clientModel.php";
 	require_once "userModel.php";
 	session_start();
 	
 	class csModel{
 		public function addClient(){
 			$masuk = json_decode(file_get_contents('php://input'));
-			$nama = $masuk->namaClient;
-			$nilaiInvest = $masuk->nilaiInvestasi;
-			$kelamin = $masuk->gender;
-			$alamat = $masuk->alamat;
-			$status = $masuk->statusKawin;
-			$birthday = $masuk->tanggalLahir;
+			$nama = $db->escapeString($masuk->namaClient);
+			$nilaiInvest = $db->escapeString($masuk->nilaiInvestasi);
+			$kelamin = $db->escapeString($masuk->gender);
+			$alamat = $db->escapeStrin($masuk->alamat);
+			$status = $db->escapeString($masuk->statusKawin);
+			$birthday = $db->escapeString($masuk->tanggalLahir);
 			if(cekClient($nama)){
 				$query="INSERT INTO client (namaClient,nilaiInvestasi,gender,alamat,statusKawin,tanggalLahir) 
 				VALUES ('$nama',$nilaiInvest,$kelamin,$alamat,$status,'birthday',$_SESSION["id"])";
@@ -31,7 +30,7 @@
 		
 		public function deleteClient(){
 			$masuk = json_decode(file_get_contents('php://input'));
-			$idC = $masuk->idClient;
+			$idC = $db->escapeString($masuk->idClient);
 			if(cekIdClient($idC)){
 				$query = "DELETE FROM client WHERE idC=$idC";
 				$db->executeNonSelectQuery($query);
@@ -49,6 +48,21 @@
 			
 		public function editClient(){
 			$masuk = json_decode(file_get_contents('php://input'));
+			$id = $db->escapeString($masuk->idC);
+			$nama = $db->escapeString($masuk->namaClient);
+			$nilaiInvest = $db->escapeString($masuk->nilaiInvestasi);
+			$status = $db->escapeString($masuk->statusKawin);
+			$alamat = $db->escapeString($masuk->alamat);
+			if(cekIdClient($id)){
+				setClient($nama,$nilaiInvest,$status,$alamat);
+				$myObj->status=true;
+				$myObj->pesan = "client berhasil diubah";
+				echo json_encode($myObj);
+			}else{
+				$myObj->status=false;
+				$myObj->pesan = "client gagal diubah";
+				echo json_encode($myObj);
+			}
 		}
 		
 		public function getClient($namaClients){
@@ -78,12 +92,12 @@
 		}
 		
 		private function setClient($namaClients,$nilai,$status,$alamat){
-			$query = "SELECT * FROM client WHERE namaClient = '$namaClients'";
-			$result = $db->executeSelectQuery($query);
-			$nilaiBaru = $nilai;
-			$statusBaru = $status;
-			$alamatBaru = $alamat;
 			$nama = $namaClients;
+			$query = "SELECT * FROM client WHERE namaClient = '$nama'";
+			$result = $query;
+			$nilaiBaru = $nilai;
+			$statusBaru =$status;
+			$alamatBaru = $alamat;
 			if(isset($nama,$alamatBaru,$statusBaru,$nilaiBaru)){
 				$que = "UPDATE client SET nilaiInvestasi=$nilaiBaru,alamat='$alamatBaru',statusKawin='$statusBaru' WHERE namaClient='$nama'";
 				$db->executeSelectQuery($que);
@@ -92,7 +106,7 @@
 		
 		public function getClientCS{
 			$masuk = json_decode(file_get_contents('php://input'));
-			$idClient = $masuk->idC;
+			$idClient = $db->escapeString($masuk->idC);
 			if(cekIdClient($idClient)){
 				$query = "SELECT users.idU,users.nama FROM users INNER JOIN client on users.idU=client.idU
 				WHERE client.idC=$idClient";
