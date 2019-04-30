@@ -53,7 +53,7 @@
                 for ($i=0; $i < $arrLength; $i++) { 
                         if(cekRegion($arrReg[$i])){
                             $idReg = getIdReg($arrReg[$i]);
-                            $quer = "INSERT terdapatdi VALUES ('$idkot','$idReg')";
+                            $quer = "INSERT INTO terdapatdi VALUES ($idkot,$idReg)";
                             $db->executeNonSelectQuery($quer);
                         }
                         else{
@@ -86,7 +86,7 @@
                 for ($i=0; $i < $arrLength; $i++) { 
                         if(cekKota($arrKot[$i])){
                             $idKot = getIdKota($arrKot[$i]);
-                            $quer = "INSERT terdapatdi VALUES ('$idKot','$idReg')";
+                            $quer = "INSERT INTO terdapatdi VALUES ($idKot,$idReg)";
                             $db->executeNonSelectQuery($quer);
                         }
                         else{
@@ -102,7 +102,7 @@
             $username = $masuk->username;
             $password = $masuk->password;
             $nama = $masuk->nama;
-            $query = "INSERT INTO users VALUES (NULL,'CURDATE()','$username','$password','$nama','0','1')";
+            $query = "INSERT INTO users VALUES (NULL,'CURDATE()','$username','$password','$nama',0,1)";
             $db->executeNonSelectQuery($query);
             $myObj->username = $masuk->username;
             $myObj->pesan = "Customer Service berhasil ditambah";
@@ -115,12 +115,12 @@
             $idCSBaru = $masuk->idUBaru;
             $query .= " WHERE idU = $idCSGanti";
             $result = $db->executeSelectQuery($query);
-            $queries = "SELECT idU FROM users WHERE idU='$idCSBaru'";
+            $queries = "SELECT idU FROM users WHERE idU=$idCSBaru";
             $res = $db->executeSelectQuery($queries);
             if($result != NULL && $res != NULL){
-                $quer = "UPDATE users SET idU = $idCSBaru WHERE idU='$idCSGanti'";
+                $quer = "UPDATE users SET idU = $idCSBaru WHERE idU=$idCSGanti";
                 $db->executeNonSelectQuery($quer);
-                $queri = "UPDATE users SET active = 0 WHERE idU='$idCSGanti'";
+                $queri = "UPDATE users SET active = 0 WHERE idU=$idCSGanti";
                 $db->executeNonSelectQuery($queri);
                 $myObj->pesan = "Berhasil diubah";
                 $myObj->status = true;
@@ -150,29 +150,19 @@
             }
             else{
                 $myObj->idU = $masuk->idU;
-                $myObj->pesan ="Customer Servie gagal diubah";
+                $myObj->pesan ="Customer Service gagal diubah";
                 echo json_encode($myObj);
             }
         }
         public function changeCityReg(){
             $masuk = json_decode(file_get_contents('php://input'));
-            $idK = $masuk->idK;
-            $idR = $masuk->idR;
-            $quer = "SELECT idK FROM terdapatdi WHERE idK = '$id'K";
-            $res = $db->executeSelectQuery($quer);
-            $quers = "SELECT idR FROM region WHERE idR = '$idR'";
-            $resu = $db->executeSelectQuery($quers);
-            if($res != NULL && $resu!=NULL){
-                $queri = "UPDATE terdapatdi SET idR = '$idR'";
-                $db->executeNonSelectQuery($queri);
-                $myObj->idK = $masuk->idK;
-                $myObj->pesan ="Daftar Kota berhasil diubah";
-                echo json_encode($myObj);
-            }
-            else{
-                $myObj->idK = $masuk->idK;
-                $myObj->pesan ="Daftar Kota gagal diubah";
-                echo json_encode($myObj);
+            $arrKota = $masuk->idK;
+            $region = $masuk->idR;
+            $query = "DELETE FROM terdapatdi WHERE idR=$region";
+            $db->executeNonSelectQuery($query);
+            foreach($arrKota as $value){
+                $que = "INSERT INTO terdapatdi (idK,idR) VALUES ($value,$region)";
+                $db->executeNonSelectQuery($que);
             }
         }
     }
