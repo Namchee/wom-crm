@@ -4,7 +4,8 @@
 	class userModel{
 		
 		private function cekUsers($nama){
-			$query = "SELECT username FROM users WHERE username = '$nama'";
+			$namas = $db->escapeString($nama);
+			$query = "SELECT username FROM users WHERE username = '$namas'";
             		$res = $db->executeSelectQuery($query);
             		if($res){
                 		return true;
@@ -15,9 +16,11 @@
 		}
 		
 		private function cekPass($user,$pass){
-            		$query = "SELECT password FROM users WHERE username='$user'";
+			$username=$db->escapeString($user);
+			$password=$db->escapeString($pass);
+            		$query = "SELECT password FROM users WHERE username='$username'";
 			$res = $db->executeSelectQuery($query);
-			if(password_verify($pass,$res[0])){
+			if(password_verify($password,$res[0])){
 				return true;
 			}else{
 				return false;
@@ -25,13 +28,15 @@
 		}
 		
 		private function getUser($nama){
-			$query = "SELECT idU,nama,status FROM users WHERE username = '$nama'";
+			$name=$db->escapeString($nama);
+			$query = "SELECT idU,nama,status FROM users WHERE username = '$name'";
             		$res = $db->executeSelectQuery($query);
             		return $res;
 		}
 		
 		public function cekActive($user){
-			$query = "SELECT active FROM users WHERE username = '$user'";
+			$username = $db->escapeString($user);
+			$query = "SELECT active FROM users WHERE username = '$username'";
             		$res = $db->executeSelectQuery($query);
             		if($res[0]==0){
 				return false;
@@ -54,8 +59,8 @@
 		
 		public function login(){
 			$masuk = json_decode(file_get_contents('php://input'));
-			$userName = $masuk->user;
-			$pass = $masuk->password;
+			$userName = $db->escapeString($masuk->user);
+			$pass = $db->escapeString($masuk->password);
 			if(cekUsers($userName)){
 				if(cekPass($username,$pass)){
 					if(cekActive($username)){
