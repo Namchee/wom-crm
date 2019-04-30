@@ -20,17 +20,6 @@
     min-width: 35vw;
 }
 
-.region-selector-label {
-    min-width: 100px;
-    flex: 0 1 0;
-    display: flex;
-    align-items: center;
-}
-
-.region-selector {
-    margin-bottom: 30px;
-}
-
 .media-modal {
     max-width: unset;
     display: flex;
@@ -49,24 +38,6 @@
 
 .media-modal > .media-content > .heading {
     margin-bottom: 0;
-}
-
-.image-uploader {
-    display: none;
-}
-
-.image-uploader-button {
-    border-radius: 50%;
-    min-width: unset;
-    position: absolute;
-    top: 60%;
-    left: 70%;
-    padding: 7.5px;
-}
-
-.gender,
-.marriage {
-    float: right;
 }
 
 tbody tr {

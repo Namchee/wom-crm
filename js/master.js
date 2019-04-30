@@ -58,7 +58,7 @@ function inputRequired(elem) {
   } else {
     if (parent.querySelector('.input-message') === null) {
       parent.classList.add('input-error');
-      if (parent.querySelector('i.icon-right') === null) {
+      if (parent.querySelector('i.right-icon') === null) {
         parent.classList.add('icon-right');
 
         let icon = document.createElement('i');

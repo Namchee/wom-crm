@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Generate Report - Wombat Inc. CRM</title>
-    <link rel="stylesheet" href="styles/slimselect.css">
-    <script src="js/slimselect.js" defer></script>
+    <title>Ubah Customer Service - Wombat Inc. CRM</title>
+    <link rel="stylesheet" href="styles/tagsinput.css">
+    <script src="js/tagsinput.js" defer></script>
+    <script src="js/moment.js" defer></script>
     <link rel="stylesheet" href="styles/datatables.css">
     <script src="js/datatables.js" defer></script>
-    <script src="js/moment.js" defer></script>
     <link rel="stylesheet" href="styles/master.css">
     <script src="js/master.js" defer></script>
-    <link rel="stylesheet" href="styles/report.css">
-    <script src="js/report.js" defer></script>
+    <link rel="stylesheet" href="styles/edit_cs.css">
+    <script src="js/edit_cs.js" defer></script>
 </head>
 
 <body>
@@ -89,17 +89,15 @@
     <section class="content">
         <div class="container">
             <h1 class="heading">
-                Buat Laporan
+                Edit Klien
             </h1>
-            <table id="client">
+            <table id="cs">
                 <thead>
                     <th>No</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>Umur</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Status Kawin</th>
-                    <th>Nilai Investasi</th>
+                    <th>Username</th>
+                    <th>Nama Lengkap</th>
+                    <th>Tanggal Gabung</th>
+                    <th>Aktif?</th>
                 </thead>
                 <tbody>
                     <tr>
@@ -108,8 +106,6 @@
                         <td>Jalan Surga</td>
                         <td>99</td>
                         <td>Pria</td>
-                        <td>Belum Menikah</td>
-                        <td>9999</td>
                     </tr>
                     <tr>
                         <td>2</td>
@@ -117,8 +113,6 @@
                         <td>Jalan Surga</td>
                         <td>99</td>
                         <td>Pria</td>
-                        <td>Belum Menikah</td>
-                        <td>9999</td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -126,8 +120,6 @@
                         <td>Jalan Surga</td>
                         <td>99</td>
                         <td>Pria</td>
-                        <td>Belum Menikah</td>
-                        <td>9999</td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -135,8 +127,6 @@
                         <td>Jalan Surga</td>
                         <td>99</td>
                         <td>Pria</td>
-                        <td>Belum Menikah</td>
-                        <td>9999</td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -144,76 +134,89 @@
                         <td>Jalan Surga</td>
                         <td>99</td>
                         <td>Pria</td>
-                        <td>Belum Menikah</td>
-                        <td>9999</td>
                     </tr>
                 </tbody>
             </table>
-
-            <div class="columns">
-                <div class="column category">
-                    Pilih Kategori
-                </div>
-                <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="age" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Umur
-                        </label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="gender" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Jenis Kelamin
-                        </label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="invest" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Nilai Investasi
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="columns">
-                <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="invest" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Buat PDF
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns">
-                <div class="column">
-                    <button class="button button-primary icon-left" id="report" ripple>
-                        <i class="material-icons left-icon">assessment</i>
-                        <span>Buat Laporan</span>
-                    </button>
-                </div>
-                <div class="column"></div>
-                <div class="column"></div>
-            </div>
         </div>
     </section>
+    <div id="modal-info" class="modal">
+        <input type="checkbox" id="modal-close" />
+        <label for="modal-close" class="modal-overlay"></label>
+        <label for="modal-close" class="modal-close-button">
+            <i class="material-icons">
+                cancel
+            </i>
+        </label>
+        <div class="modal-items client-info">
+            <div class="modal-content">
+                <h1 class="heading">
+                    Profil
+                    <echo>
+                </h1>
+                <form action="" method="POST">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group">
+                                <input type="text" name="username" class="input-field" autocomplete="off" required disabled />
+                                <span class="input-bar"></span>
+                                <span class="input-highlight"></span>
+                                <label class="input-label">Username</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group">
+                                <input type="password" name="password" class="input-field" autocomplete="off" required />
+                                <span class="input-bar"></span>
+                                <span class="input-highlight"></span>
+                                <label class="input-label">Password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group">
+                                <input type="text" name="name" class="input-field" autocomplete="off" required />
+                                <span class="input-bar"></span>
+                                <span class="input-highlight"></span>
+                                <label class="input-label">Nama Lengkap</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input-group">
+                                <input type="email" name="email" class="input-field email" placeholder="Email" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <button class="button button-primary icon-left" type="submit" ripple>
+                                <i class="material-icons">update</i>
+                                <span>Ubah Informasi</span>
+                            </button>
+                        </div>
+                        <div class="column">
+                            <!-- Freeze or not -->
+                            <button class="button button-primary icon-left" type="submit" ripple>
+                                <i class="material-icons">update</i>
+                                <span>Aktifkan / Bekukan</span>
+                            </button>
+                        </div>
+                        <div class="column">
+                            <button class="button button-danger icon-left" type="submit" ripple>
+                                <i class="material-icons">highlight_off</i>
+                                <span>Hapus</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

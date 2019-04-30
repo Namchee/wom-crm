@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Search Region - Wombat Inc. CRM</title>
+    <title>Edit Klien - Wombat Inc. CRM</title>
     <link rel="stylesheet" href="styles/slimselect.css">
     <script src="js/slimselect.js" defer></script>
     <link rel="stylesheet" href="styles/datepicker.css">
@@ -185,7 +185,7 @@
                     <div class="columns">
                         <div class="column">
                             <div class="input-group">
-                                <input type="text" name="namaKlien" class="input-field" autocomplete="off" required />
+                                <input type="text" name="namaKlien" class="input-field client-name" autocomplete="off" required />
                                 <span class="input-bar"></span>
                                 <span class="input-highlight"></span>
                                 <label class="input-label">Nama Klien</label>
@@ -195,15 +195,15 @@
                             <div class="dropdown gender" data-value="">
                                 <button class="button button-light dropdown-trigger" type="button">
                                     <label class="dropdown-toggler" for="gender">&nbsp;</label>
-                                    <span class="dropdown-value">Jenis Kelamin</span>
+                                    <span class="dropdown-value client-gender">Jenis Kelamin</span>
                                 </button>
                                 <span class="dropdown-icon">
                                     <i class="material-icons">expand_more</i>
                                 </span>
                                 <input type="checkbox" class="dropdown-input" id="gender" />
                                 <ul class="dropdown-content">
-                                    <li data-value="0">Pria</li>
-                                    <li data-value="1">Wanita</li>
+                                    <li data-value="0" class="pria">Pria</li>
+                                    <li data-value="1" class="wanita">Wanita</li>
                                 </ul>
                                 </label>
                             </div>
@@ -212,7 +212,7 @@
                     <div class="columns">
                         <div class="column">
                             <div class="input-group">
-                                <input type="text" name="alamat" class="input-field" autocomplete="off" required />
+                                <input type="text" name="alamat" class="input-field client-address" autocomplete="off" required />
                                 <span class="input-bar"></span>
                                 <span class="input-highlight"></span>
                                 <label class="input-label">Alamat</label>
@@ -223,8 +223,7 @@
                     <div class="columns">
                         <div class="column">
                             <div class="input-group">
-                                <input type="text" name="date-of-birth" class="input-field date-of-birth"
-                                    autocomplete="off" required />
+                                <input type="text" name="date-of-birth" class="input-field client-date date-of-birth" autocomplete="off" required />
                                 <span class="input-bar"></span>
                                 <span class="input-highlight"></span>
                                 <label class="input-label">Tanggal Lahir</label>
@@ -234,22 +233,22 @@
                             <div class="dropdown marriage" data-value="">
                                 <button class="button button-light dropdown-trigger" type="button">
                                     <label class="dropdown-toggler" for="marriage-status">&nbsp;</label>
-                                    <span class="dropdown-value">Status Kawin</span>
+                                    <span class="dropdown-value client-marriage">Status Kawin</span>
                                 </button>
                                 <span class="dropdown-icon">
                                     <i class="material-icons">expand_more</i>
                                 </span>
                                 <input type="checkbox" class="dropdown-input" id="marriage-status" />
                                 <ul class="dropdown-content">
-                                    <li data-value="0">Single</li>
-                                    <li data-value="1">Married</li>
+                                    <li data-value="0" class="single">Single</li>
+                                    <li data-value="1" class="married">Married</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="columns">
                         <div class="column">
-                            <select name="city" id="city" class="city">
+                            <select name="city" id="city" class="city client-city">
                                 <!-- php -->
                                 <option data-placeholder="true"></option>
                                 <option value="aaa">bbb</option>
@@ -264,8 +263,7 @@
                     <div class="columns">
                         <div class="column">
                             <div class="input-group icon-left">
-                                <input type="number" step="5000" name="nilai" class="input-field" autocomplete="off"
-                                    required />
+                                <input type="number" step="5000" name="nilai" class="input-field client-invest" autocomplete="off" required />
                                 <span class="input-bar"></span>
                                 <span class="input-highlight"></span>
                                 <label class="input-label">Nilai Investasi</label>
@@ -281,6 +279,12 @@
                             <button class="button button-primary icon-left" type="submit" ripple>
                                 <i class="material-icons">update</i>
                                 <span>Ubah Informasi</span>
+                            </button>
+                        </div>
+                        <div class="column">
+                            <button class="button button-danger icon-left" type="submit" ripple>
+                                <i class="material-icons">highlight_off</i>
+                                <span>Hapus</span>
                             </button>
                         </div>
                     </div>

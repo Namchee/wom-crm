@@ -5,16 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Generate Report - Wombat Inc. CRM</title>
-    <link rel="stylesheet" href="styles/slimselect.css">
-    <script src="js/slimselect.js" defer></script>
+    <title>Dashboard - Wombat Inc. CRM</title>
     <link rel="stylesheet" href="styles/datatables.css">
     <script src="js/datatables.js" defer></script>
+    <script src="js/chart.js" defer></script>
     <script src="js/moment.js" defer></script>
     <link rel="stylesheet" href="styles/master.css">
     <script src="js/master.js" defer></script>
-    <link rel="stylesheet" href="styles/report.css">
-    <script src="js/report.js" defer></script>
+    <link rel="stylesheet" href="styles/dashboard_cs.css">
+    <script src="js/dashboard_cs.js" defer></script>
 </head>
 
 <body>
@@ -89,7 +88,8 @@
     <section class="content">
         <div class="container">
             <h1 class="heading">
-                Buat Laporan
+                Hello,
+                <echo>!
             </h1>
             <table id="client">
                 <thead>
@@ -149,69 +149,28 @@
                     </tr>
                 </tbody>
             </table>
-
-            <div class="columns">
+            <div class="columns category-wrapper">
                 <div class="column category">
                     Pilih Kategori
                 </div>
                 <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="age" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Umur
-                        </label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="gender" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Jenis Kelamin
-                        </label>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="invest" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Nilai Investasi
-                        </label>
+                    <div class="dropdown" data-value="">
+                        <button class="button button-light dropdown-trigger">
+                            <label class="dropdown-toggler" for="dropdown-input">&nbsp;</label>
+                            <span class="dropdown-value">Choose your option...</span>
+                        </button>
+                        <span class="dropdown-icon">
+                            <i class="material-icons">expand_more</i>
+                        </span>
+                        <input type="checkbox" class="dropdown-input" id="dropdown-input" />
+                        <ul class="dropdown-content">
+                            <li data-value="jinx">Jinx</li>
+                            <li data-value="pro">Pro</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="columns">
-                <div class="column">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="invest" />
-                            <span class="checkbox-material">
-                                <span class="check"></span>
-                            </span>
-                            Buat PDF
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns">
-                <div class="column">
-                    <button class="button button-primary icon-left" id="report" ripple>
-                        <i class="material-icons left-icon">assessment</i>
-                        <span>Buat Laporan</span>
-                    </button>
-                </div>
-                <div class="column"></div>
-                <div class="column"></div>
-            </div>
+            <canvas id="user-groups"></canvas>
         </div>
     </section>
 </body>

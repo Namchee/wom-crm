@@ -46,3 +46,12 @@
 .media-modal > .media-content > .heading {
     margin-bottom: 0;
 }
+
+tbody tr {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+tbody tr:hover {
+    background: rgb(231, 231, 231);
+}

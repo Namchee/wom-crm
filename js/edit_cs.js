@@ -1,4 +1,5 @@
-let client = new DataTable("#client");
+let client = new DataTable("#cs");
+let email = new Tagify(document.querySelector(".email"));
 
 initializeRow();
 client.on('datatable.sort', initializeRow);

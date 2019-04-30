@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Customer Service Baru - Wombat Inc. CRM</title>
+    <title>Pengaturan Profil - Wombat Inc. CRM</title>
     <script src="js/moment.js" defer></script>
     <link rel="stylesheet" href="styles/tagsinput.css">
     <script src="js/tagsinput.js" defer></script>
@@ -87,13 +87,13 @@
     <section class="content">
         <div class="container">
             <h1 class="heading">
-                Tambah Customer Service
+                Pengaturan Profil
             </h1>
             <form action="" method="POST">
                 <div class="columns">
                     <div class="column">
                         <div class="input-group">
-                            <input type="text" name="username" class="input-field" autocomplete="off" required />
+                            <input type="text" name="username" class="input-field" autocomplete="off" required disabled />
                             <span class="input-highlight"></span>
                             <span class="input-bar"></span>
                             <label class="input-label">Username</label>
@@ -107,7 +107,18 @@
                                 password-reveal />
                             <span class="input-highlight"></span>
                             <span class="input-bar"></span>
-                            <label class="input-label">Password</label>
+                            <label class="input-label">New Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="password" name="password" class="input-field" autocomplete="off" required
+                                password-reveal />
+                            <span class="input-highlight"></span>
+                            <span class="input-bar"></span>
+                            <label class="input-label">Old Password</label>
                         </div>
                     </div>
                 </div>
@@ -132,8 +143,8 @@
                 <div class="column">
                     <div class="column">
                         <button class="button button-primary icon-left" type="submit" ripple>
-                            <i class="material-icons">person_add</i>
-                            <span>Tambah Customer Service</span>
+                            <i class="material-icons">build</i>
+                            <span>Ubah Profil</span>
                         </button>
                     </div>
                 </div>
