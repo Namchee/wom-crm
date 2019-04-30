@@ -33,7 +33,11 @@
 		public function cekActive($user){
 			$query = "SELECT active FROM users WHERE username = '$user'";
             		$res = $db->executeSelectQuery($query);
-            		return $res[0];
+            		if($res[0]==0){
+				return false;
+			}else{
+				return true;
+			}
 		}
 		
 		public function getUsers(){
