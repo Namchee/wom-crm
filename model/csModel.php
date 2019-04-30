@@ -51,8 +51,6 @@
 			$masuk = json_decode(file_get_contents('php://input'));
 		}
 		
-		public function makeReport(){}
-		
 		public function getClient($namaClients){
 			$query = "SELECT * FROM client WHERE namaClient = '$namaClients'";
 			$result = $db->executeSelectQuery($query);
