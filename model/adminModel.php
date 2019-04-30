@@ -303,9 +303,8 @@
         }
         
         public function escapeArray($array){
-            $length = count($arrKot);
-            for($i =0;$i<length;$i++){
-                $array[$1] = $db->escapeString($array[$i]);
+            foreach($array as $value){
+                $value = $db->escapeString($value);
             }
         }
         
