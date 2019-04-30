@@ -74,7 +74,6 @@
             $arrKot = $masuk->namakot;
             $arrKot = $db->escapeString($arrKot);
             escapeArray($arrKot);
-            $arrLength = count($arrKot);
             $namareg = $masuk->namaRegion;
             $namareg = $db->escapeString($namareg);
             if(cekRegion($namareg)){
@@ -84,23 +83,25 @@
                 echo json_encode($myObj);
             }
             else{
-                $queries = "INSERT INTO region VALUES (NULL, '$namareg')";
-                $db->executeNonSelectQuery($queries);
-                $myObj->data = $namareg;
-                $myObj->pesan = "Berhasil Ditambah";
-                $myObj->status = true;
-                $idreg = getIdReg($namareg);
-                for ($i=0; $i < $arrLength; $i++) { 
-                        if(cekKota($arrKot[$i])){
-                            $idKot = getIdKota($arrKot[$i]);
-                            $quer = "INSERT INTO terdapatdi VALUES ($idKot,$idReg)";
-                            $db->executeNonSelectQuery($quer);
-                        }
-                        else{
-                            $myObj->pesan = "Id tidak ada";
-                        }
+                if(cekArrKota($arrKot)){
+                    $queries = "INSERT INTO region VALUES (NULL, '$namareg')";
+                    $db->executeNonSelectQuery($queries);
+                    $myObj->data = $namareg;
+                    $myObj->pesan = "Berhasil Ditambah";
+                    $myObj->status = true;
+                    $idkot = getIdRegion($namareg);
+                    foreach($arrKot as $value){
+                        $idKot = getIdKota($value);
+                        $que = "INSERT INTO terdapatdi VALUES ($idkot, $idReg)";
+                        $db->executeNonSelectQuery($queries);
+                    }
+                    echo json_encode($myObj);
+                }else{
+                    $myObj->data = $namareg;
+                    $myObj->pesan = "Tidak bisa ditambah";
+                    $myObj->status = false;
+                    echo json_encode($myObj);
                 }
-                echo json_encode($myObj);
             }
         }
         
@@ -310,9 +311,8 @@
         }
         
         private function cekArrKota($array){
-            $masuk = escapeArray($array);
             $status=false;
-            foreach($masuk as $value){
+            foreach($array as $value){
                 if(cekKota($value)){
                     $status=true;
                 }else{
@@ -322,9 +322,8 @@
             return $status;
         }
         private function cekArrReg($array){
-            $masuk = escapeArray($array);
             $status=false;
-            foreach($masuk as $value){
+            foreach($array as $value){
                 if(cekRegion($value)){
                     $status=true;
                 }else{
