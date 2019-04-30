@@ -3,7 +3,8 @@
     require_once "userModel.php";
     class adminModel{
         public function cekKota($namakot){
-            $query = "SELECT idK FROM kota wHERE namaKota = '$namakot'";
+            $nama=$db->escapeString($namakot);
+            $query = "SELECT idK FROM kota wHERE namaKota = '$nama'";
             $res = $db->executeSelectQuery($query);
             if($res){
                 return true;
@@ -18,7 +19,8 @@
             return $res[0];
         }
         public function cekRegion($namareg){
-            $query = "SELECT idR FROM region wHERE namaRegion = '$namareg'";
+            $nama=$db->escapeString($namareg);
+            $query = "SELECT idR FROM region wHERE namaRegion = '$nama'";
             $res = $db->executeSelectQuery($query);
             if($res){
                 return true;
