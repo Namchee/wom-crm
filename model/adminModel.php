@@ -1,5 +1,6 @@
 <?php
     require_once "mysqlDB.php";
+    require_once "userModel.php";
     class adminModel{
         public function cekKota($namakot){
             $query = "SELECT idK FROM kota wHERE namaKota = '$namakot'";
@@ -97,16 +98,44 @@
             }
         }
         
+        private function getIdCS($nama){
+            $query = "SELECT idU FROM users WHERE username = '$nama'";
+            $res = $db->executeSelectQuery($query);
+            return $res[0];
+        }
+        
+        private function cekCS($nama){
+            $query = "SELECT idU FROM kota wHERE username = '$nama'";
+            $res = $db->executeSelectQuery($query);
+            if($res){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
         public function addCS(){
             $masuk = json_decode(file_get_contents('php://input'));
             $username = $masuk->username;
             $password = $masuk->password;
-            $nama = $masuk->nama;
-            $query = "INSERT INTO users VALUES (NULL,'CURDATE()','$username','$password','$nama',0,1)";
-            $db->executeNonSelectQuery($query);
-            $myObj->username = $masuk->username;
-            $myObj->pesan = "Customer Service berhasil ditambah";
-            echo json_encode($myObj);
+            $arrEmail = $masuk->email;
+            if(cekCS($username)){
+                $myObj->username = $masuk->username;
+                $myObj->pesan = "Customer Service gagal ditambah";
+                $myObj->status = false;
+                echo json_encode($myObj);
+            }else{
+                $query = "INSERT INTO users VALUES (NULL,'CURDATE()','$username','$password','$nama',0,1)";
+                $db->executeNonSelectQuery($query);
+                $id = getIdCS($nama);
+                foreach($arrEmail as $value){
+                    $que = "INSERT INTO kontak VALUES ($id,'$value')";
+                    $db->executeNonSelectQuery($que);
+                }
+                $myObj->username = $masuk->username;
+                $myObj->pesan = "Customer Service berhasil ditambah";
+                echo json_encode($myObj);
+            }
         }
         
         public function changeCSCLient(){
@@ -146,11 +175,13 @@
                 $db->executeNonSelectQuery($quri);
                 $myObj->idU = $masuk->idU;
                 $myObj->pesan = "Customer Service berhasil diubah";
+                $myObj->status=true;
                 echo json_encode($myObj);
             }
             else{
                 $myObj->idU = $masuk->idU;
                 $myObj->pesan ="Customer Service gagal diubah";
+                $myObj->status=false;
                 echo json_encode($myObj);
             }
         }
@@ -166,5 +197,96 @@
                 $db->executeNonSelectQuery($que);
             }
         }
+        
+        public function deleteRegion(){
+            $masuk = json_decode(file_get_contents('php://input'));
+            $reg = $masuk->namaRegion;
+            if(cekRegion($reg)){
+                $idReg = getIdReg($reg);
+                $query = "DELETE FROM region WHERE namaRegion='$reg'";
+                $db->executeNonSelectQuery($query);
+                $que = "DELETE FROM terdapatdi WHERE idR=$idReg";
+                $db->executeNonSelectQuery($que);
+                $myObj->data = '$reg';
+                $myObj->pesan ="Region berhasil dihapus";
+                $myObj->status = true;
+                echo json_encode($myObj);
+            }else{
+                $myObj->data = '$reg';
+                $myObj->pesan ="Region gagal dihapus";
+                $myObj->status = false;
+                echo json_encode($myObj);
+            }
+        }
+        
+        public function deleteKota(){
+            $masuk = json_decode(file_get_contents('php://input'));
+            $kota = $masuk->namaKota;
+            if(cekKota($kota)){
+                $idKot = getIdKota($kota);
+                $query = "DELETE FROM kota WHERE namaKota='$kota'";
+                $db->executeNonSelectQuery($query);
+                $que = "DELETE FROM terdapatdi WHERE idK=$idKot";
+                $db->executeNonSelectQuery($que);
+                $myObj->data = '$kota';
+                $myObj->pesan ="Kota berhasil dihapus";
+                $myObj->status = true;
+                echo json_encode($myObj);
+            }else{
+                $myObj->data = '$kota';
+                $myObj->pesan ="Kota gagal dihapus";
+                $myObj->status = false;
+                echo json_encode($myObj);
+            }
+        }
+        
+        public function aktifkanCS(){
+            $masuk = json_decode(file_get_contents('php://input'));
+            $user = $masuk->username;
+            if(cekCS($user)){
+                if(userModel::cekActive($user)){
+                    $myObj->data = '$user';
+                    $myObj->pesan ="CS gagal diaktifkan";
+                    $myObj->status = false;
+                    echo json_encode($myObj);
+                }else{
+                    $query="UPDATE users SET active=1 WHERE username='$user'";
+                    $db->executeNonSelectQuery($query);
+                    $myObj->data = '$user';
+                    $myObj->pesan ="CS berhasil diaktifkan";
+                    $myObj->status = true;
+                    echo json_encode($myObj);
+                }
+            }else{
+                $myObj->data = null;
+                $myObj->pesan ="CS tidak ada";
+                $myObj->status = false;
+                echo json_encode($myObj);
+            }
+        }
+        private function cekRegId($id){
+            $query = "SELECT idR from region WHERE idR=$id";
+            $res=$db-executeSelectQuery($query);
+            if($res){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getKotaRegion(){
+            $masuk = json_decode(file_get_contents('php://input'));
+            $region = $masuk->idR;
+            if(cekRegId($region)){
+                $query = "SELECT kota.idK FROM region INNER JOIN terdapatdi ON region.idR=terdapatdi.idR
+                INNER JOIN kota ON terdapatdi.idK=kota.idK WHERE region.idR='$region'";
+                $res=$db->executeSelectQuery($query);
+                echo json_encode($res);
+            }else{
+                $myObj->pesan = "Region tidak ada";
+                $myObj->status = false;
+                echo json_encode($myObj);
+            }
+        }
+        
     }
 ?>
