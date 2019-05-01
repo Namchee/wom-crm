@@ -26,17 +26,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="columns">
-                    <div class="column">
-                        <div class="input-group">
-                            <input type="password" name="password" class="input-field" autocomplete="off" required
-                                password-reveal />
-                            <span class="input-highlight"></span>
-                            <span class="input-bar"></span>
-                            <label class="input-label">Old Password</label>
-                        </div>
-                    </div>
-                </div>
                 <hr />
                 <div class="columns">
                     <div class="column">
