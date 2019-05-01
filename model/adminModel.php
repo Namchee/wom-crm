@@ -48,7 +48,7 @@
             }
             else{
                 if(cekArrReg($arrReg)){
-                    $queries = "INSERT INTO region VALUES (NULL, '$namareg')";
+                    $queries = "INSERT INTO kota VALUES (NULL, '$namakota')";
                     $db->executeNonSelectQuery($queries);
                     $myObj->data = $namakota;
                     $myObj->pesan = "Berhasil Ditambah";
