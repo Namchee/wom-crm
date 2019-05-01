@@ -92,6 +92,50 @@
 				echo json_encode($myObj);
 			}
 		}
+		private function escapeArray($array){
+            		foreach($array as $value){
+                	$value = $db->escapeString($value);
+            		}	
+        	}
+		private function getId($username){
+			$query = "SELECT idU FROM users WHERE username = '$username'";
+            		$res = $db->executeSelectQuery($query);
+            		return $res[0];
+		}
+		public function changeData(){
+			$masuk=json_decode(file_get_contents('php://input'));
+			$arrEmail = escapeArray($masuk->email);
+			$username = $db->escapeString($masuk->user);
+			$pass = $db->escapeString($masuk->pass);
+			$nama=$db->escapeString($masuk->nama);
+			$id= getId($username);
+			$besar = count($arrEmail);
+			if(isset($username,$pass,$nama)){
+				if($besar>0){
+					$que = "DELETE FROM kontak WHERE idU=$id;
+            				$db->executeNonSelectQuery($que);
+					$hashpass = password_hash('$pass',PASSWORD_DEFAULT);
+					$query="UPDATE users SET username=$username, password=$hashpass,nama=$nama
+					WHERE username=$username";
+					$db->executeNonSelectQuery($query);
+					foreach($arrEmail as $value){
+						$ques = "INSERT INTO kontak (idU,kontak) VALUES ($id,$value)";
+                				$db->executeNonSelectQuery($ques);
+					}
+					$myObj->pesan="Data user berhasil diubah";
+					$myObj->status=true;
+					echo json_encode($myObj);
+				}else{
+					$myObj->pesan="Email tidak ada";
+					$myObj->status=false;
+					echo json_encode($myObj);
+				}
+			}else{
+				$myObj->pesan="Data gagal diubah";
+				$myObj->status=false;
+				echo json_encode($myObj);
+			}
+		}
 		
 		public function logout(){
 			session_unset();
