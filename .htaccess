@@ -1,1 +1,8 @@
-RewriteMode On
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule get_cs/(\d+) get_cs?id=$1
+RewriteRule get_region/(\d+) get_region?id=$1
+RewriteRule !\.(jpg|css|js|gif|png|eot|woff|woff2|ttf)$ index.php

@@ -1,0 +1,22 @@
+.container {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.category-wrapper {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+}

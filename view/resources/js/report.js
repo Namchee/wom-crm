@@ -1,0 +1,1 @@
+let client = new DataTable('#client');

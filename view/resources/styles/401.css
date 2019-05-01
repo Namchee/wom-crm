@@ -1,0 +1,40 @@
+a {
+    color: black;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    animation: bounce 1.5s linear infinite;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+.heading {
+    font-family: 'Montserrat', serif;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-15px);
+    }
+
+    60% {
+        transform: translateY(-7.5px);
+    }
+}
