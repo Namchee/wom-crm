@@ -139,9 +139,9 @@
 				$myObj->arrayRes = $res;
 				echo json_encode($myObj);
 			}else if($kategori==2){
-				$query="SELECT regRep.namaKota, convert(float,regRep.jumlah)
+				$query="SELECT regRep.namaRegion, convert(float,regRep.jumlah)
 					FROM(
-					      SELECT region.namaKota, count(client.idC) as 'jumlah'
+					      SELECT region.namaRegion, count(client.idC) as 'jumlah'
 					      FROM users INNER JOIN client on users.idU=client.idU 
 					      INNER JOIN kota on client.alamat=kota.idK
 					      INNER JOIN terdapatdi on kota.idK=terdapatdi.idK
