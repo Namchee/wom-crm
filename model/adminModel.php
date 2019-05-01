@@ -307,7 +307,7 @@
             }
         }
         
-        public function escapeArray($array){
+        private function escapeArray($array){
             foreach($array as $value){
                 $value = $db->escapeString($value);
             }
