@@ -105,7 +105,7 @@
 			}
 		}
 		
-		public function getClientCS{
+		public function getClientCS(){
 			$masuk = json_decode(file_get_contents('php://input'));
 			$idClient = $db->escapeString($masuk->idC);
 			if(cekIdClient($idClient)){
@@ -119,6 +119,61 @@
 			}else{
 				$myObj->pesan = "Client tidak ada";
 				$myObj->status = false;
+				echo json_encode($myObj);
+			}
+		}
+		public function kategoriReport(){
+			$masuk = json_decode(file_get_contents('php://input'));
+			$kategori=$db->escapeString($masuk->kategori);
+			$idUser = $_SESSION["id"];
+			if($kategori==1){
+				$query="SELECT kotaReport.namaKota, convert(float,kotaReport.jumlah)
+					FROM(
+					      SELECT Kota.namaKota, count(client.idC) as 'jumlah'
+					      FROM users INNER JOIN client on users.idU=client.idU 
+					      INNER JOIN kota on client.alamat=kota.idK
+					      WHERE client.idU=$idUser
+					      GROUP BY kota.namaKota
+					)as kotaReport";
+				$res=$db->executeSelectQuery($query);
+				$myObj->arrayRes = $res;
+				echo json_encode($myObj);
+			}else if($kategori==2){
+				$query="SELECT regRep.namaKota, convert(float,regRep.jumlah)
+					FROM(
+					      SELECT region.namaKota, count(client.idC) as 'jumlah'
+					      FROM users INNER JOIN client on users.idU=client.idU 
+					      INNER JOIN kota on client.alamat=kota.idK
+					      INNER JOIN terdapatdi on kota.idK=terdapatdi.idK
+					      INNER JOIN region on terdapatdi.idR=region.idR
+					      WHERE client.idU=$idUser
+					      GROUP BY region.namaRegion
+					)as regRep";
+				$res=$db->executeSelectQuery($query);
+				$myObj->arrayRes = $res;
+				echo json_encode($myObj);
+			}else if($kategori==3){
+				$query="SELECT nilaiRep.rangeNilai, convert(float,nilaiRep.jumlah)
+					FROM(
+						SELECT (nilaiInvestasi/200000)*200000||'-'||(nilaiInvestasi/200000)*200000+199999 as 'rangeNilai', count(idC) as 'jumlah'
+						FROM client INNER JOIN users on client.idU=users.idU
+						WHERE client.idU=$idUser
+						GROUP BY nilaiInvestasi/20000
+						ORDER BY 1
+					)as nilaiRep";
+				$res=$db->executeSelectQuery($query);
+				$myObj->arrayRes = $res;
+				echo json_encode($myObj);
+			}else if($kategori==4){
+				$query="SELECT umurRep.rangeUmur, convert(float,umurRep.jumlah)
+						SELECT (age/10)*10||'-'||(age/10)*10+9 as 'rangeUmur', count (idC) as 'jumlah'
+						FROM viewUmurClient INNER JOIN users on viewUmurClient.idU=users.idU
+						WHERE viewUmurClient.idU=$idUser
+						GROUP BY age/10
+						ORDER BY 1
+					)as umurRep";
+				$res=$db->executeSelectQuery($query);
+				$myObj->arrayRes = $res;
 				echo json_encode($myObj);
 			}
 		}
