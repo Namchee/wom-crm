@@ -33,7 +33,6 @@
 		
 		private function setClient($namaClients,$nilai,$status,$alamat){
 			$nama = $namaClients;
-			$query = "SELECT * FROM client WHERE namaClient = '$nama'";
 			$result = $query;
 			$nilaiBaru = $nilai;
 			$statusBaru =$status;
