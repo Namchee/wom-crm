@@ -4,6 +4,47 @@
 	session_start();
 	
 	class csModel{
+		public function getClient($namaClients){
+			$namaC = $db->escapeString($namaClients);
+			$query = "SELECT * FROM client WHERE namaClient = '$namaC'";
+			$result = $db->executeSelectQuery($query);
+			return $result;
+		}
+		
+		private function cekClient($nama){
+			$query = "SELECT idC FROM client WHERE namaClient='$nama'";
+			$res=$db->executeSelectQuery($query);
+			if($res){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		private function cekIdClient($idC){
+			$query = "SELECT namaClient FROM client WHERE idC=$idC";
+			$res=$db->executeSelectQuery($query);
+			if($res){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		private function setClient($namaClients,$nilai,$status,$alamat){
+			$nama = $namaClients;
+			$query = "SELECT * FROM client WHERE namaClient = '$nama'";
+			$result = $query;
+			$nilaiBaru = $nilai;
+			$statusBaru =$status;
+			$alamatBaru = $alamat;
+			if(isset($nama,$alamatBaru,$statusBaru,$nilaiBaru)){
+				$que = "UPDATE client SET nilaiInvestasi=$nilaiBaru,alamat='$alamatBaru',statusKawin='$statusBaru'
+				WHERE namaClient='$nama'";
+				$db->executeNonSelectQuery($que);
+			}
+		}
+		
 		public function addClient(){
 			$masuk = json_decode(file_get_contents('php://input'));
 			$nama = $db->escapeString($masuk->namaClient);
@@ -13,17 +54,17 @@
 			$status = $db->escapeString($masuk->statusKawin);
 			$birthday = $db->escapeString($masuk->tanggalLahir);
 			if(cekClient($nama)){
+				$myObj->data=$nama;
+				$myObj->pesan="Client sudah ada";
+				$myObj->status=false;
+				echo json_encode($myObj);
+			}else{
 				$query="INSERT INTO client (namaClient,nilaiInvestasi,gender,alamat,statusKawin,tanggalLahir) 
 				VALUES ('$nama',$nilaiInvest,$kelamin,$alamat,$status,'birthday',$_SESSION["id"])";
-				$db->executeSelectQuery($query);
+				$db->executeNonSelectQuery($query);
 				$myObj->data=$nama;
 				$myObj->pesan="Berhasil tambah client";
 				$myObj->status=true;
-				echo json_encode($myObj);
-			}else{
-				$myObj->data=$nama;
-				$myObj->pesan="Gagal tambah client";
-				$myObj->status=false;
 				echo json_encode($myObj);
 			}
 		}
@@ -62,45 +103,6 @@
 				$myObj->status=false;
 				$myObj->pesan = "client gagal diubah";
 				echo json_encode($myObj);
-			}
-		}
-		
-		public function getClient($namaClients){
-			$query = "SELECT * FROM client WHERE namaClient = '$namaClients'";
-			$result = $db->executeSelectQuery($query);
-			return $result;
-		}
-		
-		private function cekClient($nama){
-			$query = "SELECT idC FROM client WHERE namaClient='$nama'";
-			$res=$db->executeSelectQuery($query);
-			if($res){
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		private function cekIdClient($idC){
-			$query = "SELECT namaClient FROM client WHERE idC=$idC";
-			$res=$db->executeSelectQuery($query);
-			if($res){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		
-		private function setClient($namaClients,$nilai,$status,$alamat){
-			$nama = $namaClients;
-			$query = "SELECT * FROM client WHERE namaClient = '$nama'";
-			$result = $query;
-			$nilaiBaru = $nilai;
-			$statusBaru =$status;
-			$alamatBaru = $alamat;
-			if(isset($nama,$alamatBaru,$statusBaru,$nilaiBaru)){
-				$que = "UPDATE client SET nilaiInvestasi=$nilaiBaru,alamat='$alamatBaru',statusKawin='$statusBaru' WHERE namaClient='$nama'";
-				$db->executeSelectQuery($que);
 			}
 		}
 		
