@@ -114,7 +114,7 @@
 			$oldpass = $this->db->escapeString($masuk->oldpass);
 			$newpass = '';
 			if (isset($masuk->newpass)) {
-				$newpas = $this->db->escapeString($masuk->newpass);
+				$newpass = $this->db->escapeString($masuk->newpass);
 			}
 			$nama = $this->db->escapeString($masuk->nama);
 			$id = $this->getId($username);
