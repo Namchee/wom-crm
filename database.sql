@@ -1,5 +1,5 @@
 CREATE TABLE Users(
-	nama varchar(30) NOT NULL,
+	nama varchar(50) NOT NULL,
 	tanggalGabung date NOT NULL,
 	username varchar(20) NOT NULL,
 	password varchar(100) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE Client(
 	namaClient varchar(30) NOT NULL,
 	statusKawin int NOT NULL,
 	tanggalLahir date NOT NULL,
-	nilaiInvestasi decimal(15,2) NOT NULL,
+	nilaiInvestasi decimal(15, 2) NOT NULL,
 	alamat int NULL,
 	gender int NULL,
 	gambar MEDIUMTEXT,
@@ -44,9 +44,6 @@ CREATE TABLE Kontak(
 );
 CREATE VIEW viewUmurClient as
 SELECT *, FLOOR(DATEDIFF(CURDATE(), Client.tanggalLahir) / 365.25) as umur
-FROM Client
+FROM Client;
 
-CREATE INDEX idxUser ON users(nama);
-CREATE INDEX idxClient ON client(namaClient);
-CREATE INDEX idxKota ON kota(namaKota);
-CREATE INDEX idxReg ON region(namaRegion);
+CREATE INDEX idxUser ON users(username);
