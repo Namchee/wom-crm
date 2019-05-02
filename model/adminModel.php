@@ -335,5 +335,22 @@
             }
             return $status;
         }
+        public function getAllClient(){
+            $query="SELECT viewUmurClient.*,users.nama,kota.namaKota 
+            FROM viewUmurClient INNER JOIN kota on viewUmurClient.alamat=kota.idK
+            INNER JOIN users on viewUmurClient.idU=users.idU";
+            $res=$db->executeSelectQuery($query);
+            echo json_encode($res);
+        }
+        public function getClient(){
+            $masuk = json_decode(file_get_contents('php://input'));
+            $idClient=$db->escapeString($masuk->id);
+            $query="SELECT viewUmurClient.*,users.nama,kota.namaKota 
+            FROM viewUmurClient INNER JOIN kota on viewUmurClient.alamat=kota.idK
+            INNER JOIN users on viewUmurClient.idU=users.idU
+            WHERE viewUmurClient.idC=$idClient";
+            $res=$db->executeSelectQuery($query);
+            echo json_encode($res);
+        }
     }
 ?>
