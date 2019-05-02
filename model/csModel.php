@@ -6,13 +6,13 @@
 	class csModel{
 		public function getClient($namaClients){
 			$namaC = $db->escapeString($namaClients);
-			$query = "SELECT * FROM client WHERE namaClient = '$namaC'";
+			$query = "SELECT * FROM viewUmurClient WHERE namaClient = '$namaC'";
 			$result = $db->executeSelectQuery($query);
 			return $result;
 		}
 		
 		private function cekClient($nama){
-			$query = "SELECT idC FROM client WHERE namaClient='$nama'";
+			$query = "SELECT idC FROM viewUmurClient WHERE namaClient='$nama'";
 			$res=$db->executeSelectQuery($query);
 			if($res){
 				return true;
@@ -22,7 +22,7 @@
 		}
 
 		private function cekIdClient($idC){
-			$query = "SELECT namaClient FROM client WHERE idC=$idC";
+			$query = "SELECT namaClient FROM viewUmurClient WHERE idC=$idC";
 			$res=$db->executeSelectQuery($query);
 			if($res){
 				return true;
@@ -109,8 +109,8 @@
 			$masuk = json_decode(file_get_contents('php://input'));
 			$idClient = $db->escapeString($masuk->idC);
 			if(cekIdClient($idClient)){
-				$query = "SELECT users.idU,users.nama FROM users INNER JOIN client on users.idU=client.idU
-				WHERE client.idC=$idClient";
+				$query = "SELECT users.idU,users.nama FROM users INNER JOIN viewUmurClient on users.idU=viewUmurClient.idU
+				WHERE viewUmurClient.idC=$idClient";
 				$res=$db->executeSelectQuery($query);
 				$myObj->idCS = $res[0];
 				$myObj->nama = $res[1];
@@ -129,10 +129,10 @@
 			if($kategori==1){
 				$query="SELECT kotaReport.namaKota, convert(float,kotaReport.jumlah)
 					FROM(
-					      SELECT Kota.namaKota, count(client.idC) as 'jumlah'
-					      FROM users INNER JOIN client on users.idU=client.idU 
-					      INNER JOIN kota on client.alamat=kota.idK
-					      WHERE client.idU=$idUser
+					      SELECT Kota.namaKota, count(viewUmurClient.idC) as 'jumlah'
+					      FROM users INNER JOIN viewUmurClient on users.idU=viewUmurClient.idU 
+					      INNER JOIN kota on viewUmurClient.alamat=kota.idK
+					      WHERE viewUmurClient.idU=$idUser
 					      GROUP BY kota.namaKota
 					)as kotaReport";
 				$res=$db->executeSelectQuery($query);
@@ -156,8 +156,8 @@
 				$query="SELECT nilaiRep.rangeNilai, convert(float,nilaiRep.jumlah)
 					FROM(
 						SELECT (nilaiInvestasi/200000)*200000||'-'||(nilaiInvestasi/200000)*200000+199999 as 'rangeNilai', count(idC) as 'jumlah'
-						FROM client INNER JOIN users on client.idU=users.idU
-						WHERE client.idU=$idUser
+						FROM viewUmurClient INNER JOIN users on viewUmurClient.idU=users.idU
+						WHERE viewUmurClient.idU=$idUser
 						GROUP BY nilaiInvestasi/20000
 						ORDER BY 1
 					)as nilaiRep";
