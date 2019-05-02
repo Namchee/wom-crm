@@ -38,9 +38,9 @@ INSERT INTO terdapatdi VALUES ('8','4');
 INSERT INTO terdapatdi VALUES ('8','5');
 INSERT INTO terdapatdi VALUES ('9','5');
 
-INSERT INTO users VALUES('Budi','20100131','Budi123','123456',null,'1','1');
-INSERT INTO users VALUES('Stefan','20130212','zaver','stefan123',null,'0','0');
-INSERT INTO users VALUES('Margarret','20060602','bunbun','marqwerty',null,'1','0');
+INSERT INTO users VALUES('Budi','20100131','Budi123','123456',null,'1');
+INSERT INTO users VALUES('Stefan','20130212','zaver','stefan123',null,'0');
+INSERT INTO users VALUES('Margarret','20060602','bunbun','marqwerty',null,'0');
 
 INSERT INTO client VALUES(NULL,'Brown','1','19830101','1000000','1',null,'1','3');
 INSERT INTO client VALUES(NULL,'Feni','0','19701231','2500000','3',null,'0','3');
