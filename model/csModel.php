@@ -31,15 +31,14 @@
 			}
 		}
 		
-		private function setClient($namaClients,$nilai,$status,$alamat,$gambar){
+		private function setClient($namaClients,$nilai,$status,$alamat){
 			$nama = $namaClients;
 			$result = $query;
 			$nilaiBaru = $nilai;
 			$statusBaru =$status;
 			$alamatBaru = $alamat;
-			$gambarBaru=$gambar;
-			if(isset($nama,$alamatBaru,$statusBaru,$nilaiBaru,$gambar)){
-				$que = "UPDATE client SET nilaiInvestasi=$nilaiBaru,alamat='$alamatBaru',statusKawin='$statusBaru',gambar='$gambarBaru'
+			if(isset($nama,$alamatBaru,$statusBaru,$nilaiBaru)){
+				$que = "UPDATE client SET nilaiInvestasi=$nilaiBaru,alamat='$alamatBaru',statusKawin='$statusBaru'
 				WHERE namaClient='$nama'";
 				$db->executeNonSelectQuery($que);
 			}
@@ -53,15 +52,14 @@
 			$alamat = $db->escapeStrin($masuk->alamat);
 			$status = $db->escapeString($masuk->statusKawin);
 			$birthday = $db->escapeString($masuk->tanggalLahir);
-			$gambar = $masuk->gambar;
 			if(cekClient($nama)){
 				$myObj->data=$nama;
 				$myObj->pesan="Client sudah ada";
 				$myObj->status=false;
 				echo json_encode($myObj);
 			}else{
-				$query="INSERT INTO client (namaClient,nilaiInvestasi,gender,alamat,statusKawin,tanggalLahir,idU,gambar) 
-				VALUES ('$nama',$nilaiInvest,$kelamin,$alamat,$status,'$birthday',$_SESSION["id"],'$gambar')";
+				$query="INSERT INTO client (namaClient,nilaiInvestasi,gender,alamat,statusKawin,tanggalLahir,idU,) 
+				VALUES ('$nama',$nilaiInvest,$kelamin,$alamat,$status,'$birthday',$_SESSION["id"])";
 				$db->executeNonSelectQuery($query);
 				$myObj->data=$nama;
 				$myObj->pesan="Berhasil tambah client";
@@ -95,9 +93,8 @@
 			$nilaiInvest = $db->escapeString($masuk->nilaiInvestasi);
 			$status = $db->escapeString($masuk->statusKawin);
 			$alamat = $db->escapeString($masuk->alamat);
-			$gambar=$masuk->gambar;
 			if(cekIdClient($id)){
-				setClient($nama,$nilaiInvest,$status,$alamat,$gambar);
+				setClient($nama,$nilaiInvest,$status,$alamat);
 				$myObj->status=true;
 				$myObj->pesan = "client berhasil diubah";
 				echo json_encode($myObj);
