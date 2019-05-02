@@ -43,7 +43,7 @@ CREATE TABLE Kontak(
 	CONSTRAINT FK_Kontak FOREIGN KEY (idU) REFERENCES Users(idU)
 );
 CREATE VIEW viewUmurClient as
-SELECT *, YEAR(DATEDIFF(Client.tanggalLahir, CURDATE())) as umur
+SELECT *, FLOOR(DATEDIFF(CURDATE(), Client.tanggalLahir) / 365.25) as umur
 FROM Client
 
 CREATE INDEX idxUser ON users(nama);
