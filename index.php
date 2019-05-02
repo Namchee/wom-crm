@@ -13,7 +13,11 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if ($url == '/login') {
-            echo View::renderStatic('login.html');
+            if (isset($_SESSION['id'])) {
+                header('Location: /dashboard');
+            } else {
+                echo View::renderStatic('login.html');
+            }
             return;
         } else if ($url == '' || $url == '/') {
             if (isset($_SESSION['id'])) {
@@ -119,7 +123,7 @@
                 header('Location: /401');
                 return;
             }
-        } else if ($url == '/edit_profile') {
+        } else if ($url == '/profile_settings') {
             if (isset($_SESSION['id'])) {
                 echo $userController->viewSelfInfo();
             } else {
@@ -189,6 +193,13 @@
                 } else {
                     $adminController->changeCityReg();
                 }
+            }
+        } else if ($url == '/profile_settings') {
+            if (!isset($_SESSION['id'])) {
+                header('Location: /401');
+                return;
+            } else {
+                echo $userController->changeData();
             }
         }
     }

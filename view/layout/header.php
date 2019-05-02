@@ -28,7 +28,7 @@
                 </div>
             </div>
             <ul class="sidenav-item">
-                <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/dashboard') ? 'active' : '' ?>""
+                <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/dashboard') ? 'active' : '' ?>"
                     href="/dashboard">
                     <li>
                         <i class="material-icons">home</i>
@@ -36,7 +36,7 @@
                     </li>
                 </a>
                 <?php if ($_SESSION['status'] == 0): ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_client') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_client') ? 'active' : '' ?>"
                         href="/add_client">
                         <li>
                             <i class="material-icons">person_add</i>
@@ -44,7 +44,7 @@
                         </li>
                     </a>
                 <?php else: ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_cs') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_cs') ? 'active' : '' ?>"
                         href="/add_cs">
                         <li>
                             <i class="material-icons">person_add</i>
@@ -53,7 +53,7 @@
                     </a>
                 <?php endif ?>
                 <?php if ($_SESSION['status'] == 0): ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/modify_client_cs') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/modify_client_cs') ? 'active' : '' ?>"
                         href="/modify_client_cs">
                         <li>
                             <i class="material-icons">build</i>
@@ -61,7 +61,7 @@
                         </li>
                     </a>
                 <?php else: ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/move_client') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/move_client') ? 'active' : '' ?>"
                         href="/move_client">
                         <li>
                             <i class="material-icons">build</i>
@@ -70,7 +70,7 @@
                     </a>
                 <?php endif ?>
                 <?php if ($_SESSION['status'] == 0): ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/search_region') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/search_region') ? 'active' : '' ?>"
                         href="/search_region">
                         <li>
                             <i class="material-icons">public</i>
@@ -78,7 +78,7 @@
                         </li>
                     </a>
                 <?php else: ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_kota') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_kota') ? 'active' : '' ?>"
                         href="/add_kota">
                         <li>
                             <i class="material-icons">location_city</i>
@@ -87,7 +87,7 @@
                     </a>
                 <?php endif ?>
                 <?php if ($_SESSION['status'] == 1): ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_region') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/add_region') ? 'active' : '' ?>"
                         href="/add_region">
                         <li>
                             <i class="material-icons">domain</i>
@@ -96,7 +96,7 @@
                     </a>
                 <?php endif ?>
                 <?php if ($_SESSION['status'] == 1): ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/edit_region') ? 'active' : '' ?>""
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/edit_region') ? 'active' : '' ?>"
                         href="/edit_region">
                         <li>
                             <i class="material-icons">language</i>
@@ -104,7 +104,7 @@
                         </li>
                     </a>
                 <?php endif ?>
-                <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/profile_settings') ? 'active' : '' ?>""
+                <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/profile_settings') ? 'active' : '' ?>"
                     href="/profile_settings">
                     <li>
                         <i class="material-icons">settings</i>

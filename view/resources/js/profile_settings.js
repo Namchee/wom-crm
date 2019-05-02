@@ -2,10 +2,11 @@ let email = document.querySelector('.email');
 new Tagify(email);
 
 let username = document.querySelector('#username');
-let password = document.querySelector('#password');
+let oldPassword = document.querySelector('#oldpass');
+let newPassword = document.querySelector("#newpass");
 let nama = document.querySelector('#nama');
 
-let form = document.querySelector('#new_cs');
+let form = document.querySelector('#edit-profile');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   let mailArr = [];
@@ -24,14 +25,15 @@ form.addEventListener('submit', (e) => {
   }
 
   let data = {
-    username: username.value,
-    password: password.value,
+    user: username.value,
+    oldpass: oldPassword.value,
+    newpass: newPassword.value,
     nama: nama.value,
     email: mailArr
   }
 
   sendRequest();
-  fetch('/add_cs', {
+  fetch('/profile_settings', {
     method: 'POST',
     body: JSON.stringify(data)
   }).then((resp) => {

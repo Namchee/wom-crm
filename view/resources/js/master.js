@@ -16,6 +16,8 @@ function toggleInputs() {
   let inputs = document.querySelectorAll('.input-group > .input-field');
 
   for (let input of inputs) {
+    input.focus();
+    input.blur();
     input.addEventListener('blur', () => {
       if (input.value.length) {
         input.parentElement.classList.add('not-empty');

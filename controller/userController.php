@@ -57,7 +57,11 @@
 		public function viewSelfInfo() {
 			$personalInfo = $this->getSelfInfo();
 			$mail = $this->getSelfMail();
-			var_dump($personalInfo);
+			return View::render('profile_settings.php', [
+				"person" => $personalInfo,
+				"mail" => $mail,
+				"title" => "Edit Profile - Wombat Inc. CRM"
+			]);
 		}
 		
 		public function login() {
@@ -103,7 +107,7 @@
 		}
 
 		public function changeData() {
-			$myObd = (object)array();
+			$myObj = (object)array();
 			$masuk = json_decode(file_get_contents('php://input'));
 			$arrEmail = $this->escapeArray($masuk->email);
 			$username = $this->db->escapeString($masuk->user);
@@ -115,8 +119,8 @@
 			$nama = $this->db->escapeString($masuk->nama);
 			$id = $this->getId($username);
 			$besar = count($arrEmail);
-			if (isset($username,$pass,$nama)) {
-				if (!$this->cekPassword($username, $oldpass)) {
+			if (isset($username, $oldpass, $nama)) {
+				if (!$this->cekPass($username, $oldpass)) {
 					$myObj->pesan = "Password salah";
 					$myObj->status = false;
 					return json_encode($myObj);
@@ -125,11 +129,16 @@
 					$que = "DELETE FROM kontak WHERE idU = $id";
             		$this->db->executeNonSelectQuery($que);
 					$hashpass = password_hash($newpass, PASSWORD_DEFAULT);
-					$query = "UPDATE users SET username = '$username', password = '$hashpass', nama = '$nama'
-					WHERE username = '$username'";
+					$query = "UPDATE users SET username = '$username', nama = '$nama'
+						WHERE username = '$username'";
 					$this->db->executeNonSelectQuery($query);
+					if ($newpass != '') {
+						$query = "UPDATE users SET password = '$hashpass'
+							WHERE username = '$username'";
+						$this->db->executeNonSelectQuery($query);
+					}
 					foreach ($arrEmail as $value) {
-						$ques = "INSERT INTO kontak (idU,kontak) VALUES ($id, $value)";
+						$ques = "INSERT INTO kontak (idU, kontak) VALUES ('$id', '$value')";
                 		$this->db->executeNonSelectQuery($ques);
 					}
 					$myObj->pesan = "Data user berhasil diubah";
