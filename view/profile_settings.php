@@ -4,7 +4,7 @@
 <h1 class="heading">
                 Pengaturan Profil
             </h1>
-            <form action="" method="POST">
+            <form action="" method="POST" id="edit-profile">
                 <div class="columns">
                     <div class="column">
                         <div class="input-group">
@@ -19,6 +19,17 @@
                     <div class="column">
                         <div class="input-group">
                             <input type="password" name="password" class="input-field" autocomplete="off" required
+                                password-reveal />
+                            <span class="input-highlight"></span>
+                            <span class="input-bar"></span>
+                            <label class="input-label">Old Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <div class="input-group">
+                            <input type="password" name="password" class="input-field" autocomplete="off"
                                 password-reveal />
                             <span class="input-highlight"></span>
                             <span class="input-bar"></span>

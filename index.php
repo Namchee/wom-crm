@@ -119,6 +119,13 @@
                 header('Location: /401');
                 return;
             }
+        } else if ($url == '/edit_profile') {
+            if (isset($_SESSION['id'])) {
+                echo $userController->viewSelfInfo();
+            } else {
+                header('Location: /401');
+                return;
+            } 
         } else if ($url == '/401') {
             echo View::renderStatic('401.html');
             return;
