@@ -2,7 +2,7 @@ CREATE TABLE Users(
 	nama varchar(30) NOT NULL,
 	tanggalGabung date NOT NULL,
 	username varchar(20) NOT NULL,
-	password varchar(20) NOT NULL,
+	password varchar(100) NOT NULL,
 	idU int AUTO_INCREMENT NOT NULL,
 	active int NOT NULL,
 	status int NOT NULL,
