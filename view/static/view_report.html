@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="view/resources/styles/view_report.css">
+<script src="view/resources/js/view_report.js" defer></script>
+
+<h1 class="heading">
+    Lihat Laporan
+</h1>
+<div class="columns">
+        <div class="column">
+            Kategori
+        </div>
+        <select id="category">
+            <option data-placeholder="true"></option>
+            <option value="1">Kota</option>
+            <option value="2">Region</option>
+            <option value="3">Nilai Investasi</option>
+            <option value="4">Umur</option>
+        </select>
+    </div>
+<canvas id="chart">
+
+</canvas>
+<button class="button button-primary icon-left" type="button" id="pdf" disabled ripple>
+    <i class="material-icons left-icon">assessment</i>
+    <span>Buat PDF</span>
+</button>

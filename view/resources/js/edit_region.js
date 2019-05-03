@@ -6,11 +6,11 @@ let selector = new SlimSelect({
 });
 
 initializeRow();
-regions.on('datatable.sort', initializeRow);
-regions.on('datatable.search', initializeRow);
+clients.on('datatable.sort', initializeRow);
+clients.on('datatable.search', initializeRow);
 
 function initializeRow() {
-  for (let row of regions.activeRows) {
+  for (let row of clients.activeRows) {
     row.addEventListener('click', () => {
       // fetch, then
       sendRequest();
@@ -69,24 +69,25 @@ function initializeRow() {
   }
 }
 
-regionForm.addEventListener('submit', (e) => {
+clientForm.addEventListener('submit', (e) => {
   e.preventDefault();
   sendRequest();
   let data = {
     idR: document.querySelector('#reg-id').value,
     idK: selector.selected()
   };
-  console.log(data.idR);
-  console.log(data.idK);
   fetch('/edit_region', {
     method: 'POST',
     body: JSON.stringify(data)
   })
+    .then(resp => {
+      return resp.json();
+    })
     .then(() => {
-      alert('Berhasil mengubah informasi');
+      alert(resp.pesan);
     })
     .catch(err => {
-      alert('Gagal mengubah informasi');
+      alert(err);
     })
     .finally(() => {
       endRequest();

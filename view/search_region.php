@@ -1,11 +1,22 @@
-<?php $idx = 1 ?>
-
 <link rel="stylesheet" href="view/resources/styles/modify_client_cs.css">
-<script src="view/resources/js/modify_client_cs.js" defer></script>
+<script src="view/resources/js/search_region.js" defer></script>
 
             <h1 class="heading">
-                Ubah Penanggung Jawab Klien
+                Search Region
             </h1>
+            <div class="columns">
+                <div class="column">
+                    Region
+                </div>
+                <div class="column">
+                    <select id="region">
+                        <option data-placeholder="true"></option>
+                        <?php foreach ($regions as $region): ?>
+                            <option value="<?= $region->id ?>"><?= $region->nama ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
             <table id="clients">
                 <thead>
                     <tr>
@@ -21,48 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($clients as $value) : ?>
-                        <tr>
-                            <td>
-                                <?= $idx++ ?>
-                            </td>
-                            <td>
-                                <?= $value->nama ?>
-                            </td>
-                            <td>
-                                <?php if ($value->statusKawin == 0): ?>
-                                    Single
-                                <?php else: ?>
-                                    Married
-                                <?php endif ?>
-                            </td>
-                            <td>
-                                <?= $value->tanggalLahir ?>
-                            </td>
-                            <td>
-                                <?= $value->nilaiInvest ?>
-                            </td>
-                            <td>
-                                <?= $value->kota ?>
-                            </td>
-                            <td>
-                                <?php if ($value->gender == 0): ?>
-                                    Pria
-                                <?php else: ?>
-                                    Wanita
-                                <?php endif ?>
-                            </td>
-                            <td>
-                                <?= $value->age ?>
-                            </td>
-                            <td>
-                                <?= $value->cs ?>
-                            </td>
-                            <td class="hide-id"> 
-                                <?= $value->id ?>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
+
                 </tbody>
             </table>
             <div id="modal-info" class="modal">
@@ -78,7 +48,6 @@
                         <h1 class="heading">
                             Profil Klien
                         </h1>
-                        <form action="" class="client-form">
                             <div class="columns">
                                 <div class="column">
                                     Nama Klien
@@ -139,20 +108,10 @@
                                 <div class="column">
                                     Penanggung Jawab
                                 </div>
-                                <div class="column">
-                                    <select name="cs" id="cs" class="cs">
-                                        <!-- php -->
-                                        <?php foreach ($cs as $value): ?>
-                                            <option value="<?= $value->id ?>"><?= $value->name ?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                <div class="column" id="client-pj">
+                                    
                                 </div>
                             </div>
-                            <button class="button button-primary icon-left" type="submit">
-                                <i class="material-icons">build</i>
-                                <span>Simpan Perubahan</span>
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>

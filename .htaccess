@@ -4,5 +4,8 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteRule get_cs/(\d+) get_cs?id=$1
+RewriteRule get_client_mod/(\d+) get_client_mod?id=$1
+RewriteRule get_client/(\d+) get_client?id=$1
+RewriteRule get_client_by_region/(\d+) get_client_by_region?id=$1
 RewriteRule get_region/(\d+) get_region?id=$1
 RewriteRule !\.(jpg|css|js|gif|png|eot|woff|woff2|ttf)$ index.php

@@ -1,10 +1,10 @@
 <?php $idx = 1 ?>
 
 <link rel="stylesheet" href="view/resources/styles/modify_client_cs.css">
-<script src="view/resources/js/modify_client_cs.js" defer></script>
+<script src="view/resources/js/dashboard_cs.js" defer></script>
 
             <h1 class="heading">
-                Ubah Penanggung Jawab Klien
+                Customer Service Dashboard
             </h1>
             <table id="clients">
                 <thead>
@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($clients as $value) : ?>
-                        <tr>
+                       <tr>
                             <td>
                                 <?= $idx++ ?>
                             </td>
@@ -61,7 +61,7 @@
                             <td class="hide-id"> 
                                 <?= $value->id ?>
                             </td>
-                        </tr>
+                        </tr> 
                     <?php endforeach ?>
                 </tbody>
             </table>
@@ -78,7 +78,6 @@
                         <h1 class="heading">
                             Profil Klien
                         </h1>
-                        <form action="" class="client-form">
                             <div class="columns">
                                 <div class="column">
                                     Nama Klien
@@ -139,20 +138,10 @@
                                 <div class="column">
                                     Penanggung Jawab
                                 </div>
-                                <div class="column">
-                                    <select name="cs" id="cs" class="cs">
-                                        <!-- php -->
-                                        <?php foreach ($cs as $value): ?>
-                                            <option value="<?= $value->id ?>"><?= $value->name ?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                <div class="column" id="client-pj">
+                                    
                                 </div>
                             </div>
-                            <button class="button button-primary icon-left" type="submit">
-                                <i class="material-icons">build</i>
-                                <span>Simpan Perubahan</span>
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@
     require_once 'controller/csController.php';
     require_once 'model/regionModel.php';
     require_once 'model/kotaModel.php';
+    require_once 'model/clientModel.php';
 
     class AdminController {
         private $db;
@@ -106,7 +107,7 @@
         public function getClientCS() {
 			$masuk = json_decode(file_get_contents('php://input'));
 			$idClient = $this->db->escapeString($masuk->idC);
-			if(cekIdClient($idClient)){
+			if (cekIdClient($idClient)) {
 				$query = "SELECT users.idU,users.nama FROM users INNER JOIN client on users.idU=client.idU
 				WHERE client.idC=$idClient";
 				$res = $this->db->executeSelectQuery($query);
@@ -120,13 +121,6 @@
 				return json_encode($myObj);
 			}
 		}
-
-        public function viewMoveClient() {
-        }
-
-        private function getClients() {
-            $query = "SELECT * FROM client";
-        }
 
         public function viewAddKota() {
             $regions = $this->getRegions();
@@ -253,9 +247,15 @@
         }
 
         public function changeCityReg() {
+            $myObj = (object)array();
             $masuk = json_decode(file_get_contents('php://input'));
             $arrKota = $masuk->idK;
             $arrKota = $this->escapeArray($arrKota);
+            if (count($arrKota) <= 0) {
+                $myObj->status = false;
+                $myObj->pesan = "Region tidak boleh kosong";
+                return $myObj;
+            }
             $region = $masuk->idR;
             $query = "DELETE FROM terdapatdi WHERE idR = $region";
             $this->db->executeNonSelectQuery($query);
@@ -263,6 +263,9 @@
                 $que = "INSERT INTO terdapatdi VALUES ('$value', '$region')";
                 $this->db->executeNonSelectQuery($que);
             }
+            $myObj->status = true;
+            $myObj->pesan = "Berhasil mengubah region";
+            return $myObj;
         }
 
         public function viewEditRegion() {
@@ -273,6 +276,67 @@
                 "kotas" => $rez,
                 "title" => "Edit Region - Wombat Inc. CRM"
             ]);
+        }
+
+        public function viewModifyClientCS() {
+            $clients = $this->getAllClient();
+            $cs = $this->getCS();
+            return View::render('modify_client_cs.php', [
+                "clients" => $clients,
+                "cs" => $cs,
+                "title" => "Modify Client-CS - Wombat Inc. CRM"
+            ]);
+        }
+
+        private function getAllClient() {
+            $query = "SELECT viewUmurClient.*, users.nama, kota.namaKota 
+                FROM viewUmurClient INNER JOIN kota on viewUmurClient.alamat = kota.idK
+                INNER JOIN users on viewUmurClient.idU = users.idU";
+            $res = $this->db->executeSelectQuery($query);
+            
+            $clients = [];
+            foreach ($res as $client) {
+                $clients[] = new Client($client['idC'], $client['namaClient'], $client['statusKawin'],
+                    $client['tanggalLahir'], $client['nilaiInvestasi'], $client['namaKota'], $client['gender'],
+                    $client['nama'], $client['umur']);
+            }
+
+            return $clients;
+        }
+
+        public function getClient() {
+            $idClient = $this->db->escapeString($_GET['id']);
+            $query = "SELECT viewUmurClient.*, users.nama, kota.namaKota 
+            FROM viewUmurClient INNER JOIN kota on viewUmurClient.alamat = kota.idK
+            INNER JOIN users on viewUmurClient.idU = users.idU
+            WHERE viewUmurClient.idC = $idClient";
+            $res = $this->db->executeSelectQuery($query);
+            return json_encode($res);
+        }
+
+        public function changeCSCLient() {
+            $myObj = (object)array();
+            $masuk = json_decode(file_get_contents('php://input'));
+            $idClient = $this->db->escapeString($masuk->idClient);
+            $idCS = $this->db->escapeString($masuk->idCS);
+
+            $query = "SELECT idC FROM client WHERE idC = $idClient";
+            $res = $this->db->executeSelectQuery($query);
+            $que = "SELECT idU FROM users WHERE idU = $idCS";
+            $result = $this->db->executeSelectQuery($que);
+            if (count($res) > 0 && count($result) > 0) {
+                $ques = "UPDATE client SET idU = $idCS WHERE idC = $idClient";
+                $this->db->executeNonSelectQuery($ques);
+                $myObj->data = $idClient;
+                $myObj->pesan = "Client berhasil di ubah";
+                $myObj->status = true;
+                return json_encode($myObj);
+            } else {
+                $myObj->data = $idClient;
+                $myObj->pesan = "Client gagal di ubah";
+                $myObj->status = false;
+                return json_encode($myObj);
+            }
         }
 
         private function cekKota($namakot) {

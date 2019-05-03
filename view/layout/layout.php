@@ -17,6 +17,7 @@
     <script src="view/resources/js/datatables.js" defer></script>
     <script src="view/resources/js/datepicker.js" defer></script>
     <script src="view/resources/js/master.js" defer></script>
+    <script src="view/resources/js/jspdf.js" defer></script>
 </head>
 <body>
     <?php 

@@ -16,15 +16,18 @@ function toggleInputs() {
   let inputs = document.querySelectorAll('.input-group > .input-field');
 
   for (let input of inputs) {
-    input.focus();
-    input.blur();
+    if (input.type != 'password') {
+      triggerInput(input);
+      inputRequired(input);
+    }
     input.addEventListener('blur', () => {
-      if (input.value.length) {
-        input.parentElement.classList.add('not-empty');
-      } else {
-        input.parentElement.classList.remove('not-empty');
-      }
+      triggerInput(input);
+      inputRequired(input);
     });
+    input.addEventListener('change', () => {
+      triggerInput(input);
+      inputRequired(input);
+    })
 
     if (input.hasAttribute('required')) {
       input.addEventListener('input', () => {
@@ -42,6 +45,14 @@ function toggleInputs() {
     input.parentElement.addEventListener('click', (e) => {
       input.focus();
     });
+  }
+}
+
+function triggerInput(input) {
+  if (input.value.length) {
+    input.parentElement.classList.add('not-empty');
+  } else {
+    input.parentElement.classList.remove('not-empty');
   }
 }
 

@@ -1,57 +1,130 @@
-let client = new DataTable("#client");
+let clients = new DataTable("#clients");
+let form = document.querySelector('form');
+
+let gender = new SlimSelect({
+  select: '#gender'
+});
+
+let alamat = new SlimSelect({
+  select: '#alamat'
+});
+
+let marriage = new SlimSelect({
+  select: '#marriage'
+});
 
 let dateOfBirth = flatpickr(".date-of-birth", {
   altInput: true,
   altFormat: 'F j, Y',
-  dateFormat: "Y-m-d"
-});
-
-let city = new SlimSelect({
-  select: "#city",
-  placeholder: 'Pilih Kota...'
+  dateFormat: "Ymd",
+  maxDate: Date.now()
 });
 
 initializeRow();
-client.on('datatable.sort', initializeRow);
-client.on('datatable.search', initializeRow);
+clients.on('datatable.sort', initializeRow);
+clients.on('datatable.search', initializeRow);
 
 function initializeRow() {
-  for (let row of client.activeRows) {
+  for (let row of clients.activeRows) {
     row.addEventListener('click', () => {
       // fetch, then
-      let modal = document.querySelector('#modal-info');
+      sendRequest();
+      let id = Number(row.querySelector('.hide-id').textContent);
+      fetch(`/get_client/${id}`)
+        .then(resp => {
+          return resp.json();
+        })
+        .then(resp => {
+          let modal = document.querySelector('#modal-info');
+          let nama = document.querySelector('#nama');
+          let nilai = document.querySelector('#nilai');
+          nama.value = resp[0].namaClient;
+          nama.dispatchEvent(new CustomEvent('change'));
+          nilai.value = Number(resp[0].nilaiInvestasi);
+          nilai.dispatchEvent(new CustomEvent('change'));
+          gender.set(resp[0].gender);
+          alamat.set(resp[0].idK);
+          marriage.set(resp[0].statusKawin);
+          dateOfBirth.setDate(resp[0].tanggalLahir, true, "Y-m-d");
 
-      modal.classList.remove('remove');
-      modal.classList.add('active');
-      let overlay = modal.querySelector('.modal-overlay');
-      let closeButton = modal.querySelector('.modal-close-button');
+          let ide = document.createElement('input');
+          ide.id = "client-id";
+          ide.type = 'hidden';
+          ide.value = id;
 
-      overlay.addEventListener('click', () => {
-        modal.classList.remove('active');
-        modal.classList.add('remove');
-      });
+          modal.classList.remove('remove');
+          modal.classList.add('active');
+          let overlay = modal.querySelector('.modal-overlay');
+          let closeButton = modal.querySelector('.modal-close-button');
+          modal.appendChild(ide);
 
-      closeButton.addEventListener('click', () => {
-        modal.classList.remove('active');
-        modal.classList.add('remove');
-      });
+          overlay.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modal.classList.add('remove');
+            modal.removeChild(ide);
+            nama.value = '';
+            nilai.value = '';
+          });
+
+          closeButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modal.classList.add('remove');
+            modal.removeChild(ide);
+            nama.value = '';
+            nilai.value = '';
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          endRequest();
+        })
     });
   }
 }
 
-let profile_pic = document.querySelector('.image-uploader');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let nama = document.querySelector('#nama');
+  let nilai = document.querySelector('#nilai');
+  let id = document.querySelector("#client-id");
+  let tanggalLahir = dateOfBirth.selectedDates[0].toJSON().slice(0, 10);
 
-profile_pic.addEventListener('input', () => {
-  getBase64(profile_pic.files[0]).then((res) => {
-    console.log(res);
+  let data = {
+    idC: id.value,
+    namaClient: nama.value,
+    gender: gender.selected(),
+    nilaiInvestasi: Number(nilai.value),
+    statusKawin: marriage.selected(),
+    alamat: alamat.selected(),
+    tanggalLahir
+  }
+  sendRequest();
+  fetch('/edit_client', {
+    method: 'POST',
+    body: JSON.stringify(data)
   })
-});
-
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+  .then(resp => {
+    return resp.json();
+  })
+  .then(resp => {
+    alert(resp.pesan);
+  })
+  .catch(err => {
+    alert(err);
+  })
+  .finally(() => {
+    endRequest();
   });
+})
+
+function sendRequest() {
+  let loader = document.querySelector('.loader');
+  loader.classList.add('active');
+}
+
+function endRequest() {
+  let loader = document.querySelector('.loader');
+  loader.classList.remove('active');
 }

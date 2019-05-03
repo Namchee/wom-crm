@@ -52,7 +52,7 @@
                         </li>
                     </a>
                 <?php endif ?>
-                <?php if ($_SESSION['status'] == 0): ?>
+                <?php if ($_SESSION['status'] == 1): ?>
                     <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/modify_client_cs') ? 'active' : '' ?>"
                         href="/modify_client_cs">
                         <li>
@@ -61,11 +61,11 @@
                         </li>
                     </a>
                 <?php else: ?>
-                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/move_client') ? 'active' : '' ?>"
-                        href="/move_client">
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/view_report') ? 'active' : '' ?>"
+                        href="/view_report">
                         <li>
-                            <i class="material-icons">build</i>
-                            <span>Move Client</span>
+                            <i class="material-icons">assessment</i>
+                            <span>View Report</span>
                         </li>
                     </a>
                 <?php endif ?>
@@ -101,6 +101,14 @@
                         <li>
                             <i class="material-icons">language</i>
                             <span>Edit Region</span>
+                        </li>
+                    </a>
+                <?php else: ?>
+                    <a class="<?php echo ($_SERVER['REQUEST_URI'] == '/edit_client') ? 'active' : '' ?>"
+                        href="/edit_client">
+                        <li>
+                            <i class="material-icons">build</i>
+                            <span>Edit Client</span>
                         </li>
                     </a>
                 <?php endif ?>
