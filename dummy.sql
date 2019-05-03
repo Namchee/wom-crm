@@ -39,7 +39,7 @@ INSERT INTO terdapatdi VALUES ('8','5');
 INSERT INTO terdapatdi VALUES ('9','5');
 
 INSERT INTO users VALUES('Budi','20100131','Budi123','$2y$10$27engEA0PsLRBI8zYv2gIeYGVp/790TG7GTSjO.kKzB7nZKYXzrue',null,'1');
-INSERT INTO users VALUES('Stefan','20130212','zaver','stefan123',null,'0');
+INSERT INTO users VALUES('Stefan','20130212','zaver','$2y$10$URS5ec6O0.SmNta3OGw4oOwBdls5uTkJopSEdAacMQhLK2lxzenUK',null,'0');
 INSERT INTO users VALUES('Margarret','20060602','bunbun','marqwerty',null,'0');
 
 INSERT INTO client VALUES(NULL,'Brown','1','19830101','1000000','1','0','3');
