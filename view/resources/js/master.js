@@ -26,7 +26,6 @@ function toggleInputs() {
     });
     input.addEventListener('change', () => {
       triggerInput(input);
-      inputRequired(input);
     })
 
     if (input.hasAttribute('required')) {
