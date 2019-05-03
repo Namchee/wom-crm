@@ -45,6 +45,19 @@ CREATE VIEW viewUmurClient as
 SELECT *, FLOOR(DATEDIFF(CURDATE(), Client.tanggalLahir) / 365.25) as umur
 FROM Client;
 
+CREATE VIEW viewRegion AS
+SELECT
+	region.idR, 
+	region.namaRegion,
+	COUNT(kota.idK) as jumlah_kota
+FROM
+	region INNER JOIN terdapatdi
+		ON region.idR = terdapatdi.idR
+	INNER JOIN KOTA
+		ON kota.idK = terdapatdi.idK
+GROUP BY
+	region.idR;
+
 CREATE INDEX idxUsername ON users(username);
 CREATE INDEX idxKota ON kota(namaKota);
 CREATE INDEX idxRegion ON region(namaRegion);
