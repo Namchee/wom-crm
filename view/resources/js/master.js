@@ -16,13 +16,9 @@ function toggleInputs() {
   let inputs = document.querySelectorAll('.input-group > .input-field');
 
   for (let input of inputs) {
-    if (input.type != 'password') {
-      triggerInput(input);
-      inputRequired(input);
-    }
+    triggerInput(input);
     input.addEventListener('blur', () => {
       triggerInput(input);
-      inputRequired(input);
     });
     input.addEventListener('change', () => {
       triggerInput(input);

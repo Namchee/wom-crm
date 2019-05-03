@@ -2,6 +2,7 @@ let email = document.querySelector('.email');
 new Tagify(email);
 
 let username = document.querySelector('#username');
+username.addEventListener('input', checkUname);
 let password = document.querySelector('#password');
 let nama = document.querySelector('#nama');
 

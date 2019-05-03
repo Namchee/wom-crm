@@ -227,6 +227,25 @@
 				return json_encode($myObj);
 			}
         }
+
+        public function deleteClient() {
+            $myObj = (object)array();
+			$masuk = json_decode(file_get_contents('php://input'));
+			$idC = $this->db->escapeString($masuk->idClient);
+			if ($this->cekIdClient($idC)){
+				$query = "DELETE FROM client WHERE idC = $idC";
+				$this->db->executeNonSelectQuery($query);
+				$myObj->data = $idC;
+				$myObj->pesan = "Data berhasil dihapus";
+				$myObj->status = true;
+				return json_encode($myObj);
+			} else {
+				$myObj->data = $idC;
+				$myObj->pesan = "Data tidak ditemukan";
+				$myObj->status = false;
+				return json_encode($myObj);
+			}
+		}
         
         private function cekIdClient($idC) {
 			$query = "SELECT namaClient FROM viewUmurClient WHERE idC = $idC";

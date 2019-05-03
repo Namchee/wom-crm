@@ -20,3 +20,13 @@
 .marriage {
     float: right;
 }
+
+#file-hide {
+    display: none;
+}
+
+.photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

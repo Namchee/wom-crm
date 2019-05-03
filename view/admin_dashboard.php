@@ -89,6 +89,14 @@
                     <div class="column cs-join">
                     </div>
                 </div>
+                <div class="columns">
+                    <div class="column">
+                        <button class="button button-danger icon-left" id="purge" disabled>
+                            <i class="material-icons">delete</i>
+                            <span>Hapus Customer Service</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

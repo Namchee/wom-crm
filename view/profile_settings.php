@@ -13,6 +13,7 @@
                                 value="<?= $person['username'] ?>" />
                             <span class="input-highlight"></span>
                             <span class="input-bar"></span>
+                            <label class="input-label">Username</label>
                         </div>
                     </div>
                 </div>

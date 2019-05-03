@@ -21,6 +21,11 @@ let form = document.querySelector('form');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+  let foto = document.querySelector('#file-hide');
+  if (foto.value == '') {
+    alert('Foto harus diisi');
+    return;
+  }
   let namaClient = document.getElementById("nama").value;
   let nilaiInvestasi = Number(document.getElementById("nilai").value);
   let gendere = gender.selected();

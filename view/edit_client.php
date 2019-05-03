@@ -144,6 +144,12 @@
                             <span>Ubah Informasi</span>
                         </button>
                     </div>
+                    <div class="column">
+                        <button class="button button-danger icon-left" type="button" id="purge" disabled ripple>
+                            <i class="material-icons">delete</i>
+                            <span>Hapus Klien</span>
+                        </button>
+                    </div>
                 </div>
             </form>
                     </div>

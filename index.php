@@ -347,6 +347,32 @@
                     return;
                 }
             }
+        } else if ($url == '/delete_client') {
+            if (!isset($_SESSION['id'])) {
+                header('Location: /401');
+                return;
+            } else {
+                if ($_SESSION['status'] != 0) {
+                    header('Location: /403');
+                    return;
+                } else {
+                    echo $csController->deleteClient();
+                    return;
+                }
+            }
+        } else if ($url == '/delete_cs') {
+            if (!isset($_SESSION['id'])) {
+                header('Location: /401');
+                return;
+            } else {
+                if ($_SESSION['status'] != 1) {
+                    header('Location: /403');
+                    return;
+                } else {
+                    echo $adminController->deleteCS();
+                    return;
+                }
+            }
         }
     }
 ?>

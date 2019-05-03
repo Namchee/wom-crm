@@ -18,10 +18,13 @@ function initializeRow() {
           let nameField = document.querySelector('.cs-name');
           let joinField = document.querySelector('.cs-join');
           let idField = document.querySelector('.cs-id');
+          let purge =  document.querySelector("#purge");
           usernameField.textContent = result.username;
           nameField.textContent = result.nama;
           joinField.textContent = new Date(result.tanggalGabung).toLocaleDateString();
           idField.textContent = id;
+          purge.disabled = false;
+          purge.addEventListener('click', purgeCS);
 
           let modal = document.querySelector('#modal-info');
 
@@ -37,6 +40,8 @@ function initializeRow() {
             nameField.textContent = '';
             joinField.textContent = '';
             idField.textContent = '';
+            purge.disabled = true;
+            purge.removeEventListener('click');
           });
 
           closeButton.addEventListener('click', () => {
@@ -46,6 +51,8 @@ function initializeRow() {
             nameField.textContent = '';
             idField.textContent = '';
             joinField.textContent = '';
+            purge.disabled = true;
+            purge.removeEventListener('click');
           });
         }).catch(err => {
           console.log(err);
@@ -65,4 +72,35 @@ function sendRequest() {
 function endRequest() {
   let loader = document.querySelector('.loader');
   loader.classList.remove('active');
+}
+
+function purgeCS(e) {
+  let message = confirm('Apakah anda yakin ingin menghapus Customer Service?');
+  if (message) {
+    let idField = document.querySelector('.cs-id');
+    let data = {
+      id: idField.textContent
+    }
+
+    sendRequest();
+    fetch('/delete_cs', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(resp => {
+      return resp.text();
+    })
+    .then(resp => {
+      alert(resp.pesan);
+      if (resp.status) {
+        window.location.reload();
+      }
+    })
+    .catch(err => {
+      alert(err);
+    })
+    .finally(() => {
+      endRequest();
+    })
+  }
 }

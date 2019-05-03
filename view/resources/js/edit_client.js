@@ -1,5 +1,6 @@
 let clients = new DataTable("#clients");
 let form = document.querySelector('form');
+let purge = document.querySelector('#purge');
 
 let gender = new SlimSelect({
   select: '#gender'
@@ -46,6 +47,8 @@ function initializeRow() {
           alamat.set(resp[0].idK);
           marriage.set(resp[0].statusKawin);
           dateOfBirth.setDate(resp[0].tanggalLahir, true, "Y-m-d");
+          purge.disabled = false;
+          purge.addEventListener('click', purgeClient);
 
           let ide = document.createElement('input');
           ide.id = "client-id";
@@ -64,6 +67,8 @@ function initializeRow() {
             modal.removeChild(ide);
             nama.value = '';
             nilai.value = '';
+            purge.disabled = true;
+            purge.removeEventListener('click');
           });
 
           closeButton.addEventListener('click', () => {
@@ -72,6 +77,8 @@ function initializeRow() {
             modal.removeChild(ide);
             nama.value = '';
             nilai.value = '';
+            purge.disabled = true;
+            purge.removeEventListener('click');
           });
         })
         .catch(err => {
@@ -110,6 +117,9 @@ form.addEventListener('submit', (e) => {
   })
   .then(resp => {
     alert(resp.pesan);
+    if (resp.status) {
+      window.location.reload();
+    }
   })
   .catch(err => {
     alert(err);
@@ -127,4 +137,33 @@ function sendRequest() {
 function endRequest() {
   let loader = document.querySelector('.loader');
   loader.classList.remove('active');
+}
+
+function purgeClient() {
+  console.log('fired');
+  let message = confirm('Apakah anda yakin akan menghapus klien?');
+  if (message) {
+    let id = document.getElementById("client-id");
+    let data = {
+      idClient: id.value
+    };
+
+    sendRequest();
+    fetch('/delete_client', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+      .then(resp => {
+        return resp.json();
+      })
+      .then(resp => {
+        alert(resp.pesan);
+        if (resp.status) {
+          window.location.reload();
+        }
+      })
+      .finally(() => {
+        endRequest();
+      })
+  }
 }

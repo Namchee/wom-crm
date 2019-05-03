@@ -65,6 +65,21 @@
                     </div>
                 </div>
                 <div class="columns">
+                    <div class="column photo">
+                        Foto Klien
+                    </div>
+                    <div class="column">
+                        <input type="file" id="file-hide" accept="image/*" />
+                        <div class="columns">
+                            <div class="column">
+                                <label for="file-hide" class="button button-primary">
+                                    Upload Foto
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
                     <div class="column">
                         <button class="button button-primary icon-left" type="submit" ripple>
                             <i class="material-icons">person_add</i>

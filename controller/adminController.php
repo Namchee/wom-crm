@@ -64,7 +64,7 @@
             $password = password_hash($password, PASSWORD_DEFAULT);
             $arrEmail = $masuk->email;
             $this->escapeArray($arrEmail);
-            if ($this->cekCS($username)) {
+            if ($this->cekNamaCS($username)) {
                 $myObj->username = $masuk->username;
                 $myObj->pesan = "Username Sudah Dipakai";
                 $myObj->status = false;
@@ -92,7 +92,7 @@
             return $escaped;
         }
 
-        private function cekCS($nama) {
+        private function cekNamaCS($nama) {
             $query = "SELECT idU FROM users wHERE username = '$nama'";
             $res = $this->db->executeSelectQuery($query);
             return count($res) > 0;
@@ -399,6 +399,45 @@
             $query = "SELECT idR FROM region WHERE namaRegion = '$namareg'";
             $res = $this->db->executeSelectQuery($query);
             return $res[0]['idR'];
+        }
+
+        public function deleteCS() {
+            $myObj = (object)array();
+			$masuk = json_decode(file_get_contents('php://input'));
+            $idC = $this->db->escapeString($masuk->id);
+			if ($this->cekCSByID($idC)){
+                if ($this->cekCSClient($idC)) {
+                    $myObj->data = $idC;
+				    $myObj->pesan = "CS masih memiliki klien, pindahkan klien terlebih dahulu";
+				    $myObj->status = false;
+				    return json_encode($myObj);
+                } else {
+                    $query = "DELETE FROM users WHERE idU = $idC";
+				    $this->db->executeNonSelectQuery($query);
+				    $myObj->data = $idC;
+				    $myObj->pesan = "Data berhasil dihapus";
+				    $myObj->status = true;
+				    return json_encode($myObj);
+                }
+				
+			} else {
+				$myObj->data = $idC;
+				$myObj->pesan = "CS tidak ditemukan";
+				$myObj->status = false;
+				return json_encode($myObj);
+			}
+        }
+
+        public function cekCSByID($id) {
+            $query = "SELECT * FROM users WHERE idU = $id";
+            $res = $this->db->executeSelectQuery($query);
+            return count($res) > 0;
+        }
+
+        public function cekCSClient($id) {
+            $query = "SELECT * FROM client WHERE idU = $id";
+            $res = $this->db->executeSelectQuery($query);
+            return count($res) > 0;
         }
     }
 ?>
