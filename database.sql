@@ -45,4 +45,6 @@ CREATE VIEW viewUmurClient as
 SELECT *, FLOOR(DATEDIFF(CURDATE(), Client.tanggalLahir) / 365.25) as umur
 FROM Client;
 
-CREATE INDEX idxUser ON users(username);
+CREATE INDEX idxUsername ON users(username);
+CREATE INDEX idxKota ON kota(namaKota);
+CREATE INDEX idxRegion ON region(namaRegion);
