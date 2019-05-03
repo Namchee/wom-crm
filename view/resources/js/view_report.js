@@ -1,4 +1,10 @@
-let chart = new Chart('chart');
+let chart = null;
+let canvas = document.getElementById("chart");
+let ctx = canvas.getContext('2d');
+ctx.font = '32px Impact';
+ctx.fillStyle = '#c9c9c9';
+ctx.textAlign = 'center';
+ctx.fillText("Tidak ada data, pilih sebuah kategori", canvas.width / 2, canvas.height / 2);
 let button = document.getElementById('pdf');
 
 let category = new SlimSelect({
@@ -23,7 +29,7 @@ let category = new SlimSelect({
       endRequest();
     })
   },
-  placeholder: 'Pilih Kategori'
+  placeholder: 'Pilih Kategori...'
 });
 
 function sendRequest() {
@@ -36,7 +42,7 @@ function endRequest() {
   loader.classList.remove('active');
 }
 
-function generateChart(resp, tex) {
+function generateChart(resp) {
   let data = {
     labels: [],
     datasets: [{
@@ -63,7 +69,9 @@ function generateChart(resp, tex) {
     data.datasets[0].data.push(qe.y);
   }
 
-  chart.destroy();
+  if (chart) {
+    chart.destroy();
+  }
 
   chart = new Chart('chart', {
     type: 'bar',
@@ -86,5 +94,5 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(20);
 	doc.addImage(canvasImg, 'PNG', 10, 10, 280, 150 );
-	doc.save('canvas.pdf');
+	doc.save('report.pdf');
 }

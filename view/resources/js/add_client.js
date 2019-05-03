@@ -6,31 +6,41 @@ let dateOfBirth = flatpickr(".date-of-birth", {
 });
 
 let gender = new SlimSelect({
-  select: '#gender'
+  select: '#gender',
+  placeholder: "Pilih Jenis Kelamin"
 });
 
 let alamat = new SlimSelect({
-  select: '#alamat'
+  select: '#alamat',
+  placeholder: "Pilih Kota Domisili"
 });
 
 let marriage = new SlimSelect({
-  select: '#marriage'
+  select: '#marriage',
+  placeholder: "Pilih Status Kawin"
 });
 
 let form = document.querySelector('form');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  let foto = document.querySelector('#file-hide');
-  if (foto.value == '') {
-    alert('Foto harus diisi');
-    return;
-  }
   let namaClient = document.getElementById("nama").value;
   let nilaiInvestasi = Number(document.getElementById("nilai").value);
   let gendere = gender.selected();
   let alamate = alamat.selected();
   let statusKawine = marriage.selected();
+  if (gendere === '') {
+    alert('Jenis Kelamin harus diisi');
+    return;
+  }
+  if (alamate === '') {
+    alert('Kota Domisili harus diisi');
+    return;
+  }
+  if (statusKawine === '') {
+    alert('Staus kawin harus diisi');
+    return;
+  }
   if (dateOfBirth.selectedDates.length == 0) {
     alert('Tanggal Lahir harus diisi');
     return;

@@ -14,6 +14,7 @@
                             <span class="input-highlight"></span>
                             <span class="input-bar"></span>
                             <label class="input-label">Username</label>
+                            <span class="input-message">Username <strong>TIDAK BISA</strong> diubah</span>
                         </div>
                     </div>
                 </div>
@@ -32,10 +33,12 @@
                     <div class="column">
                         <div class="input-group">
                             <input type="password" id="newpass" name="password" class="input-field" autocomplete="off"
-                                password-reveal />
+                                password-reveal
+                                pattern=".{4, }" />
                             <span class="input-highlight"></span>
                             <span class="input-bar"></span>
                             <label class="input-label">New Password</label>
+                            <span class="input-message">Panjang password baru minimal 4 karakter</span>
                         </div>
                     </div>
                 </div>

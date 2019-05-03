@@ -6,11 +6,11 @@ let selector = new SlimSelect({
 });
 
 initializeRow();
-clients.on('datatable.sort', initializeRow);
-clients.on('datatable.search', initializeRow);
+regions.on('datatable.sort', initializeRow);
+regions.on('datatable.search', initializeRow);
 
 function initializeRow() {
-  for (let row of clients.activeRows) {
+  for (let row of regions.activeRows) {
     row.addEventListener('click', () => {
       // fetch, then
       sendRequest();
@@ -69,7 +69,7 @@ function initializeRow() {
   }
 }
 
-clientForm.addEventListener('submit', (e) => {
+regionForm.addEventListener('submit', (e) => {
   e.preventDefault();
   sendRequest();
   let data = {
@@ -83,8 +83,11 @@ clientForm.addEventListener('submit', (e) => {
     .then(resp => {
       return resp.json();
     })
-    .then(() => {
+    .then(resp => {
       alert(resp.pesan);
+      if (resp.status) {
+        window.location.reload();
+      }
     })
     .catch(err => {
       alert(err);

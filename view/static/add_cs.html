@@ -13,6 +13,7 @@
                 <span class="input-highlight"></span>
                 <span class="input-bar"></span>
                 <label class="input-label">Username</label>
+                <span class="input-message">Panjang username minimal 4 dengan kombinasi angka dan huruf</span>
             </div>
         </div>
     </div>
@@ -20,10 +21,12 @@
         <div class="column">
             <div class="input-group">
                 <input type="password" name="password" id="password" class="input-field" autocomplete="off" required
-                    password-reveal />
+                    password-reveal
+                    min="4" />
                 <span class="input-highlight"></span>
                 <span class="input-bar"></span>
                 <label class="input-label">Password</label>
+                <span class="input-message">Panjang password minimal 4</span>
             </div>
         </div>
     </div>
@@ -41,7 +44,7 @@
     <div class="columns">
         <div class="column">
             <div class="input-group">
-                <input type="text" name="email" class="input-field email" placeholder="E-mail" required />
+                <input type="text" name="email" class="input-field email" placeholder="E-mail" />
             </div>
         </div>
     </div>

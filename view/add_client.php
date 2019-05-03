@@ -9,14 +9,18 @@
                 <div class="columns">
                     <div class="column">
                         <div class="input-group">
-                            <input type="text" name="namaKlien" id="nama" class="input-field" autocomplete="off" required />
+                            <input type="text" name="namaKlien" id="nama" class="input-field" 
+                                autocomplete="off" required
+                                pattern="[a-zA-Z]+" />
                             <span class="input-bar"></span>
                             <span class="input-highlight"></span>
                             <label class="input-label">Nama Klien</label>
+                            <span class="input-message">Nama Klien hanya boleh berisi huruf</span>
                         </div>
                     </div>
                     <div class="column">
                         <select id="gender">
+                            <option data-placeholder="true"></option>
                             <option value="0">Pria</option>
                             <option value="1">Wanita</option>
                         </select>
@@ -25,6 +29,7 @@
                 <div class="columns">
                     <div class="column">
                         <select id="alamat">
+                            <option data-placeholder="true"></option>
                             <?php foreach ($kotas as $kota): ?>
                                 <option value="<?= $kota->id ?>"><?= $kota->nama ?></option>
                             <?php endforeach ?>
@@ -44,6 +49,7 @@
                     </div>
                     <div class="column">
                         <select name="" id="marriage">
+                            <option data-placeholder="true"></option>
                             <option value="0">Single</option>
                             <option value="1">Married</option>
                         </select>
@@ -62,21 +68,6 @@
                     </div>
                     <div class="column">
                         &nbsp;
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column photo">
-                        Foto Klien
-                    </div>
-                    <div class="column">
-                        <input type="file" id="file-hide" accept="image/*" />
-                        <div class="columns">
-                            <div class="column">
-                                <label for="file-hide" class="button button-primary">
-                                    Upload Foto
-                                </label>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="columns">

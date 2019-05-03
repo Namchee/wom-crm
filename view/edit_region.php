@@ -11,6 +11,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Region</th>
+                        <th>Jumlah Kota</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,6 +22,9 @@
                             </td>
                             <td id="reg-real-name">
                                 <?= $value->nama ?>
+                            </td>
+                            <td>
+                                <?= $value->jumlah ?>
                             </td>
                             <td class="hide-id"> 
                                 <?= $value->id ?>

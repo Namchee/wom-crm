@@ -17,12 +17,9 @@ function toggleInputs() {
 
   for (let input of inputs) {
     triggerInput(input);
-    input.addEventListener('blur', () => {
-      triggerInput(input);
-    });
     input.addEventListener('change', () => {
       triggerInput(input);
-    })
+    });
 
     if (input.hasAttribute('required')) {
       input.addEventListener('input', () => {
@@ -57,7 +54,7 @@ function inputRequired(elem) {
   if (elem.value.length > 0) {
     parent.classList.remove('input-error');
 
-    let message = parent.querySelector('.input-message');
+    let message = parent.querySelector('.input-message.input-error');
     let errorIcon = parent.querySelector('.error-icon');
     if (message) {
       parent.removeChild(message);
@@ -67,21 +64,23 @@ function inputRequired(elem) {
       parent.removeChild(errorIcon);
     }
   } else {
+    parent.classList.add('input-error');
+
+    if (parent.querySelector('i.right-icon') === null) {
+      parent.classList.add('icon-right');
+
+      let icon = document.createElement('i');
+      icon.classList.add('material-icons');
+      icon.classList.add('right-icon');
+      icon.classList.add('error-icon');
+      icon.textContent = 'error';
+      parent.appendChild(icon);
+    }
+
     if (parent.querySelector('.input-message') === null) {
-      parent.classList.add('input-error');
-      if (parent.querySelector('i.right-icon') === null) {
-        parent.classList.add('icon-right');
-
-        let icon = document.createElement('i');
-        icon.classList.add('material-icons');
-        icon.classList.add('right-icon');
-        icon.classList.add('error-icon');
-        icon.textContent = 'error';
-        parent.appendChild(icon);
-      }
-
       let message = document.createElement('span');
       message.classList.add('input-message');
+      message.classList.add('input-error');
       message.textContent = 'Please fill out this field';
 
       parent.appendChild(message);

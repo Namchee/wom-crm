@@ -1,4 +1,8 @@
 let cs = new DataTable("#clients");
+initializeRow();
+cs.on('datatable.sort', initializeRow());
+cs.on('datatable.search', initializeRow());
+
 let region = new SlimSelect({
   select: "#region",
   onChange: (reg) => {
@@ -24,6 +28,7 @@ function initTable(data) {
   cs.destroy();
   let idx = 1;
   let place = document.querySelector('#clients tbody');
+  place.innerHTML = '';
   for (let x of data) {
     let template = `<tr>
     <td>
@@ -61,12 +66,16 @@ function initTable(data) {
   }
 
   cs = new DataTable("#clients");
-  initializeRow(cs);
-  cs.on('datatable.sort', initializeRow(cs));
-  cs.on('datatable.search', initializeRow(cs));
+  initializeRow();
+  cs.on('datatable.sort', () => {
+    initializeRow();
+  });
+  cs.on('datatable.search', () => {
+    initializeRow();
+  });
 }
 
-function initializeRow(cs) {
+function initializeRow() {
   for (let row of cs.activeRows) {
     row.addEventListener('click', () => {
       // fetch, then

@@ -90,11 +90,11 @@
         }
 
         private function getRegions() {
-            $query = "SELECT * FROM region";
+            $query = "SELECT * FROM viewRegion";
             $res = $this->db->executeSelectQuery($query);
             $regions = [];
             foreach ($res as $key=>$value) {
-                $regions[] = new Region($value['idR'], $value['namaRegion']);
+                $regions[] = new Region($value['idR'], $value['namaRegion'], $value['jumlah_kota']);
             }
             return $regions;
         }

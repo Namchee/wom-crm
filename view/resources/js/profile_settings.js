@@ -10,6 +10,10 @@ let form = document.querySelector('#edit-profile');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   let mailArr = [];
+  if (!email.value) {
+    alert('E-mail tidak boleh kosong');
+    return;
+  }
   for (let emaile of JSON.parse(email.value)) {
     if (!isEmail(emaile.value)) {
       alert(`E-mail '${emaile.value}' bukan merupakan e-mail`);
@@ -21,6 +25,12 @@ form.addEventListener('submit', (e) => {
 
   if (mailArr.length == 0) {
     alert(`E-mail harus diisi`);
+    return;
+  }
+
+  if (newPassword.value.length != 0 && newPassword.value.length < 4) {
+    alert('Panjang password baru minimal 4 karakter');
+    newPassword.focus();
     return;
   }
 
@@ -40,6 +50,9 @@ form.addEventListener('submit', (e) => {
     return resp.json();
   }).then((resp) => {
     alert(resp.pesan);
+    if (resp.status) {
+      window.location.reload();
+    }
   }).catch((err) => {
     alert(err);
   }).finally(() => {

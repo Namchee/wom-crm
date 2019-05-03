@@ -2,14 +2,17 @@ let email = document.querySelector('.email');
 new Tagify(email);
 
 let username = document.querySelector('#username');
-username.addEventListener('input', checkUname);
 let password = document.querySelector('#password');
 let nama = document.querySelector('#nama');
 
 let form = document.querySelector('#new_cs');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  let mailArr = [];
+  let mailArr = []; 
+  if (!email.value) {
+    alert('E-mail tidak boleh kosong');
+    return;
+  }
   for (let emaile of JSON.parse(email.value)) {
     if (!isEmail(emaile.value)) {
       alert(`E-mail '${emaile.value}' bukan merupakan e-mail`);

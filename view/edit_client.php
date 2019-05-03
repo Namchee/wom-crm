@@ -82,10 +82,13 @@
                 <div class="columns">
                     <div class="column">
                         <div class="input-group">
-                            <input type="text" name="namaKlien" id="nama" class="input-field" autocomplete="off" required />
+                            <input type="text" name="namaKlien" id="nama" class="input-field" 
+                                autocomplete="off" required
+                                pattern="[a-zA-Z]+" />
                             <span class="input-bar"></span>
                             <span class="input-highlight"></span>
                             <label class="input-label">Nama Klien</label>
+                            <span class="input-message">Nama Klien hanya boleh berisi huruf</span>
                         </div>
                     </div>
                     <div class="column">
