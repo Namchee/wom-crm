@@ -136,7 +136,7 @@
 				$myObj->arrayRes = $res;
 				return json_encode($myObj);
 			} else if ($kategori == 4) {
-                $query = "SELECT umurRep.rangeUmur as x, umurRep.jumlah as y FROM ( SELECT concat(TRIM((umur/10)*10) + 0, '-' ,TRIM((umur/10)*10+10) + 0) as 'rangeUmur', count(idC) as 'jumlah' FROM viewUmurClient INNER JOIN users on viewUmurClient.idU=users.idU WHERE viewUmurClient.idU = $idUser GROUP BY umur / 10 ) as umurRep";
+                $query = "SELECT umurRep.rangeUmur as x, umurRep.jumlah as y FROM ( SELECT concat(TRIM((umur/10)*10) + 0, '-' ,TRIM((umur/10)*10+9) + 0) as 'rangeUmur', count(idC) as 'jumlah' FROM viewUmurClient INNER JOIN users on viewUmurClient.idU=users.idU WHERE viewUmurClient.idU = $idUser GROUP BY umur / 10 ) as umurRep";
 				$res = $this->db->executeSelectQuery($query);
 				$myObj->arrayRes = $res;
 			    return json_encode($myObj);

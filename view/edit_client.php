@@ -129,11 +129,12 @@
                 <div class="columns">
                     <div class="column">
                         <div class="input-group icon-left">
-                            <input type="number" step="5000" id="nilai" class="input-field" autocomplete="off" required />
+                            <input type="number" step="200000" id="nilai" class="input-field" autocomplete="off" required />
                             <span class="input-bar"></span>
                             <span class="input-highlight"></span>
                             <label class="input-label">Nilai Investasi</label>
                             <i class="material-icons left-icon">attach_money</i>
+                            <span class="input-message">Investasi memiliki range per-200.000</span>
                         </div>
                     </div>
                     <div class="column">
