@@ -88,7 +88,7 @@ function purgeCS(e) {
       body: JSON.stringify(data)
     })
     .then(resp => {
-      return resp.text();
+      return resp.json();
     })
     .then(resp => {
       alert(resp.pesan);

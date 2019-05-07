@@ -412,6 +412,8 @@
 				    $myObj->status = false;
 				    return json_encode($myObj);
                 } else {
+                    $killContact = "DELETE FROM kontak WHERE idU = $idC";
+                    $this->db->executeNonSelectQuery($killContact);
                     $query = "DELETE FROM users WHERE idU = $idC";
 				    $this->db->executeNonSelectQuery($query);
 				    $myObj->data = $idC;
@@ -419,7 +421,6 @@
 				    $myObj->status = true;
 				    return json_encode($myObj);
                 }
-				
 			} else {
 				$myObj->data = $idC;
 				$myObj->pesan = "CS tidak ditemukan";
